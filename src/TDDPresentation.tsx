@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { LAYOUT, ANIMATIONS, CONTENT, DEMO_CONFIG } from './constants';
 import { Slide, DemoStep, PingPongPhase } from './types';
 import DemoSlide from './components/slides/DemoSlide';
@@ -1792,7 +1792,7 @@ public void Add_TwoNumbers_ReturnsSum()
       case 'best-practices':
         return <BestPracticesSlide />;
       case 'demo':
-        return <DemoSlide demoSteps={demoSteps} />;
+        return <DemoSlide />;
       case 'kent-beck-quote':
         return <KentBeckQuoteSlide />;
       default:
@@ -2308,7 +2308,7 @@ public class FizzBuzz
                 STEP {currentStep + 1} of {demoSteps.length}
               </div>
               <div className="flex space-x-1 justify-center">
-                {demoSteps.map((step, index) => (
+                {demoSteps.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentStep(index)}

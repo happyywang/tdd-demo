@@ -26,6 +26,7 @@ export interface DemoStep {
   testResults: TestResult[];
   allTestsCode: string;
   productionCode: string;
+  tddInsight?: string;
 }
 
 export interface PingPongPhase {
