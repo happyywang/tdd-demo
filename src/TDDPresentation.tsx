@@ -330,17 +330,16 @@ public void Convert_Returns_FizzBuzz_For_Multiples_Of_Three_And_Five()
 {
     Assert.AreEqual("FizzBuzz", FizzBuzz.Convert(15));
 }`,
-    productionCode: `// FizzBuzz.cs - Cleaner, more extensible!
+    productionCode: `// FizzBuzz.cs - Modern C# with switch expressions!
 public class FizzBuzz
 {
-    public static string Convert(int input)
+    public static string Convert(int input) => (input % 3, input % 5) switch
     {
-        string result = "";
-        if (input % 3 == 0) result += "Fizz";
-        if (input % 5 == 0) result += "Buzz";
-        if (string.IsNullOrEmpty(result)) result = input.ToString();
-        return result;
-    }
+        (0, 0) => "FizzBuzz",
+        (0, _) => "Fizz",
+        (_, 0) => "Buzz",
+        _ => input.ToString()
+    };
 }`,
     testResults: [
       { name: "Convert_Returns_Number_For_NonFizzBuzz_Input", status: "pass", message: "✓ Test passed" },
@@ -521,21 +520,42 @@ const TDDPresentation = () => {
         color: "bg-red-500",
         title: "Write Failing Test",
         description: "Write a test first, it will fail",
-        code: "Assert.AreEqual(5, calculator.Add(2, 3));\n// ❌ Test fails - method doesn't exist"
+        code: `[TestMethod]
+public void GetDiscount_RegularCustomer_Returns5Percent()
+{
+    var calculator = new DiscountCalculator();
+    var discount = calculator.GetDiscount("regular", 100);
+    Assert.AreEqual(5, discount); // ❌ Fails - method doesn't exist
+}`
       },
       {
         name: "Green", 
         color: "bg-green-500",
         title: "Make Test Pass",
         description: "Write simplest code to pass the test",
-        code: "public int Add(int a, int b) {\n    return a + b;\n}\n// ✅ Test passes!"
+        code: `public class DiscountCalculator
+{
+    public int GetDiscount(string customerType, decimal amount)
+    {
+        return 5; // 💡 Hard-coded return 5, makes test pass
+    }
+}
+// ✅ Test passes!`
       },
       {
         name: "Refactor",
         color: "bg-blue-500", 
         title: "Improve Code",
         description: "Optimize code quality while keeping tests green",
-        code: "public int Add(int a, int b) {\n    // Add validation\n    if (a < 0 || b < 0) \n        throw new ArgumentException();\n    return a + b;\n}"
+        code: `public class DiscountCalculator
+{
+    private const int REGULAR_CUSTOMER_DISCOUNT = 5;
+    
+    public int GetDiscount(string customerType, decimal amount)
+    {
+        return REGULAR_CUSTOMER_DISCOUNT; // 💡 Extract constant, cleaner code
+    }
+}`
       }
     ];
 
@@ -546,7 +566,9 @@ const TDDPresentation = () => {
         color: "bg-purple-500",
         title: "Identify Next Small Behavior",
         description: "Identify the next small behavior or feature you want to implement. Think about what test will best guide that implementation.",
-        code: "// What should Add(2, 3) return?\n// What edge cases to consider?\n// How should the API look?"
+        code: `// What discount should regular customers get?
+// What about premium/VIP customers?
+// How should the API handle different amounts?`
       },
       ...traditionalSteps
     ];
@@ -581,16 +603,18 @@ const TDDPresentation = () => {
           </button>
         </div>
 
-        <div className={`${currentStepData.color} p-6 rounded-2xl mb-6 text-center flex-1 flex flex-col justify-center`}>
+        <div className={`${currentStepData.color} p-6 rounded-2xl mb-6 text-center flex flex-col`}>
           <h2 className="text-3xl font-bold mb-3">
             {showExtended ? `${currentStep + 1}. ` : ''}{currentStepData.name}: {currentStepData.title}
           </h2>
-          <p className="text-lg mb-4">{currentStepData.description}</p>
+          <p className="text-lg mb-3">{currentStepData.description}</p>
           
-          <div className="bg-black bg-opacity-50 p-4 rounded-lg mb-4">
-            <code className="text-green-300 text-sm whitespace-pre-line">
-              {currentStepData.code}
-            </code>
+          <div className="bg-gray-900 rounded-lg p-3 mb-2 text-left max-h-44 overflow-auto">
+            <pre className="text-sm">
+              <code className="text-gray-100 font-mono whitespace-pre">
+{currentStepData.code}
+              </code>
+            </pre>
           </div>
 
           <button
@@ -769,29 +793,6 @@ const TDDPresentation = () => {
           </h1>
           <p className="text-xl text-gray-300 mb-8">Evolution of Test-Driven Development</p>
           
-          {/* Phase Legend */}
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <div className="flex items-center gap-2 px-4 py-2 bg-amber-500 bg-opacity-20 rounded-full border border-amber-300">
-              <div className="w-3 h-3 bg-amber-400 rounded-full"></div>
-              <span className="text-amber-200 text-sm font-medium">Origins</span>
-            </div>
-            <div className="flex items-center gap-2 px-4 py-2 bg-orange-500 bg-opacity-20 rounded-full border border-orange-300">
-              <div className="w-3 h-3 bg-orange-400 rounded-full"></div>
-              <span className="text-orange-200 text-sm font-medium">Formalization</span>
-            </div>
-            <div className="flex items-center gap-2 px-4 py-2 bg-green-500 bg-opacity-20 rounded-full border border-green-300">
-              <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-              <span className="text-green-200 text-sm font-medium">Expansion</span>
-            </div>
-            <div className="flex items-center gap-2 px-4 py-2 bg-blue-500 bg-opacity-20 rounded-full border border-blue-300">
-              <div className="w-3 h-3 bg-blue-400 rounded-full"></div>
-              <span className="text-blue-200 text-sm font-medium">Maturation</span>
-            </div>
-            <div className="flex items-center gap-2 px-4 py-2 bg-purple-500 bg-opacity-20 rounded-full border border-purple-300">
-              <div className="w-3 h-3 bg-purple-400 rounded-full"></div>
-              <span className="text-purple-200 text-sm font-medium">Modern Era</span>
-            </div>
-          </div>
         </div>
 
         {/* Timeline Container */}
@@ -1760,10 +1761,6 @@ public void Add_TwoNumbers_ReturnsSum()
           ))}
         </div>
 
-        {/* Quick Overview */}
-        <div className="text-center text-gray-400 text-sm">
-          <p>💡 Click dots to jump to specific myths • Use "Show All Myths" for complete overview</p>
-        </div>
       </div>
     );
   };
@@ -2134,17 +2131,16 @@ public void Convert_Returns_FizzBuzz_For_Multiples_Of_Three_And_Five()
 {
     Assert.AreEqual("FizzBuzz", FizzBuzz.Convert(15));
 }`,
-        productionCode: `// FizzBuzz.cs - Cleaner, more extensible!
+        productionCode: `// FizzBuzz.cs - Modern C# with switch expressions!
 public class FizzBuzz
 {
-    public static string Convert(int input)
+    public static string Convert(int input) => (input % 3, input % 5) switch
     {
-        string result = "";
-        if (input % 3 == 0) result += "Fizz";
-        if (input % 5 == 0) result += "Buzz";
-        if (string.IsNullOrEmpty(result)) result = input.ToString();
-        return result;
-    }
+        (0, 0) => "FizzBuzz",
+        (0, _) => "Fizz",
+        (_, 0) => "Buzz",
+        _ => input.ToString()
+    };
 }`,
         testResults: [
           { name: "Convert_Returns_Number_For_NonFizzBuzz_Input", status: "pass", message: "✓ Test passed" },
@@ -2164,56 +2160,35 @@ public class FizzBuzz
 public void Convert_Returns_Number_For_NonFizzBuzz_Input()
 {
     Assert.AreEqual("1", FizzBuzz.Convert(1));
-    Assert.AreEqual("2", FizzBuzz.Convert(2));
-    Assert.AreEqual("4", FizzBuzz.Convert(4));
 }
 
 [TestMethod]
 public void Convert_Returns_Fizz_For_Multiples_Of_Three()
 {
     Assert.AreEqual("Fizz", FizzBuzz.Convert(3));
-    Assert.AreEqual("Fizz", FizzBuzz.Convert(6));
-    Assert.AreEqual("Fizz", FizzBuzz.Convert(9));
 }
 
 [TestMethod]
 public void Convert_Returns_Buzz_For_Multiples_Of_Five()
 {
     Assert.AreEqual("Buzz", FizzBuzz.Convert(5));
-    Assert.AreEqual("Buzz", FizzBuzz.Convert(10));
-    Assert.AreEqual("Buzz", FizzBuzz.Convert(20));
 }
 
 [TestMethod]
 public void Convert_Returns_FizzBuzz_For_Multiples_Of_Three_And_Five()
 {
     Assert.AreEqual("FizzBuzz", FizzBuzz.Convert(15));
-    Assert.AreEqual("FizzBuzz", FizzBuzz.Convert(30));
-    Assert.AreEqual("FizzBuzz", FizzBuzz.Convert(45));
-}
-
-// 🎯 100% test coverage
-// 🏗️ Clean, extensible design
-// 📚 Self-documenting code`,
-        productionCode: `// Final FizzBuzz.cs - Clean, Tested, and Extensible!
+}`,
+        productionCode: `// Final FizzBuzz.cs - Modern, Clean, Tested, and Extensible!
 public class FizzBuzz
 {
-    public static string Convert(int input)
+    public static string Convert(int input) => (input % 3, input % 5) switch
     {
-        string result = "";
-        
-        if (input % 3 == 0) result += "Fizz";
-        if (input % 5 == 0) result += "Buzz";
-        
-        if (string.IsNullOrEmpty(result)) 
-            result = input.ToString();
-            
-        return result;
-    }
-    
-    // 🚀 Easy to extend:
-    // if (input % 7 == 0) result += "Bazz";
-    // if (input % 11 == 0) result += "Jazz";
+        (0, 0) => "FizzBuzz",
+        (0, _) => "Fizz",
+        (_, 0) => "Buzz",
+        _ => input.ToString()
+    };
 }
 
 /* ✨ TDD Benefits Achieved:
