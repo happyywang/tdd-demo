@@ -18,16 +18,18 @@ const BestPracticesSlide = () => {
           icon: "🔍",
           description: "Each test should verify one specific behavior",
           example: `[TestMethod]
-public void Add_TwoPositiveNumbers_ReturnsSum()
+public void ApplyDiscount_WhenCustomerIsPremium_ShouldReduceTotalBy10Percent()
 {
     // Arrange
-    var calculator = new Calculator();
-    
+    var cart = new ShoppingCart();
+    cart.AddItem(price: 100);
+    var customer = new Customer { IsPremium = true };
+
     // Act
-    var result = calculator.Add(2, 3);
-    
+    cart.ApplyDiscount(customer);
+
     // Assert
-    Assert.AreEqual(5, result);
+    Assert.AreEqual(90, cart.Total);
 }`,
           tip: "One assertion per test when possible. If testing multiple outcomes, use descriptive test names."
         },
@@ -40,7 +42,7 @@ Add_Test1()
 TestCalculator()
 
 // ✅ Good Names  
-Add_TwoPositiveNumbers_ReturnsSum()
+ApplyDiscount_WhenCustomerIsPremium_ShouldReduceTotalBy10Percent()
 Add_NegativeNumber_ThrowsArgumentException()
 GetUser_InvalidId_ReturnsNull()`,
           tip: "Use pattern: MethodUnderTest_Scenario_ExpectedBehavior"
@@ -69,10 +71,10 @@ var user = new UserBuilder()
           icon: "🌱",
           description: "Begin with the most basic scenario first",
           example: `// Test progression order:
-1. Add_TwoPositiveNumbers_ReturnsSum()
-2. Add_ZeroToNumber_ReturnsNumber()  
-3. Add_NegativeNumbers_ReturnsSum()
-4. Add_IntegerOverflow_ThrowsException()`,
+1. ApplyDiscount_WhenCustomerIsPremium_ShouldReduceTotalBy10Percent()
+2. ApplyDiscount_WhenCustomerIsRegular_ShouldNotApplyDiscount()  
+3. ApplyDiscount_WhenCartIsEmpty_ShouldKeepTotalZero()
+4. ApplyDiscount_WhenDiscountExceedsTotal_ThrowsException()`,
           tip: "Happy path first, then edge cases. Build complexity gradually."
         }
       ]

@@ -521,11 +521,11 @@ const TDDPresentation = () => {
         title: "Write Failing Test",
         description: "Write a test first, it will fail",
         code: `[TestMethod]
-public void GetDiscount_RegularCustomer_Returns5Percent()
+public void IsEven_GivenOddNumber_ReturnsFalse()
 {
-    var calculator = new DiscountCalculator();
-    var discount = calculator.GetDiscount("regular", 100);
-    Assert.AreEqual(5, discount); // ❌ Fails - method doesn't exist
+    var checker = new NumberChecker();
+    var result = checker.IsEven(3);
+    Assert.IsFalse(result); // ❌ Fails – method not implemented
 }`
       },
       {
@@ -533,11 +533,11 @@ public void GetDiscount_RegularCustomer_Returns5Percent()
         color: "bg-green-500",
         title: "Make Test Pass",
         description: "Write simplest code to pass the test",
-        code: `public class DiscountCalculator
+        code: `public class NumberChecker
 {
-    public int GetDiscount(string customerType, decimal amount)
+    public bool IsEven(int number)
     {
-        return 5; // 💡 Hard-coded return 5, makes test pass
+        return false; // 💡 Hard-coded ， passes current test
     }
 }
 // ✅ Test passes!`
@@ -547,13 +547,11 @@ public void GetDiscount_RegularCustomer_Returns5Percent()
         color: "bg-blue-500", 
         title: "Improve Code",
         description: "Optimize code quality while keeping tests green",
-        code: `public class DiscountCalculator
+        code: `public class NumberChecker
 {
-    private const int REGULAR_CUSTOMER_DISCOUNT = 5;
-    
-    public int GetDiscount(string customerType, decimal amount)
+    public bool IsEven(int number)
     {
-        return REGULAR_CUSTOMER_DISCOUNT; // 💡 Extract constant, cleaner code
+        return number % 2 == 0; // 💡 Generalized solution
     }
 }`
       }
@@ -566,9 +564,10 @@ public void GetDiscount_RegularCustomer_Returns5Percent()
         color: "bg-purple-500",
         title: "Identify Next Small Behavior",
         description: "Identify the next small behavior or feature you want to implement. Think about what test will best guide that implementation.",
-        code: `// What discount should regular customers get?
-// What about premium/VIP customers?
-// How should the API handle different amounts?`
+        code: `// What does “even” mean for integers?
+// What should the method return for odd numbers?
+// Should zero be considered even?
+// Are negative numbers supported?`
       },
       ...traditionalSteps
     ];
@@ -2569,16 +2568,18 @@ public class FizzBuzz
             icon: "🔍",
             description: "Each test should verify one specific behavior",
             example: `[TestMethod]
-public void Add_TwoPositiveNumbers_ReturnsSum()
+public void ApplyDiscount_WhenCustomerIsPremium_ShouldReduceTotalBy10Percent()
 {
     // Arrange
-    var calculator = new Calculator();
-    
+    var cart = new ShoppingCart();
+    cart.AddItem(price: 100);
+    var customer = new Customer { IsPremium = true };
+
     // Act
-    var result = calculator.Add(2, 3);
-    
+    cart.ApplyDiscount(customer);
+
     // Assert
-    Assert.AreEqual(5, result);
+    Assert.AreEqual(90, cart.Total);
 }`,
             tip: "One assertion per test when possible. If testing multiple outcomes, use descriptive test names."
           },
@@ -2587,13 +2588,12 @@ public void Add_TwoPositiveNumbers_ReturnsSum()
             icon: "📝",
             description: "Test names should read like specifications",
             example: `// ❌ Bad Names
-Add_Test1()
-TestCalculator()
+DiscountTest()                   // Vague, doesn't explain scenario or expectation
+CheckEven()                      // Too generic, doesn't specify odd/even behavior
 
 // ✅ Good Names  
-Add_TwoPositiveNumbers_ReturnsSum()
-Add_NegativeNumber_ThrowsArgumentException()
-GetUser_InvalidId_ReturnsNull()`,
+ApplyDiscount_WhenCustomerIsPremium_ShouldReduceTotalBy10Percent()
+IsEven_OddNumber_ReturnsFalse()`,
             tip: "Use pattern: MethodUnderTest_Scenario_ExpectedBehavior"
           },
           {
@@ -2601,29 +2601,25 @@ GetUser_InvalidId_ReturnsNull()`,
             icon: "📊",
             description: "Make test data meaningful and obvious",
             example: `// ❌ Magic Numbers
-Assert.AreEqual(42, Calculate(6, 7));
+Assert.AreEqual(5.4m, CalculateTotalPrice(3, 1.8m)); // ❌ What are 3 and 1.8?
 
 // ✅ Meaningful Data
-const int ValidAge = 25;
-const int RetirementAge = 65; 
-Assert.AreEqual(40, CalculateYearsToRetirement(ValidAge));
+const int AppleCount = 3;
+const decimal ApplePrice = 1.8m; // Price per apple
+const decimal ExpectedTotalPrice = 5.4m;
 
-// ✅ Or use Builder Pattern
-var user = new UserBuilder()
-    .WithAge(25)
-    .WithName("John")
-    .Build();`,
-            tip: "Use constants or builder patterns to make test intent crystal clear"
+Assert.AreEqual(ExpectedTotalPrice, CalculateTotalPrice(AppleCount, ApplePrice));`,
+            tip: "Use constants to make test intent crystal clear"
           },
           {
             title: "Start with Simplest Test Case",
             icon: "🌱",
             description: "Begin with the most basic scenario first",
             example: `// Test progression order:
-1. Add_TwoPositiveNumbers_ReturnsSum()
-2. Add_ZeroToNumber_ReturnsNumber()  
-3. Add_NegativeNumbers_ReturnsSum()
-4. Add_IntegerOverflow_ThrowsException()`,
+1. ApplyDiscount_WhenCustomerIsPremium_ShouldReduceTotalBy10Percent()
+2. ApplyDiscount_WhenCustomerIsRegular_ShouldNotApplyDiscount()  
+3. ApplyDiscount_WhenCartIsEmpty_ShouldKeepTotalZero()
+4. ApplyDiscount_WhenDiscountIsNegative_ShouldThrowException`,
             tip: "Happy path first, then edge cases. Build complexity gradually."
           }
         ]
@@ -2639,20 +2635,25 @@ var user = new UserBuilder()
             icon: "🏝️",
             description: "Each test should run independently",
             example: `// ❌ Dependent Tests
-[TestMethod] public void CreateUser_ValidData_ReturnsId() { ... }
-[TestMethod] public void GetUser_ExistingId_ReturnsUser() { 
-    // Depends on CreateUser test running first! 
+[TestMethod]
+public void GetUser_ExistingId_ReturnsUser()
+{
+    // Depends on another test to create a user first!
+    var user = repository.GetUser(1);
+    Assert.IsNotNull(user);
 }
 
-// ✅ Independent Tests  
-[TestMethod] 
-public void GetUser_ExistingId_ReturnsUser() 
+// ✅ Independent Test
+[TestMethod]
+public void GetUser_ExistingId_ReturnsUser()
 {
-    // Arrange - create test data in this test
-    var userId = CreateTestUser();
-    
-    // Act & Assert
-    var user = repository.GetUser(userId);
+    // Arrange - create test data locally
+    var testUser = repository.CreateUser("Alice");
+
+    // Act
+    var user = repository.GetUser(testUser.Id);
+
+    // Assert
     Assert.IsNotNull(user);
 }`,
             tip: "Use [TestInitialize] for setup, avoid test execution order dependencies"
@@ -2675,42 +2676,32 @@ public void GetUser_ExistingId_ReturnsUser()
             tip: "Never skip a step. Each phase has a different mindset and purpose."
           },
           {
-            title: "Run Tests Frequently for Fast Feedback",
+            title: "Only write Production Code to satisfy a Failing Test",
             icon: "⚡",
-            description: "Continuous validation during development",
-            example: `// VS Code/Visual Studio shortcuts:
-Ctrl+R, A - Run All Tests
-Ctrl+R, T - Run Tests in Current Context
+            description: "Let the tests drive the code, not the other way around",
+            example: `
+🔵 You should never write new production code without having a failing test that requires it.
 
-// Set up automatic test runs:
-- On file save
-- On build  
-- Pre-commit hooks
+🔵 This ensures every piece of code is necessary and covered by tests.  
 
-// Continuous Integration:
-- Run tests on every PR
-- Fast feedback on builds`,
-            tip: "Tests should run in under 10 seconds for immediate feedback loop"
+🔵 Prevents over-engineering and keeps focus on the current requirement.
+
+`,
+            tip: "No failing test, no new code"
           },
           {
-            title: "End Your Day with a Failing Test",
+            title: "Refactor Only When Tests Are Green",
             icon: "🌙",
-            description: "Set yourself up for easy next-morning start",
-            example: `// Before leaving work:
-1. Write the next test (it will fail)
-2. Add TODO comment explaining intent
-3. Commit the failing test
+            description: "Green tests give you a safety net for improving code quality",
+            example: `
+🔵 Don’t refactor when tests are failing — you risk introducing new bugs.
 
-[TestMethod]
-public void ProcessOrder_MultipleItems_CalculatesTotalWithTax()
-{
-    // TODO: Implement tax calculation logic
-    // This should handle multiple items and apply correct tax rate
-    Assert.Fail("Not implemented yet");
-}
+🔵 Once tests pass (green state), you can safely clean up code.
 
-// Next morning: You know exactly where to start!`,
-            tip: "This technique eliminates the 'blank page' problem when resuming work"
+🔵 This step improves maintainability without breaking functionality.
+
+`,
+            tip: "Green first, then clean"
           }
         ]
       },
@@ -2742,21 +2733,18 @@ Celebration moments:
           {
             title: "Shared Understanding of Test Quality",
             icon: "🤝",
-            description: "Align team standards for what makes good tests",
+            description: "Treat tests as First-class Code",
             example: `Team Code Review Checklist:
 
+✅ Review tests with the same standard as production code
 ✅ Test name clearly describes behavior?
-✅ Single responsibility per test?
-✅ Arrange-Act-Assert structure clear?
-✅ No magic numbers or unclear data?
-✅ Test runs independently?
-✅ Failure message is helpful?
+✅ Is the test independent, reliable and fast?
+✅ Is failure output meaningful?
 
-Team Agreements:
-- Maximum test execution time: 100ms
-- Test naming convention: Method_Scenario_Expected
-- When to mock vs use real objects
-- Coverage expectations (not 100%!)`,
+Shared style:
+- Follow consistent naming: Method_Scenario_ExpectedResult
+- Use Arrange-Act-Assert for clarity
+- Avoid magic numbers and unclear data`,
             tip: "Document team agreements. Review and update standards regularly."
           }
         ]
@@ -2771,112 +2759,54 @@ Team Agreements:
             title: "Keep Tests Fast",
             icon: "🏃‍♂️",
             description: "Slow tests kill the TDD feedback loop",
-            example: `Speed Guidelines:
-🟢 Unit Tests: < 100ms each
-🟡 Integration Tests: < 5 seconds  
-🔴 End-to-End Tests: < 30 seconds
-
+            example: `
 Speed Optimization Techniques:
 - Use in-memory databases for tests
 - Mock external dependencies  
 - Parallel test execution
-- Test categorization ([Category("Fast")])
+- Test categorization ([Category("Plausibility")])
 
-// Fast test example:
-[Test, Category("Fast")]
-public void Calculate_ValidInput_ReturnsResult()
-{
-    var result = calculator.Add(2, 3); // No I/O
-    Assert.AreEqual(5, result);
-}`,
+`,
             tip: "If unit tests take more than 10 seconds total, developers will skip them"
           },
           {
-            title: "Avoid Testing Implementation Details",
+            title: "Mock External Dependencies",
             icon: "🚫", 
-            description: "Test behavior, not internal workings",
-            example: `// ❌ Testing Implementation (Brittle)
-[TestMethod]
-public void ProcessOrder_CallsRepositorySaveMethod()
-{
-    // Verifying internal method calls
-    repository.Verify(r => r.Save(It.IsAny<Order>()), Times.Once);
-}
+            description: "Use Mocks or stubs instead of calling external systems like databases, APIs or file systems",
+            example: `
+🔵 Mock an API client instead of making real HTTP calls
 
-// ✅ Testing Behavior (Robust)  
-[TestMethod]
-public void ProcessOrder_ValidOrder_OrderIsPersisted()
-{
-    // Arrange
-    var order = new Order { Id = 1, Total = 100 };
-    
-    // Act
-    service.ProcessOrder(order);
-    
-    // Assert - verify the outcome, not the method
-    var savedOrder = repository.GetById(1);
-    Assert.IsNotNull(savedOrder);
-    Assert.AreEqual(100, savedOrder.Total);
-}`,
-            tip: "If you refactor and tests break, you're probably testing implementation"
+🔵 Use in-memory storage instead of file system operations
+
+🔵 Use a fake repository instead of querying a real database
+`,
+            tip: "Replace slow or unstable systems"
           },
           {
-            title: "Refactor Fearlessly but Safely",
+            title: "Refactor Test code",
             icon: "🛡️",
-            description: "Use tests as your safety net for bold changes",
-            example: `Fearless Refactoring Process:
+            description: "Tests are code too, regularly improve structure, remove deuuplication and enhance readability",
+            example: `
+🔵 Reduce duplication: Extract shared setup into a base class or helper methods.
 
-1. 🟢 Ensure all tests are GREEN
-2. 🔧 Make refactoring changes
-3. ⚡ Run tests immediately  
-4. 🔴 If ANY test fails:
-   - Stop and fix the issue
-   - Don't continue refactoring
-5. 🟢 All green? Continue refactoring
-6. 📝 Commit frequently
+🔵 Improve readability: Use descriptive test names and organize tests logically.
 
-// Example: Extracting method safely
-// BEFORE refactor - tests are green ✅
-public decimal CalculateTotal(Order order) {
-    var total = 0m;
-    foreach(var item in order.Items) {
-        total += item.Price * item.Quantity;  
-        if(item.IsTaxable) total += item.Price * 0.08m;
-    }
-    return total;
-}
-
-// AFTER refactor - tests still green ✅  
-public decimal CalculateTotal(Order order) {
-    return order.Items.Sum(CalculateItemTotal);
-}`,
-            tip: "Small refactoring steps with frequent test runs. Commit working states often."
+🔵 Keep tests up-to-date: Refactor tests promptly when requirements or behavior change.
+`,
+            tip: "Keep test code clean and readable, and aligned with requirement"
           },
           {
-            title: "Regular Test Suite Maintenance",
+            title: "Automate with CI",
             icon: "🧹",
-            description: "Keep your test suite healthy over time",
-            example: `Monthly Test Health Review:
+            description: "Automate running tests so that every commit or merge request is verified",
+            example: `
+🔵 Integrate tests into GitHub Actions / Azure DevOps / Jenkins
 
-📊 Metrics to Track:
-- Test execution time trends
-- Flaky test frequency  
-- Test coverage gaps
-- Duplicate/similar tests
+🔵 Prevent merging if tests fail
 
-🧽 Cleaning Activities:
-- Remove obsolete tests
-- Merge duplicate tests
-- Update test data factories
-- Refactor test utilities
-
-// Example: Test cleanup
-// ❌ Outdated test for removed feature
-[Test, Ignore("Feature removed in v2.0")]
-public void LegacyFeature_Test() { ... }
-
-// ✅ Remove completely instead of ignoring`,
-            tip: "Schedule regular 'test debt' cleanup sessions. Treat tests as production code."
+🔵 Automatically generate test coverage reports
+`,
+            tip: "Make tests part of continuous quanlity assurance."
           }
         ]
       }
