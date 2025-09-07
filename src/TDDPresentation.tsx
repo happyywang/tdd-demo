@@ -585,9 +585,9 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
     };
 
     return (
-      <div className="min-h-full flex flex-col">
+      <div className="min-h-screen bg-gray-900 p-8 overflow-auto flex flex-col">
         <div className="text-center mb-6">
-          <h1 className="text-5xl font-bold mb-2">What is TDD?</h1>
+          <h1 className="text-5xl font-bold mb-2 text-white">What is TDD?</h1>
           <p className="text-xl text-gray-300 mb-2">A development methodology where tests drive the design of production code</p>
           <p className="text-lg text-gray-400">Tests are written before the production code</p>
         </div>
@@ -602,51 +602,58 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
           </button>
         </div>
 
-        <div className={`${currentStepData.color} p-6 rounded-2xl mb-6 text-center flex flex-col`}>
-          <h2 className="text-3xl font-bold mb-3">
-            {showExtended ? `${currentStep + 1}. ` : ''}{currentStepData.name}: {currentStepData.title}
-          </h2>
-          <p className="text-lg mb-3">{currentStepData.description}</p>
-          
-          <div className="bg-gray-900 rounded-lg p-3 mb-2 text-left max-h-44 overflow-auto">
-            <pre className="text-sm">
-              <code className="text-gray-100 font-mono whitespace-pre">
+        {/* Main content area with flex-grow */}
+        <div className="flex-grow flex flex-col">
+          <div className={`${currentStepData.color} p-6 rounded-2xl mb-6 text-center flex flex-col`}>
+            <h2 className="text-3xl font-bold mb-3">
+              {showExtended ? `${currentStep + 1}. ` : ''}{currentStepData.name}: {currentStepData.title}
+            </h2>
+            <p className="text-lg mb-3">{currentStepData.description}</p>
+            
+            <div className="bg-gray-900 rounded-lg p-3 mb-4 text-left max-h-40 overflow-auto">
+              <pre className="text-sm">
+                <code className="text-gray-100 font-mono whitespace-pre">
 {currentStepData.code}
-              </code>
-            </pre>
+                </code>
+              </pre>
+            </div>
+
+            <button
+              onClick={nextStep}
+              className="bg-white text-gray-900 px-6 py-3 rounded-full text-lg font-bold hover:bg-gray-200 transition-colors mx-auto"
+            >
+              Next: {currentSteps[(currentStep + 1) % currentSteps.length].name}
+            </button>
           </div>
 
-          <button
-            onClick={nextStep}
-            className="bg-white text-gray-900 px-6 py-3 rounded-full text-lg font-bold hover:bg-gray-200 transition-colors mx-auto"
-          >
-            Next: {currentSteps[(currentStep + 1) % currentSteps.length].name}
-          </button>
-        </div>
-
-        <div>
-          <h3 className="text-xl font-bold mb-3 text-center">
-            {showExtended ? 'The 4-Step TRGR Cycle' : 'The Traditional 3-Step TDD Cycle'}
-          </h3>
-          <div className={`grid gap-3 ${showExtended ? 'grid-cols-4' : 'grid-cols-3'}`}>
-            {currentSteps.map((step, index) => (
-              <div
-                key={index}
-                className={`p-3 rounded-xl border-2 transition-all cursor-pointer ${
-                  index === currentStep
-                    ? `${step.color} border-white scale-105`
-                    : 'bg-gray-800 border-gray-600 opacity-70 hover:opacity-100'
-                }`}
-                onClick={() => setCurrentStep(index)}
-              >
-                <h4 className="text-lg font-bold mb-1">
-                  {showExtended ? `${index + 1}. ` : ''}{step.name}
-                </h4>
-                <p className="text-xs">{step.title}</p>
-              </div>
-            ))}
+          {/* Bottom cycle overview - ensures visibility */}
+          <div className="mt-auto">
+            <h3 className="text-xl font-bold mb-4 text-center text-white">
+              {showExtended ? 'The 4-Step TRGR Cycle' : 'The Traditional 3-Step TDD Cycle'}
+            </h3>
+            <div className={`grid gap-4 ${showExtended ? 'grid-cols-4' : 'grid-cols-3'} max-w-4xl mx-auto`}>
+              {currentSteps.map((step, index) => (
+                <div
+                  key={index}
+                  className={`p-4 rounded-xl border-2 transition-all cursor-pointer ${
+                    index === currentStep
+                      ? `${step.color} border-white scale-105 shadow-lg`
+                      : 'bg-gray-800 border-gray-600 opacity-70 hover:opacity-100 hover:scale-102'
+                  }`}
+                  onClick={() => setCurrentStep(index)}
+                >
+                  <h4 className="text-lg font-bold mb-2 text-white">
+                    {showExtended ? `${index + 1}. ` : ''}{step.name}
+                  </h4>
+                  <p className="text-sm text-gray-300">{step.title}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
+        
+        {/* Bottom spacer */}
+        <div className="h-8"></div>
       </div>
     );
   };
@@ -655,254 +662,126 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
   const HistorySlide = () => {
     const timelineEvents = [
       {
-        period: "Pre-1990s",
         year: "1980s",
-        title: "Test-First Foundations",
-        mainEvent: "Early test-first concepts emerge",
-        description: "Pioneering developers start advocating for writing tests before implementation in academic and research environments",
-        icon: "⚡",
-        phase: "origin",
+        description: "Early academic pioneers plant the seeds of \"test first,\" challenging traditional workflows.",
+        icon: "🌱",
         color: "amber",
-        techIcon: "🔬",
-        expandedContent: {
-          keyFigures: ["NASA software teams", "Bell Labs researchers"],
-          technologies: ["Early unit testing", "Formal verification"],
-          impact: "Foundation for systematic testing approaches"
-        }
+        avatar: null
       },
       {
-        period: "1999",
         year: "1999",
-        title: "Extreme Programming Explained",
-        mainEvent: "Kent Beck formalizes TDD methodology",
-        description: "First comprehensive framework combining test-first development with rapid iteration cycles and refactoring",
-        icon: "📖",
-        phase: "formalization", 
+        description: "Kent Beck formalizes TDD in \"Extreme Programming Explained,\" making \"test before code\" a clear methodology.",
+        icon: "📘",
         color: "orange",
-        techIcon: "👨‍💻",
-        expandedContent: {
-          keyFigures: ["Kent Beck", "Ward Cunningham"],
-          technologies: ["Extreme Programming", "SUnit framework"],
-          impact: "TDD becomes a formal development methodology"
-        }
+        avatar: "/kent-beck.webp"
       },
       {
-        period: "2000-2002",
-        year: "Early 2000s",
-        title: "Framework Revolution",
-        mainEvent: "xUnit family frameworks emerge",
-        description: "SUnit inspires JUnit and NUnit, making TDD accessible to mainstream developers across multiple platforms",
+        year: "2000s",
+        description: "xUnit frameworks (SUnit, JUnit, NUnit) bring TDD to mainstream developers; Agile teams begin to adopt.",
         icon: "🔧",
-        phase: "expansion",
         color: "green",
-        techIcon: "⚙️",
-        expandedContent: {
-          keyFigures: ["Erich Gamma", "Kent Beck", "JUnit team"],
-          technologies: ["JUnit", "NUnit", "Test runners"],
-          impact: "Testing frameworks become industry standard"
-        }
+        avatar: null
       },
       {
-        period: "2003-2010", 
-        year: "Mid 2000s",
-        title: "Agile Integration",
-        mainEvent: "TDD becomes core Agile practice",
-        description: "Integration with Agile methodologies and enterprise adoption through MSTest, enhanced NUnit, and CI/CD pipelines",
+        year: "2010s–Now",
+        description: "TDD is woven into Agile, CI/CD, and enhanced by cloud & AI testing tools. It's moved from a controversial idea to a daily best practice.",
         icon: "🚀",
-        phase: "maturation",
-        color: "blue",
-        techIcon: "🔄",
-        expandedContent: {
-          keyFigures: ["Agile community", "Enterprise teams"],
-          technologies: ["MSTest", "Continuous Integration", "Build automation"],
-          impact: "TDD scales to enterprise development"
-        }
-      },
-      {
-        period: "2010s-Present",
-        year: "Modern Era",
-        title: "Industry Standard",
-        mainEvent: "TDD becomes development best practice",
-        description: "Full integration into modern development workflows with AI-assisted testing, cloud CI/CD, and advanced tooling",
-        icon: "⭐",
-        phase: "modern",
         color: "purple",
-        techIcon: "🤖",
-        expandedContent: {
-          keyFigures: ["Developer community", "Tech giants"],
-          technologies: ["GitHub Actions", "AI testing tools", "Cloud platforms"],
-          impact: "TDD integral to software quality culture"
-        }
+        avatar: null
       }
     ];
 
-    const [expandedCard, setExpandedCard] = useState<number | null>(null);
-    const [showAnimation, setShowAnimation] = useState(false);
-
     const getColorClasses = (color: string) => {
-      const colorMap: { [key: string]: { text: string; bg: string; border: string; bgOpacity: string } } = {
+      const colorMap: { [key: string]: { text: string; bg: string; border: string; bgLight: string } } = {
         amber: {
           text: 'text-amber-400',
-          bg: 'bg-amber-400', 
+          bg: 'bg-amber-500',
           border: 'border-amber-400',
-          bgOpacity: 'bg-amber-400/20'
+          bgLight: 'bg-amber-400/10'
         },
         orange: {
           text: 'text-orange-400',
-          bg: 'bg-orange-400',
+          bg: 'bg-orange-500',
           border: 'border-orange-400', 
-          bgOpacity: 'bg-orange-400/20'
+          bgLight: 'bg-orange-400/10'
         },
         green: {
           text: 'text-green-400',
-          bg: 'bg-green-400',
+          bg: 'bg-green-500',
           border: 'border-green-400',
-          bgOpacity: 'bg-green-400/20'
-        },
-        blue: {
-          text: 'text-blue-400',
-          bg: 'bg-blue-400',
-          border: 'border-blue-400',
-          bgOpacity: 'bg-blue-400/20'
+          bgLight: 'bg-green-400/10'
         },
         purple: {
           text: 'text-purple-400',
-          bg: 'bg-purple-400',
+          bg: 'bg-purple-500',
           border: 'border-purple-400',
-          bgOpacity: 'bg-purple-400/20'
+          bgLight: 'bg-purple-400/10'
         }
       };
       return colorMap[color] || colorMap.amber;
     };
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 p-8 overflow-auto relative">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.1) 1px, transparent 0)`,
-            backgroundSize: '40px 40px'
-          }}></div>
-        </div>
-
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 p-8 overflow-auto">
         {/* Header */}
-        <div className="text-center mb-12 relative z-10">
-          <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-blue-400 to-green-400 bg-clip-text text-transparent">
+        <div className="text-center mb-16">
+          <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-amber-400 via-orange-400 via-green-400 to-purple-400 bg-clip-text text-transparent">
             History of TDD
           </h1>
-          <p className="text-xl text-gray-300 mb-8">Evolution of Test-Driven Development</p>
-          
+          <p className="text-xl text-gray-300">Evolution of Test-Driven Development</p>
         </div>
 
         {/* Timeline Container */}
-        <div className="max-w-7xl mx-auto relative">
+        <div className="max-w-5xl mx-auto relative">
           {/* Vertical timeline line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-2 bg-gradient-to-b from-amber-400 via-orange-400 via-green-400 via-blue-400 to-purple-400 rounded-full shadow-lg"></div>
+          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-amber-400 via-orange-400 via-green-400 to-purple-400 rounded-full opacity-30"></div>
           
           {timelineEvents.map((event, index) => {
             const colors = getColorClasses(event.color);
             
             return (
-              <div key={index} className="relative flex items-center mb-20 last:mb-8">
-                {/* Timeline circle with period text */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-1/2 z-30">
-                  <div className={`bg-white rounded-full w-28 h-28 flex flex-col items-center justify-center shadow-2xl border-4 ${colors.border} group-hover:scale-110 transition-all duration-300`}>
-                    <div className="text-gray-900 font-bold text-xs text-center leading-tight">
-                      {event.period}
-                    </div>
-                    <div className={`${colors.text} text-lg mt-1`}>
-                      {event.techIcon}
-                    </div>
+              <div key={index} className="relative flex items-center mb-16 last:mb-8">
+                {/* Timeline node */}
+                <div className="absolute left-1/2 transform -translate-x-1/2 z-20">
+                  <div className={`${colors.bg} rounded-full w-20 h-20 flex items-center justify-center shadow-xl border-4 border-white`}>
+                    {event.avatar ? (
+                      <img 
+                        src={event.avatar} 
+                        alt="Kent Beck"
+                        className="w-12 h-12 rounded-full object-cover border-2 border-white"
+                      />
+                    ) : (
+                      <span className="text-2xl text-white">{event.icon}</span>
+                    )}
                   </div>
                 </div>
                 
                 {/* Content card - alternating left/right */}
-                <div className={`w-5/12 ${index % 2 === 0 ? 'ml-0 mr-auto pr-10' : 'ml-auto mr-0 pl-10'}`}>
-                  <div 
-                    className={`bg-gradient-to-br from-gray-800 to-gray-700 p-8 rounded-2xl transform hover:scale-105 transition-all duration-500 shadow-2xl border-l-6 ${colors.border} cursor-pointer group`}
-                    onClick={() => setExpandedCard(expandedCard === index ? null : index)}
-                  >
-                    {/* Phase indicator */}
-                    <div className={`inline-flex items-center px-3 py-1 ${colors.bgOpacity} rounded-full border ${colors.border} mb-4`}>
-                      <span className={`${colors.text} text-sm font-semibold capitalize`}>
-                        {event.phase} Era
-                      </span>
+                <div className={`w-5/12 ${index % 2 === 0 ? 'ml-0 mr-auto pr-12' : 'ml-auto mr-0 pl-12'}`}>
+                  <div className={`${colors.bgLight} backdrop-blur-sm p-6 rounded-2xl border ${colors.border} border-opacity-30 shadow-xl transform hover:scale-105 transition-all duration-300`}>
+                    {/* Year badge */}
+                    <div className={`inline-block ${colors.bg} text-white px-4 py-2 rounded-full font-bold text-lg mb-4 shadow-lg`}>
+                      {event.year}
                     </div>
-
-                    {/* Header */}
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex items-start gap-4">
-                        <span className="text-4xl">{event.icon}</span>
-                        <div className="flex-1">
-                          <h3 className={`text-2xl font-bold ${colors.text} mb-1 group-hover:text-white transition-colors`}>
-                            {event.title}
-                          </h3>
-                          <div className={`text-lg font-semibold ${colors.bgOpacity} ${colors.text} px-3 py-1 rounded-lg inline-block mb-2`}>
-                            {event.year}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="text-gray-400 group-hover:text-white transition-colors">
-                        {expandedCard === index ? '▲' : '▼'}
-                      </div>
-                    </div>
-
-                    {/* Main Event (highlighted) */}
-                    <div className="mb-4">
-                      <p className="text-xl font-semibold text-white mb-2 leading-relaxed">
-                        {event.mainEvent}
-                      </p>
-                      <p className="text-gray-300 leading-relaxed text-base">
-                        {event.description}
-                      </p>
-                    </div>
-
-                    {/* Expanded Content */}
-                    {expandedCard === index && (
-                      <div className={`mt-6 p-6 ${colors.bgOpacity} rounded-xl border ${colors.border} border-opacity-30 animate-fade-in`}>
-                        <div className="grid md:grid-cols-3 gap-4">
-                          <div>
-                            <h4 className={`${colors.text} font-bold mb-2`}>Key Figures</h4>
-                            <ul className="text-sm text-gray-300 space-y-1">
-                              {event.expandedContent.keyFigures.map((figure, idx) => (
-                                <li key={idx} className="flex items-center gap-2">
-                                  <span className="w-1 h-1 bg-current rounded-full"></span>
-                                  {figure}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                          <div>
-                            <h4 className={`${colors.text} font-bold mb-2`}>Technologies</h4>
-                            <ul className="text-sm text-gray-300 space-y-1">
-                              {event.expandedContent.technologies.map((tech, idx) => (
-                                <li key={idx} className="flex items-center gap-2">
-                                  <span className="w-1 h-1 bg-current rounded-full"></span>
-                                  {tech}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                          <div>
-                            <h4 className={`${colors.text} font-bold mb-2`}>Impact</h4>
-                            <p className="text-sm text-gray-300">{event.expandedContent.impact}</p>
-                          </div>
-                        </div>
-                      </div>
-                    )}
                     
-                    {/* Click hint */}
-                    <div className="text-xs text-gray-500 mt-4 text-center group-hover:text-gray-400 transition-colors">
-                      Click to {expandedCard === index ? 'collapse' : 'expand'} details
-                    </div>
+                    {/* Description */}
+                    <p className="text-gray-200 text-lg leading-relaxed">
+                      {event.description}
+                    </p>
                   </div>
                 </div>
               </div>
             );
           })}
+        </div>
 
-          {/* Timeline End Marker */}
-          <div className="absolute left-1/2 bottom-8 w-6 h-6 bg-purple-400 rounded-full transform -translate-x-1/2 animate-pulse shadow-lg border-2 border-white"></div>
+        {/* Bottom summary */}
+        <div className="text-center mt-16 max-w-3xl mx-auto">
+          <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700">
+            <p className="text-xl text-gray-300 italic leading-relaxed">
+              "TDD's journey is a story of challenging habits, proving value, and shaping how modern software is built."
+            </p>
+          </div>
         </div>
 
         {/* Bottom Spacer */}
