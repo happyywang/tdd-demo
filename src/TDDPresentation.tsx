@@ -413,7 +413,7 @@ const TDDPresentation = () => {
     // Slide 9: Demo
     {
       id: 'demo',
-      title: 'Live Demo',
+      title: 'Demo',
       type: 'demo'
     },
     // Slide 10: Kent Beck Quote
@@ -461,7 +461,7 @@ const TDDPresentation = () => {
       <p className="text-4xl text-gray-300 mb-12">Test-Driven Development</p>
       <div className="text-2xl text-gray-400 space-y-4">
         <p>🎯 A Complete Guide to TDD</p>
-        <p>📅 30 minutes • 👥 Interactive • 💻 Live Demo</p>
+        <p>📅 30 minutes • 👥 Interactive • 💻 Demo</p>
       </div>
       <div className="mt-16 text-gray-500">
         <p>{CONTENT.NAVIGATION.PRESS_ARROW_TO_START}</p>
@@ -479,7 +479,7 @@ const TDDPresentation = () => {
       { title: "Disadvantages", subtitle: "Honest Assessment", icon: "⚠️" },
       { title: "TDD vs BDD", subtitle: "Comparative Analysis", icon: "⚖️" },
       { title: "Best Practices", subtitle: "Implementation Guide", icon: "⭐" },
-      { title: "Live Demo", subtitle: "Hands-on Practice", icon: "🚀" }
+      { title: "Demo", subtitle: "Hands-on Practice", icon: "🚀" }
     ];
 
     return (
