@@ -837,28 +837,31 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
       tdd: {
         title: "TDD Example",
         code: `[TestMethod]
-public void Add_TwoNumbers_ReturnsSum()
+public void AddItemToCart_ItemIsAdded()
 {
     // Arrange
-    var calculator = new Calculator();
-    
+    var cart = new Cart();
+    var item = new Product("Apple", 1.00m);
+
     // Act
-    var result = calculator.Add(2, 3);
-    
+    cart.Add(item);
+
     // Assert
-    Assert.AreEqual(5, result);
+    Assert.IsTrue(cart.Contains(item));
 }`,
-        focus: "Tests the technical implementation of the Add method"
+        focus: "Tests the technical implementation of adding items to cart"
       },
       bdd: {
         title: "BDD Example",
         code: `Feature: Shopping Cart
-  Scenario: Adding items to cart
-    Given I am on the shopping page
-    When I add a product to my cart
-    Then I should see the item in my cart
-    And the cart total should be updated`,
-        focus: "Tests the user behavior and business workflow"
+
+  Scenario: Add item to cart
+    Given I have a shopping cart
+    And I am on the product page
+    When I add an "Apple" to the cart
+    Then the cart should contain "Apple"
+    And the cart total should reflect the price`,
+        focus: "Tests the user behavior and business value of cart functionality"
       }
     };
 
@@ -921,12 +924,12 @@ public void Add_TwoNumbers_ReturnsSum()
     };
 
     const renderExamplesView = () => (
-      <div className="min-h-full flex flex-col">
-        <div className="grid md:grid-cols-2 gap-6 flex-1">
+      <div className="flex flex-col h-full">
+        <div className="grid md:grid-cols-2 gap-6 mb-6">
           {/* TDD Example */}
           <div className="bg-gray-800 p-6 rounded-xl">
             <h3 className="text-2xl font-bold text-green-400 mb-4">{examples.tdd.title}</h3>
-            <div className="bg-black p-4 rounded-lg mb-4 overflow-auto">
+            <div className="bg-black p-4 rounded-lg mb-4 overflow-auto max-h-64">
               <code className="text-green-300 text-sm whitespace-pre-line">
                 {examples.tdd.code}
               </code>
@@ -937,7 +940,7 @@ public void Add_TwoNumbers_ReturnsSum()
           {/* BDD Example */}
           <div className="bg-gray-800 p-6 rounded-xl">
             <h3 className="text-2xl font-bold text-blue-400 mb-4">{examples.bdd.title}</h3>
-            <div className="bg-black p-4 rounded-lg mb-4 overflow-auto">
+            <div className="bg-black p-4 rounded-lg mb-4 overflow-auto max-h-64">
               <code className="text-blue-300 text-sm whitespace-pre-line">
                 {examples.bdd.code}
               </code>
@@ -946,9 +949,9 @@ public void Add_TwoNumbers_ReturnsSum()
           </div>
         </div>
 
-        <div className="text-center mt-6 bg-purple-900 bg-opacity-50 p-4 rounded-lg">
-          <p className="text-lg text-purple-200">
-            <strong>Key Insight:</strong> TDD focuses on "How to build it right" while BDD focuses on "Building the right thing"
+        <div className="text-center bg-purple-900 bg-opacity-50 p-6 rounded-lg shadow-lg">
+          <p className="text-xl text-purple-100 font-medium">
+            <strong className="text-purple-200">Key Insight:</strong> TDD focuses on "How to build it right" while BDD focuses on "Building the right thing"
           </p>
         </div>
       </div>
