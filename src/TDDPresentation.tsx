@@ -4,6 +4,7 @@ import { LAYOUT, ANIMATIONS, CONTENT, DEMO_CONFIG } from './constants';
 import { Slide, DemoStep, PingPongPhase } from './types';
 import DemoSlide from './components/slides/DemoSlide';
 import BestPracticesSlide from './components/slides/BestPracticesSlide';
+import BugFirstTDDSlide from './components/slides/BugFirstTDDSlide';
 import AnimatedPingPong from './components/slides/AnimatedPingPong';
 
 // All TypeScript interfaces moved to types.ts
@@ -416,7 +417,13 @@ const TDDPresentation = () => {
       title: 'Demo',
       type: 'demo'
     },
-    // Slide 10: Kent Beck Quote
+    // Slide 10: Bug-First TDD
+    {
+      id: 'bug-first-tdd',
+      title: 'TDD From the Trenches: Bug-Driven Development',
+      type: 'bug-first-tdd'
+    },
+    // Slide 11: Kent Beck Quote
     {
       id: 'kent-beck-quote',
       title: 'Kent Beck Quote',
@@ -1671,6 +1678,8 @@ public void AddItemToCart_ItemIsAdded()
         return <BestPracticesSlide />;
       case 'demo':
         return <DemoSlide />;
+      case 'bug-first-tdd':
+        return <BugFirstTDDSlide />;
       case 'kent-beck-quote':
         return <KentBeckQuoteSlide />;
       default:
