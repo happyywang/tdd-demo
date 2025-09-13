@@ -13,8 +13,8 @@ const TDDCycleSlide = () => {
       id: 'red',
       name: 'Write Failing Test',
       shortName: 'Red',
-      color: 'from-red-500 to-red-600',
-      bgColor: 'bg-red-500',
+      color: 'from-red-600 to-red-700',
+      bgColor: 'bg-red-600',
       icon: '🔴',
       position: { x: 50, y: 15 }, // Top - 12 o'clock
       labelPosition: { x: 25, y: 2 }, // Left and up
@@ -24,8 +24,8 @@ const TDDCycleSlide = () => {
       id: 'green',
       name: 'Make Test Pass',
       shortName: 'Green',
-      color: 'from-green-500 to-green-600',
-      bgColor: 'bg-green-500',
+      color: 'from-emerald-600 to-emerald-700',
+      bgColor: 'bg-emerald-600',
       icon: '🟢',
       position: { x: 87, y: 55 }, // Right - moved slightly right
       labelPosition: { x: 107, y: 55 }, // To the right
@@ -35,8 +35,8 @@ const TDDCycleSlide = () => {
       id: 'refactor',
       name: 'Improve Code',
       shortName: 'Refactor',
-      color: 'from-blue-500 to-blue-600',
-      bgColor: 'bg-blue-500',
+      color: 'from-slate-600 to-slate-700',
+      bgColor: 'bg-slate-600',
       icon: '🔵',
       position: { x: 13, y: 55 }, // Left - moved slightly left
       labelPosition: { x: -7, y: 55 }, // To the left
@@ -50,8 +50,8 @@ const TDDCycleSlide = () => {
       id: 'think',
       name: 'Think: Break Down Goals, Focus Intent',
       shortName: 'Think',
-      color: 'from-yellow-500 to-amber-600',
-      bgColor: 'bg-yellow-500',
+      color: 'from-[#50DCE1] to-cyan-500',
+      bgColor: 'bg-[#50DCE1]',
       icon: '🧠',
       position: { x: 50, y: 15 }, // Top - 12 o'clock
       labelPosition: { x: 50, y: 2 },
@@ -62,8 +62,8 @@ const TDDCycleSlide = () => {
       id: 'red',
       name: 'Write Failing Test',
       shortName: 'Red',
-      color: 'from-red-500 to-red-600',
-      bgColor: 'bg-red-500',
+      color: 'from-red-600 to-red-700',
+      bgColor: 'bg-red-600',
       icon: '🔴',
       position: { x: 86, y: 50 }, // Right - moved right
       labelPosition: { x: 106, y: 50 },
@@ -73,19 +73,19 @@ const TDDCycleSlide = () => {
       id: 'green',
       name: 'Make Test Pass',
       shortName: 'Green',
-      color: 'from-green-500 to-green-600',
-      bgColor: 'bg-green-500',
+      color: 'from-emerald-600 to-emerald-700',
+      bgColor: 'bg-emerald-600',
       icon: '🟢',
       position: { x: 50, y: 88 }, // Bottom - moved further down
-      labelPosition: { x: 50, y: 105 },
+      labelPosition: { x: 25, y: 95 },
       sound: 'success'
     },
     {
       id: 'refactor',
       name: 'Refactor & Optimize',
       shortName: 'Refactor',
-      color: 'from-blue-500 to-blue-600',
-      bgColor: 'bg-blue-500',
+      color: 'from-slate-600 to-slate-700',
+      bgColor: 'bg-slate-600',
       icon: '🔵',
       position: { x: 14, y: 50 }, // Left - moved left
       labelPosition: { x: -16, y: 50 },
@@ -173,11 +173,11 @@ const TDDCycleSlide = () => {
   };
 
   return (
-    <div className="min-h-full flex flex-col bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 p-8">
+    <div className="min-h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
       <div className="text-center mb-8">
-        <h1 className="text-5xl font-bold mb-4 text-white">What is TDD?</h1>
-        <p className="text-xl text-gray-300">Test-Driven Development</p>
-        <p className="text-lg text-gray-400 mt-2">A development methodology where tests drive the design of production code</p>
+        <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">What is TDD?</h1>
+        <p className="text-xl text-[#50DCE1] font-semibold">Test-Driven Development</p>
+        <p className="text-lg text-gray-300 mt-2">A development methodology where tests drive the design of production code</p>
       </div>
 
       <div className="flex-1 flex flex-col items-center justify-center">
@@ -193,7 +193,7 @@ const TDDCycleSlide = () => {
         >
           <button
             onClick={toggleExtended}
-            className="bg-gray-700 hover:bg-gray-600 text-gray-300 hover:text-white px-4 py-2 rounded-md text-sm transition-colors border border-gray-600 text-right"
+            className="bg-gray-800 hover:bg-[#50DCE1] text-gray-300 hover:text-black px-4 py-2 rounded-md text-sm transition-colors border border-gray-600 hover:border-[#50DCE1] text-right"
           >
             {showExtended ? '3-Step' : '4-Step TRGR'}
           </button>
@@ -205,9 +205,9 @@ const TDDCycleSlide = () => {
 
           {/* Floating Bubble Tip for Think step */}
           {showExtended && (
-            <div className="absolute top-4 right-4 bg-yellow-400 text-black px-3 py-2 rounded-full text-sm font-bold shadow-lg animate-bounce z-10">
+            <div className="absolute top-4 right-4 bg-[#50DCE1] text-black px-3 py-2 rounded-full text-sm font-bold shadow-lg animate-bounce z-10">
               💡 Every cycle starts with Think!
-              <div className="absolute -bottom-2 left-8 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-yellow-400"></div>
+              <div className="absolute -bottom-2 left-8 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-[#50DCE1]"></div>
             </div>
           )}
 
@@ -254,7 +254,7 @@ const TDDCycleSlide = () => {
 
                   {/* Special indicator for Think step */}
                   {isThinkStep && (
-                    <div className="absolute -top-2 -right-2 bg-gradient-to-r from-yellow-400 to-orange-400 text-black text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shadow-lg">
+                    <div className="absolute -top-2 -right-2 bg-gradient-to-r from-[#50DCE1] to-cyan-400 text-black text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shadow-lg">
                       💭
                     </div>
                   )}
@@ -296,7 +296,7 @@ const TDDCycleSlide = () => {
                     }}
                   >
                     {/* Different arrow directions based on step transition and mode */}
-                    <div className="text-2xl font-bold text-white bg-blue-500 rounded w-10 h-10 flex items-center justify-center drop-shadow-lg">
+                    <div className="text-2xl font-bold text-black bg-[#50DCE1] rounded w-10 h-10 flex items-center justify-center drop-shadow-lg">
                       {showExtended
                         ? (index === 0 ? '↘' : index === 1 ? '↙' : index === 2 ? '↖' : '↗')
                         : (index === 0 ? '↘' : index === 1 ? '←' : '↗')
