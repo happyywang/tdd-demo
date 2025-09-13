@@ -5,12 +5,12 @@ const BugFirstTDDSlide = () => {
 
   const steps = [
     {
-      icon: '⚠️',
+      icon: '🪲',
       title: 'Bug',
       subtitle: 'Don\'t rush to fix - understand the bug first, then write a test.',
-      bgColor: 'from-purple-900 via-violet-800 to-purple-900',
-      accentColor: 'text-purple-400',
-      borderColor: 'border-purple-500/30'
+      bgColor: 'from-slate-900 via-slate-700 to-slate-900',
+      accentColor: 'text-[#50DCE1]',
+      borderColor: 'border-[#50DCE1]/30'
     },
     {
       icon: '📝',
@@ -50,19 +50,19 @@ const BugFirstTDDSlide = () => {
     <div className="min-h-full relative bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 flex flex-col items-center justify-center px-8 py-16">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-10 left-10 w-32 h-32 bg-red-500 opacity-5 rounded-full blur-2xl animate-pulse"></div>
-        <div className="absolute top-20 right-20 w-48 h-48 bg-purple-500 opacity-5 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute bottom-20 left-20 w-40 h-40 bg-green-500 opacity-5 rounded-full blur-2xl animate-pulse delay-500"></div>
-        <div className="absolute bottom-10 right-10 w-56 h-56 bg-blue-500 opacity-5 rounded-full blur-3xl animate-pulse delay-1500"></div>
+        <div className="absolute top-10 left-10 w-32 h-32 bg-[#50DCE1] opacity-5 rounded-full blur-2xl animate-pulse"></div>
+        <div className="absolute top-20 right-20 w-48 h-48 bg-[#50DCE1] opacity-10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute bottom-20 left-20 w-40 h-40 bg-[#50DCE1] opacity-5 rounded-full blur-2xl animate-pulse delay-500"></div>
+        <div className="absolute bottom-10 right-10 w-56 h-56 bg-[#50DCE1] opacity-10 rounded-full blur-3xl animate-pulse delay-1500"></div>
       </div>
       
       <div className="relative z-10 max-w-7xl mx-auto text-center">
         {/* Title */}
         <div className="mb-8">
-          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
+          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">
             TDD From the Trenches
           </h1>
-          <h2 className="text-xl text-gray-300">Recommend: start from a bug fix</h2>
+          <h2 className="text-xl text-[#50DCE1]">Recommend: start from a bug fix</h2>
         </div>
 
         {/* Interactive Flow */}

@@ -7,6 +7,7 @@ import BestPracticesSlide from './components/slides/BestPracticesSlide';
 import BugFirstTDDSlide from './components/slides/BugFirstTDDSlide';
 import AnimatedPingPong from './components/slides/AnimatedPingPong';
 import TDDCycleSlide from './components/slides/TDDCycleSlide';
+import WhatIsNotTDDSlide from './components/slides/WhatIsNotTDDSlide';
 
 // All TypeScript interfaces moved to types.ts
 
@@ -462,16 +463,16 @@ const TDDPresentation = () => {
 
   // Title Slide Component
   const TitleSlide = () => (
-    <div className="flex flex-col items-center justify-center text-center" style={{minHeight: LAYOUT.SLIDE_MIN_HEIGHT}}>
-      <h1 className="text-8xl font-bold mb-8 bg-gradient-to-r from-red-400 via-green-400 to-blue-400 bg-clip-text text-transparent">
+    <div className="flex flex-col items-center justify-center text-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" style={{minHeight: LAYOUT.SLIDE_MIN_HEIGHT}}>
+      <h1 className="text-8xl font-bold mb-8 bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">
         User Group TDD
       </h1>
-      <p className="text-4xl text-gray-300 mb-12">Test-Driven Development</p>
-      <div className="text-2xl text-gray-400 space-y-4">
+      <p className="text-4xl text-[#50DCE1] font-semibold mb-12">Test-Driven Development</p>
+      <div className="text-2xl text-gray-300 space-y-4">
         <p>🎯 A Complete Guide to TDD</p>
         <p>📅 30 minutes • 👥 Interactive • 💻 Demo</p>
       </div>
-      <div className="mt-16 text-gray-500">
+      <div className="mt-16 text-gray-400">
         <p>{CONTENT.NAVIGATION.PRESS_ARROW_TO_START}</p>
       </div>
     </div>
@@ -491,22 +492,22 @@ const TDDPresentation = () => {
     ];
 
     return (
-      <div className="min-h-full flex flex-col">
-        <h1 className="text-6xl font-bold mb-12 text-center bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+      <div className="min-h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
+        <h1 className="text-6xl font-bold mb-12 text-center bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">
           Agenda
         </h1>
         <div className="grid md:grid-cols-2 gap-6 flex-1">
           {agendaItems.map((item, index) => (
             <div
               key={index}
-              className="bg-gray-800 p-6 rounded-xl hover:bg-gray-700 transition-all cursor-pointer transform hover:scale-105"
+              className="bg-gray-800 p-6 rounded-xl hover:bg-gray-700 border border-gray-700 hover:border-[#50DCE1] transition-all cursor-pointer transform hover:scale-105"
               onClick={() => goToSlide(index + 2)}
             >
               <div className="flex items-center space-x-4">
                 <div className="text-4xl">{item.icon}</div>
                 <div>
                   <h3 className="text-2xl font-bold text-white">{item.title}</h3>
-                  <p className="text-gray-400">{item.subtitle}</p>
+                  <p className="text-[#50DCE1]">{item.subtitle}</p>
                 </div>
               </div>
             </div>
@@ -702,47 +703,47 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
     const getColorClasses = (color: string) => {
       const colorMap: { [key: string]: { text: string; bg: string; border: string; bgLight: string } } = {
         amber: {
-          text: 'text-amber-400',
-          bg: 'bg-amber-500',
-          border: 'border-amber-400',
-          bgLight: 'bg-amber-400/10'
+          text: 'text-[#50DCE1]',
+          bg: 'bg-gradient-to-br from-slate-600 to-slate-700',
+          border: 'border-[#50DCE1]',
+          bgLight: 'bg-slate-800/50'
         },
         orange: {
-          text: 'text-orange-400',
-          bg: 'bg-orange-500',
-          border: 'border-orange-400', 
-          bgLight: 'bg-orange-400/10'
+          text: 'text-[#50DCE1]',
+          bg: 'bg-gradient-to-br from-[#50DCE1] to-cyan-500',
+          border: 'border-[#50DCE1]',
+          bgLight: 'bg-[#50DCE1]/10'
         },
         green: {
-          text: 'text-green-400',
-          bg: 'bg-green-500',
-          border: 'border-green-400',
-          bgLight: 'bg-green-400/10'
+          text: 'text-[#50DCE1]',
+          bg: 'bg-gradient-to-br from-slate-500 to-slate-600',
+          border: 'border-[#50DCE1]',
+          bgLight: 'bg-slate-700/50'
         },
         purple: {
-          text: 'text-purple-400',
-          bg: 'bg-purple-500',
-          border: 'border-purple-400',
-          bgLight: 'bg-purple-400/10'
+          text: 'text-[#50DCE1]',
+          bg: 'bg-gradient-to-br from-[#50DCE1] to-slate-500',
+          border: 'border-[#50DCE1]',
+          bgLight: 'bg-slate-800/30'
         }
       };
       return colorMap[color] || colorMap.amber;
     };
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 p-8 overflow-auto">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 overflow-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-amber-400 via-orange-400 via-green-400 to-purple-400 bg-clip-text text-transparent">
+          <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">
             History of TDD
           </h1>
-          <p className="text-xl text-gray-300">Evolution of Test-Driven Development</p>
+          <p className="text-xl text-[#50DCE1]">Evolution of Test-Driven Development</p>
         </div>
 
         {/* Timeline Container */}
         <div className="max-w-5xl mx-auto relative">
           {/* Vertical timeline line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-amber-400 via-orange-400 via-green-400 to-purple-400 rounded-full opacity-30"></div>
+          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-[#50DCE1] via-slate-400 to-[#50DCE1] rounded-full opacity-30"></div>
           
           {timelineEvents.map((event, index) => {
             const colors = getColorClasses(event.color);
@@ -785,7 +786,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
 
         {/* Bottom summary */}
         <div className="text-center mt-16 max-w-3xl mx-auto">
-          <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700">
+          <div className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl border border-[#50DCE1]/30 hover:border-[#50DCE1] transition-all">
             <p className="text-xl text-gray-300 italic leading-relaxed">
               "TDD's journey is a story of challenging habits, proving value, and shaping how modern software is built."
             </p>
@@ -881,28 +882,28 @@ public void AddItemToCart_ItemIsAdded()
           <div className="mb-6">
             <div className="grid md:grid-cols-2 gap-6 mb-6">
               {/* TDD Side */}
-              <div className="bg-gradient-to-br from-green-800 to-green-600 p-6 rounded-xl">
+              <div className="bg-gradient-to-br from-slate-700 to-slate-800 border border-[#50DCE1]/30 p-6 rounded-xl">
                 <div className="text-center mb-4">
                   <div className="text-4xl mb-2">{current.tddIcon}</div>
-                  <h3 className="text-2xl font-bold">TDD</h3>
-                  <p className="text-sm text-green-100">Test-Driven Development</p>
+                  <h3 className="text-2xl font-bold text-[#50DCE1]">TDD</h3>
+                  <p className="text-sm text-gray-300">Test-Driven Development</p>
                 </div>
                 <div className="bg-black bg-opacity-30 p-4 rounded-lg">
-                  <h4 className="font-bold text-green-200 mb-2">{current.aspect}:</h4>
-                  <p className="text-green-100">{current.tdd}</p>
+                  <h4 className="font-bold text-[#50DCE1] mb-2">{current.aspect}:</h4>
+                  <p className="text-gray-200">{current.tdd}</p>
                 </div>
               </div>
 
               {/* BDD Side */}
-              <div className="bg-gradient-to-br from-blue-800 to-blue-600 p-6 rounded-xl">
+              <div className="bg-gradient-to-br from-[#50DCE1] to-cyan-500 p-6 rounded-xl">
                 <div className="text-center mb-4">
                   <div className="text-4xl mb-2">{current.bddIcon}</div>
-                  <h3 className="text-2xl font-bold">BDD</h3>
-                  <p className="text-sm text-blue-100">Behavior-Driven Development</p>
+                  <h3 className="text-2xl font-bold text-black">BDD</h3>
+                  <p className="text-sm text-black">Behavior-Driven Development</p>
                 </div>
                 <div className="bg-black bg-opacity-30 p-4 rounded-lg">
-                  <h4 className="font-bold text-blue-200 mb-2">{current.aspect}:</h4>
-                  <p className="text-blue-100">{current.bdd}</p>
+                  <h4 className="font-bold text-[#50DCE1] mb-2">{current.aspect}:</h4>
+                  <p className="text-white">{current.bdd}</p>
                 </div>
               </div>
             </div>
@@ -910,16 +911,16 @@ public void AddItemToCart_ItemIsAdded()
 
           {/* Aspect Navigation */}
           <div className="mb-4">
-            <h4 className="text-xl font-bold text-center mb-4">Compare Different Aspects:</h4>
+            <h4 className="text-xl font-bold text-center mb-4 text-[#50DCE1]">Compare Different Aspects:</h4>
             <div className="flex flex-wrap justify-center gap-2">
               {comparisonAspects.map((aspect, index) => (
                 <button
                   key={index}
                   onClick={() => setSelectedAspect(index)}
                   className={`px-4 py-2 rounded-full text-sm font-bold transition-all ${
-                    index === selectedAspect 
-                      ? 'bg-purple-600 text-white transform scale-105' 
-                      : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                    index === selectedAspect
+                      ? 'bg-[#50DCE1] text-black transform scale-105'
+                      : 'bg-slate-700 text-gray-300 hover:bg-slate-600 hover:border-[#50DCE1] border border-transparent'
                   }`}
                 >
                   {aspect.aspect}
@@ -935,10 +936,10 @@ public void AddItemToCart_ItemIsAdded()
       <div className="flex flex-col h-full">
         <div className="grid md:grid-cols-2 gap-6 mb-6">
           {/* TDD Example */}
-          <div className="bg-gray-800 p-6 rounded-xl">
-            <h3 className="text-2xl font-bold text-green-400 mb-4">{examples.tdd.title}</h3>
+          <div className="bg-slate-800 border border-[#50DCE1]/30 p-6 rounded-xl">
+            <h3 className="text-2xl font-bold text-[#50DCE1] mb-4">{examples.tdd.title}</h3>
             <div className="bg-black p-4 rounded-lg mb-4 overflow-auto max-h-64">
-              <code className="text-green-300 text-sm whitespace-pre-line">
+              <code className="text-[#50DCE1] text-sm whitespace-pre-line">
                 {examples.tdd.code}
               </code>
             </div>
@@ -946,20 +947,20 @@ public void AddItemToCart_ItemIsAdded()
           </div>
 
           {/* BDD Example */}
-          <div className="bg-gray-800 p-6 rounded-xl">
-            <h3 className="text-2xl font-bold text-blue-400 mb-4">{examples.bdd.title}</h3>
-            <div className="bg-black p-4 rounded-lg mb-4 overflow-auto max-h-64">
-              <code className="text-blue-300 text-sm whitespace-pre-line">
+          <div className="bg-gradient-to-br from-[#50DCE1] to-cyan-500 p-6 rounded-xl">
+            <h3 className="text-2xl font-bold text-black mb-4">{examples.bdd.title}</h3>
+            <div className="bg-black bg-opacity-30 p-4 rounded-lg mb-4 overflow-auto max-h-64">
+              <code className="text-[#50DCE1] text-sm whitespace-pre-line">
                 {examples.bdd.code}
               </code>
             </div>
-            <p className="text-sm text-gray-300 italic">{examples.bdd.focus}</p>
+            <p className="text-sm text-black font-semibold italic">{examples.bdd.focus}</p>
           </div>
         </div>
 
-        <div className="text-center bg-purple-900 bg-opacity-50 p-6 rounded-lg shadow-lg">
-          <p className="text-xl text-purple-100 font-medium">
-            <strong className="text-purple-200">Key Insight:</strong> TDD focuses on "How to build it right" while BDD focuses on "Building the right thing"
+        <div className="text-center bg-slate-800 bg-opacity-50 border border-[#50DCE1]/50 p-6 rounded-lg shadow-lg">
+          <p className="text-xl text-gray-200 font-medium">
+            <strong className="text-[#50DCE1]">Key Insight:</strong> TDD focuses on "How to build it right" while BDD focuses on "Building the right thing"
           </p>
         </div>
       </div>
@@ -968,13 +969,13 @@ public void AddItemToCart_ItemIsAdded()
     const renderDecisionView = () => (
       <div className="min-h-full flex flex-col justify-center">
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold mb-4 text-purple-400">Which Should You Choose?</h2>
+          <h2 className="text-3xl font-bold mb-4 text-[#50DCE1]">Which Should You Choose?</h2>
           <p className="text-lg text-gray-300">They're not mutually exclusive!</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-green-900 bg-opacity-50 p-6 rounded-xl text-center">
-            <h3 className="text-xl font-bold text-green-400 mb-4">Choose TDD When:</h3>
+          <div className="bg-slate-800 bg-opacity-50 border border-[#50DCE1]/30 p-6 rounded-xl text-center">
+            <h3 className="text-xl font-bold text-[#50DCE1] mb-4">Choose TDD When:</h3>
             <ul className="space-y-2 text-sm text-left">
               <li>• Building internal APIs</li>
               <li>• Complex business logic</li>
@@ -984,9 +985,9 @@ public void AddItemToCart_ItemIsAdded()
             </ul>
           </div>
 
-          <div className="bg-blue-900 bg-opacity-50 p-6 rounded-xl text-center">
-            <h3 className="text-xl font-bold text-blue-400 mb-4">Choose BDD When:</h3>
-            <ul className="space-y-2 text-sm text-left">
+          <div className="bg-gradient-to-br from-[#50DCE1] to-cyan-500 p-6 rounded-xl text-center">
+            <h3 className="text-xl font-bold text-black mb-4">Choose BDD When:</h3>
+            <ul className="space-y-2 text-sm text-left text-black font-semibold">
               <li>• User-facing features</li>
               <li>• Cross-team communication needed</li>
               <li>• Business stakeholder involvement</li>
@@ -995,8 +996,8 @@ public void AddItemToCart_ItemIsAdded()
             </ul>
           </div>
 
-          <div className="bg-purple-900 bg-opacity-50 p-6 rounded-xl text-center">
-            <h3 className="text-xl font-bold text-purple-400 mb-4">Use Both When:</h3>
+          <div className="bg-slate-700 bg-opacity-50 border border-[#50DCE1]/50 p-6 rounded-xl text-center">
+            <h3 className="text-xl font-bold text-[#50DCE1] mb-4">Use Both When:</h3>
             <ul className="space-y-2 text-sm text-left">
               <li>• Large, complex systems</li>
               <li>• Mature development teams</li>
@@ -1008,8 +1009,8 @@ public void AddItemToCart_ItemIsAdded()
         </div>
 
         <div className="text-center">
-          <div className="bg-yellow-900 bg-opacity-50 p-4 rounded-lg inline-block">
-            <h4 className="text-lg font-bold text-yellow-200 mb-2">💡 Practical Recommendation</h4>
+          <div className="bg-slate-800 bg-opacity-50 border border-[#50DCE1]/50 p-4 rounded-lg inline-block">
+            <h4 className="text-lg font-bold text-[#50DCE1] mb-2">💡 Practical Recommendation</h4>
             <p className="text-sm text-gray-200">
               Start with TDD for technical mastery, add BDD for business alignment. They complement each other perfectly!
             </p>
@@ -1019,29 +1020,29 @@ public void AddItemToCart_ItemIsAdded()
     );
 
     return (
-      <div className="min-h-full flex flex-col">
+      <div className="min-h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
         <div className="text-center mb-8">
           <h1 className="text-5xl font-bold mb-4">
-            <span className="text-green-400">TDD</span>
+            <span className="text-[#50DCE1]">TDD</span>
             <span className="text-gray-400"> vs </span>
-            <span className="text-blue-400">BDD</span>
+            <span className="text-[#50DCE1]">BDD</span>
           </h1>
           <p className="text-xl text-gray-300">Understanding the differences and when to use each</p>
-          
+
           {/* View Toggle */}
           <div className="flex justify-center space-x-2 mt-6">
             {[
-              { key: 'comparison', label: '⚖️ Side by Side', color: 'bg-purple-600' },
-              { key: 'examples', label: '📝 Code Examples', color: 'bg-gray-600' },
-              { key: 'decision', label: '🎯 Which to Choose', color: 'bg-orange-600' }
+              { key: 'comparison', label: '⚖️ Side by Side', color: 'bg-[#50DCE1]' },
+              { key: 'examples', label: '📝 Code Examples', color: 'bg-[#50DCE1]' },
+              { key: 'decision', label: '🎯 Which to Choose', color: 'bg-[#50DCE1]' }
             ].map(view => (
               <button
                 key={view.key}
                 onClick={() => setCurrentView(view.key)}
                 className={`px-4 py-2 rounded-full text-sm font-bold transition-all transform hover:scale-105 ${
-                  currentView === view.key 
-                    ? `${view.color} text-white` 
-                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                  currentView === view.key
+                    ? `${view.color} text-black`
+                    : 'bg-slate-700 text-gray-300 hover:bg-slate-600 hover:border-[#50DCE1] border border-transparent'
                 }`}
               >
                 {view.label}
@@ -1067,7 +1068,7 @@ public void AddItemToCart_ItemIsAdded()
       {
         title: "Mindset Shift Required",
         icon: "🧠",
-        color: "bg-red-500",
+        color: "bg-gradient-to-br from-slate-700 to-slate-800",
         problem: "Requires fundamental change from 'code first' to 'test first' thinking",
         impact: "Developers feel slower and uncomfortable initially",
         detail: "Years of 'write code then test' habits are hard to break. Feels unnatural and counterintuitive at first.",
@@ -1076,7 +1077,7 @@ public void AddItemToCart_ItemIsAdded()
       {
         title: "Test Maintenance Burden",
         icon: "🔧",
-        color: "bg-orange-500",
+        color: "bg-gradient-to-br from-[#50DCE1] to-cyan-500",
         problem: "Tests become another codebase that needs constant maintenance",
         impact: "Changing requirements means updating both code AND tests",
         detail: "Brittle tests break frequently. Refactoring becomes expensive when tests are tightly coupled to implementation.",
@@ -1085,7 +1086,7 @@ public void AddItemToCart_ItemIsAdded()
       {
         title: "Initial Development Slowdown",
         icon: "🐌",
-        color: "bg-yellow-500",
+        color: "bg-gradient-to-br from-slate-600 to-slate-700",
         problem: "15-35% longer development time initially (research confirmed)",
         impact: "Pressure from management and tight deadlines create resistance",
         detail: "Writing tests first feels like doing double work. Team velocity appears to drop in early sprints.",
@@ -1094,7 +1095,7 @@ public void AddItemToCart_ItemIsAdded()
       {
         title: "Legacy Code Integration",
         icon: "🏚️",
-        color: "bg-purple-500",
+        color: "bg-gradient-to-br from-[#50DCE1] to-slate-500",
         problem: "Extremely difficult to apply TDD to existing untested codebases",
         impact: "Requires extensive refactoring before TDD can be effective",
         detail: "Tightly coupled legacy code resists testing. Dependencies are hard to mock. Existing architecture fights TDD.",
@@ -1103,7 +1104,7 @@ public void AddItemToCart_ItemIsAdded()
       {
         title: "Over-Testing Risk",
         icon: "🎯",
-        color: "bg-blue-500",
+        color: "bg-gradient-to-br from-slate-800 to-slate-700",
         problem: "Tendency to test implementation details rather than behavior",
         impact: "Creates fragile test suites that break with every refactor",
         detail: "Developers often write too many low-level tests. Mock-heavy tests become maintenance nightmares.",
@@ -1112,7 +1113,7 @@ public void AddItemToCart_ItemIsAdded()
       {
         title: "Tool and Infrastructure Overhead",
         icon: "⚙️",
-        color: "bg-teal-500",
+        color: "bg-gradient-to-br from-slate-700 to-slate-600",
         problem: "Requires investment in testing frameworks, CI/CD, and tooling",
         impact: "Additional complexity in build pipelines and development environment",
         detail: "Test runners, mocking frameworks, test databases. Slow test suites impact developer productivity.",
@@ -1201,12 +1202,12 @@ public void AddItemToCart_ItemIsAdded()
     const renderRealityView = () => (
       <div className="min-h-full flex flex-col justify-center">
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold mb-4 text-orange-400">The Honest Truth About TDD</h2>
+          <h2 className="text-3xl font-bold mb-4 text-[#50DCE1]">The Honest Truth About TDD</h2>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6 mb-8">
-          <div className="bg-red-900 bg-opacity-50 p-6 rounded-xl">
-            <h3 className="text-xl font-bold mb-4 text-red-300">❌ TDD is NOT for everyone</h3>
+          <div className="bg-slate-800 bg-opacity-50 border border-red-500/30 p-6 rounded-xl">
+            <h3 className="text-xl font-bold mb-4 text-red-400">❌ TDD is NOT for everyone</h3>
             <ul className="space-y-2 text-sm">
               <li>• Tight deadline projects with no long-term maintenance</li>
               <li>• Prototyping and throw-away code</li>
@@ -1216,9 +1217,9 @@ public void AddItemToCart_ItemIsAdded()
             </ul>
           </div>
 
-          <div className="bg-green-900 bg-opacity-50 p-6 rounded-xl">
-            <h3 className="text-xl font-bold mb-4 text-green-300">✅ TDD works best when</h3>
-            <ul className="space-y-2 text-sm">
+          <div className="bg-gradient-to-br from-[#50DCE1] to-cyan-500 p-6 rounded-xl">
+            <h3 className="text-xl font-bold mb-4 text-black">✅ TDD works best when</h3>
+            <ul className="space-y-2 text-sm text-black font-semibold">
               <li>• Long-term maintenance is expected</li>
               <li>• Team commits to learning period</li>
               <li>• Business logic complexity is high</li>
@@ -1229,8 +1230,8 @@ public void AddItemToCart_ItemIsAdded()
         </div>
 
         <div className="text-center">
-          <div className="bg-yellow-900 bg-opacity-50 p-4 rounded-lg inline-block">
-            <h4 className="text-lg font-bold text-yellow-200 mb-2">🎯 Key Success Factors</h4>
+          <div className="bg-slate-800 bg-opacity-50 border border-[#50DCE1]/50 p-4 rounded-lg inline-block">
+            <h4 className="text-lg font-bold text-[#50DCE1] mb-2">🎯 Key Success Factors</h4>
             <p className="text-sm text-gray-200">
               Management support • Realistic timeline • Gradual adoption • Team commitment • Proper training
             </p>
@@ -1240,25 +1241,25 @@ public void AddItemToCart_ItemIsAdded()
     );
 
     return (
-      <div className="min-h-full flex flex-col">
+      <div className="min-h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
         <div className="text-center mb-8">
-          <h1 className="text-5xl font-bold mb-4 text-orange-400">TDD Challenges</h1>
+          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">TDD Challenges</h1>
           <p className="text-xl text-gray-300">Let's be honest about the difficulties</p>
-          
+
           {/* View Toggle */}
           <div className="flex justify-center space-x-2 mt-6">
             {[
-              { key: 'challenges', label: '⚠️ Challenges', color: 'bg-red-600' },
-              { key: 'mitigation', label: '💡 Solutions', color: 'bg-green-600' },
-              { key: 'reality', label: '🎯 Reality Check', color: 'bg-blue-600' }
+              { key: 'challenges', label: '⚠️ Challenges', color: 'bg-[#50DCE1]' },
+              { key: 'mitigation', label: '💡 Solutions', color: 'bg-[#50DCE1]' },
+              { key: 'reality', label: '🎯 Reality Check', color: 'bg-[#50DCE1]' }
             ].map(view => (
               <button
                 key={view.key}
                 onClick={() => setCurrentView(view.key)}
                 className={`px-4 py-2 rounded-full text-sm font-bold transition-all transform hover:scale-105 ${
-                  currentView === view.key 
-                    ? `${view.color} text-white` 
-                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                  currentView === view.key
+                    ? `${view.color} text-black`
+                    : 'bg-slate-700 text-gray-300 hover:bg-slate-600 hover:border-[#50DCE1] border border-transparent'
                 }`}
               >
                 {view.label}
@@ -1284,35 +1285,35 @@ public void AddItemToCart_ItemIsAdded()
       {
         title: "Confidence to Change Code",
         icon: "🛡️",
-        color: "bg-green-500",
+        color: "bg-gradient-to-br from-slate-700 to-slate-800",
         description: "No more fear of breaking existing functionality",
         detail: "Tests act as a safety net, allowing bold refactoring and feature additions without anxiety"
       },
       {
         title: "Faster Debugging",
         icon: "🐛",
-        color: "bg-blue-500",
+        color: "bg-gradient-to-br from-[#50DCE1] to-cyan-500",
         description: "When tests fail, you know exactly what broke",
         detail: "Pinpoint failures instantly instead of hunting through logs and stack traces"
       },
       {
         title: "Better API Design",
         icon: "🎨",
-        color: "bg-purple-500",
+        color: "bg-gradient-to-br from-slate-600 to-slate-700",
         description: "Tests force you to think from user's perspective",
         detail: "Writing the test first makes you design more intuitive, testable interfaces"
       },
       {
         title: "Living Documentation",
         icon: "📚",
-        color: "bg-orange-500",
+        color: "bg-gradient-to-br from-[#50DCE1] to-slate-500",
         description: "Tests show exactly how your code should work",
         detail: "New team members can read tests to understand system behavior and expectations"
       },
       {
         title: "Incremental Progress",
         icon: "🎯",
-        color: "bg-teal-500",
+        color: "bg-gradient-to-br from-slate-800 to-slate-700",
         description: "Small, focused steps reduce overwhelm",
         detail: "Break complex problems into manageable test-driven increments"
       }
@@ -1346,7 +1347,7 @@ public void AddItemToCart_ItemIsAdded()
       return (
         <div className="min-h-full flex flex-col">
           <div className="text-center mb-6">
-            <h2 className="text-4xl font-bold mb-4 text-yellow-400">Daily Developer Benefits</h2>
+            <h2 className="text-4xl font-bold mb-4 text-[#50DCE1]">Daily Developer Benefits</h2>
             <p className="text-lg text-gray-300">What TDD feels like in practice</p>
           </div>
 
@@ -1361,7 +1362,7 @@ public void AddItemToCart_ItemIsAdded()
 
           <button
             onClick={nextBenefit}
-            className="bg-white text-gray-900 px-6 py-3 rounded-full text-lg font-bold hover:bg-gray-200 transition-colors mx-auto"
+            className="bg-[#50DCE1] text-black px-6 py-3 rounded-full text-lg font-bold hover:bg-cyan-400 transition-colors mx-auto"
           >
             Next Benefit →
           </button>
@@ -1372,9 +1373,9 @@ public void AddItemToCart_ItemIsAdded()
                 key={index}
                 onClick={() => setCurrentBenefit(index)}
                 className={`w-3 h-3 rounded-full transition-all ${
-                  index === currentBenefit 
-                    ? 'bg-yellow-400 transform scale-125' 
-                    : 'bg-gray-600 hover:bg-gray-500'
+                  index === currentBenefit
+                    ? 'bg-[#50DCE1] transform scale-125'
+                    : 'bg-slate-600 hover:bg-slate-500'
                 }`}
               />
             ))}
@@ -1386,21 +1387,21 @@ public void AddItemToCart_ItemIsAdded()
     const renderResearchView = () => (
       <div className="min-h-full flex flex-col justify-center">
         <div className="text-center mb-8">
-          <h2 className="text-4xl font-bold mb-4 text-blue-400">Research Evidence</h2>
+          <h2 className="text-4xl font-bold mb-4 text-[#50DCE1]">Research Evidence</h2>
           <p className="text-lg text-gray-300">What the studies tell us</p>
         </div>
 
         <div className="space-y-6">
-          <div className="bg-gradient-to-r from-blue-800 to-blue-600 p-6 rounded-xl">
+          <div className="bg-gradient-to-r from-slate-800 to-slate-700 border border-[#50DCE1]/30 p-6 rounded-xl">
             <h3 className="text-2xl font-bold mb-4">{researchData.nagappan2008.title}</h3>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-black bg-opacity-30 p-4 rounded-lg">
-                <h4 className="text-lg font-bold text-green-400 mb-2">🔽 Defect Density Dropped</h4>
+                <h4 className="text-lg font-bold text-[#50DCE1] mb-2">🔽 Defect Density Dropped</h4>
                 <p className="text-3xl font-bold">{researchData.nagappan2008.defectReduction}</p>
                 <p className="text-sm text-gray-200 mt-2">Significantly fewer bugs in production</p>
               </div>
               <div className="bg-black bg-opacity-30 p-4 rounded-lg">
-                <h4 className="text-lg font-bold text-orange-400 mb-2">🔼 Initial Dev Time</h4>
+                <h4 className="text-lg font-bold text-[#50DCE1] mb-2">🔼 Initial Dev Time</h4>
                 <p className="text-3xl font-bold">+{researchData.nagappan2008.timeIncrease}</p>
                 <p className="text-sm text-gray-200 mt-2">Short-term investment for long-term gain</p>
               </div>
@@ -1408,16 +1409,16 @@ public void AddItemToCart_ItemIsAdded()
             <p className="text-sm text-gray-200 mt-4 italic">{researchData.nagappan2008.credibility}</p>
           </div>
 
-          <div className="bg-gradient-to-r from-green-800 to-green-600 p-6 rounded-xl">
-            <h3 className="text-2xl font-bold mb-4">{researchData.metaAnalysis.title}</h3>
+          <div className="bg-gradient-to-r from-[#50DCE1] to-cyan-500 p-6 rounded-xl">
+            <h3 className="text-2xl font-bold mb-4 text-black">{researchData.metaAnalysis.title}</h3>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="bg-black bg-opacity-30 p-4 rounded-lg text-center">
-                <p className="text-2xl font-bold text-green-300">{researchData.metaAnalysis.qualityImprovement}</p>
-                <p className="text-sm">Internal Quality Improvement</p>
+                <p className="text-2xl font-bold text-[#50DCE1]">{researchData.metaAnalysis.qualityImprovement}</p>
+                <p className="text-sm text-white">Internal Quality Improvement</p>
               </div>
               <div className="bg-black bg-opacity-30 p-4 rounded-lg text-center">
-                <p className="text-2xl font-bold text-green-300">{researchData.metaAnalysis.externalQuality}</p>
-                <p className="text-sm">External Quality Improvement</p>
+                <p className="text-2xl font-bold text-[#50DCE1]">{researchData.metaAnalysis.externalQuality}</p>
+                <p className="text-sm text-white">External Quality Improvement</p>
               </div>
             </div>
           </div>
@@ -1428,13 +1429,13 @@ public void AddItemToCart_ItemIsAdded()
     const renderComparisonView = () => (
       <div className="min-h-full flex flex-col justify-center">
         <div className="text-center mb-8">
-          <h2 className="text-4xl font-bold mb-4 text-purple-400">The TDD Investment</h2>
+          <h2 className="text-4xl font-bold mb-4 text-[#50DCE1]">The TDD Investment</h2>
           <p className="text-lg text-gray-300">Short-term cost, long-term gain</p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-red-900 bg-opacity-50 p-6 rounded-xl">
-            <h3 className="text-2xl font-bold mb-4 text-red-300">⏳ Initial Cost</h3>
+          <div className="bg-slate-800 bg-opacity-50 border border-red-500/30 p-6 rounded-xl">
+            <h3 className="text-2xl font-bold mb-4 text-red-400">⏳ Initial Cost</h3>
             <ul className="space-y-3 text-lg">
               <li>📈 15-35% longer initial development</li>
               <li>🧠 Learning curve for team</li>
@@ -1442,9 +1443,9 @@ public void AddItemToCart_ItemIsAdded()
             </ul>
           </div>
 
-          <div className="bg-green-900 bg-opacity-50 p-6 rounded-xl">
-            <h3 className="text-2xl font-bold mb-4 text-green-300">🎯 Long-term Gains</h3>
-            <ul className="space-y-3 text-lg">
+          <div className="bg-gradient-to-br from-[#50DCE1] to-cyan-500 p-6 rounded-xl">
+            <h3 className="text-2xl font-bold mb-4 text-black">🎯 Long-term Gains</h3>
+            <ul className="space-y-3 text-lg text-black font-semibold">
               <li>🐛 40-91% fewer defects</li>
               <li>🚀 Faster feature delivery later</li>
               <li>😌 Less debugging stress</li>
@@ -1455,8 +1456,8 @@ public void AddItemToCart_ItemIsAdded()
         </div>
 
         <div className="text-center mt-8">
-          <div className="bg-yellow-900 bg-opacity-50 p-4 rounded-lg inline-block">
-            <p className="text-lg font-bold text-yellow-200">
+          <div className="bg-slate-800 bg-opacity-50 border border-[#50DCE1]/50 p-4 rounded-lg inline-block">
+            <p className="text-lg font-bold text-[#50DCE1]">
               💰 ROI typically becomes positive after 2-3 months
             </p>
           </div>
@@ -1465,24 +1466,24 @@ public void AddItemToCart_ItemIsAdded()
     );
 
     return (
-      <div className="min-h-full flex flex-col">
+      <div className="min-h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
         <div className="text-center mb-8">
-          <h1 className="text-5xl font-bold mb-4 text-yellow-400">Why TDD?</h1>
+          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">Why TDD?</h1>
           
           {/* View Toggle */}
           <div className="flex justify-center space-x-2 mb-6">
             {[
-              { key: 'daily', label: '👨‍💻 Daily Benefits', color: 'bg-green-600' },
-              { key: 'research', label: '📊 Research Data', color: 'bg-blue-600' },
-              { key: 'comparison', label: '⚖️ Cost vs Benefit', color: 'bg-purple-600' }
+              { key: 'daily', label: '👨‍💻 Daily Benefits', color: 'bg-[#50DCE1]' },
+              { key: 'research', label: '📊 Research Data', color: 'bg-[#50DCE1]' },
+              { key: 'comparison', label: '⚖️ Cost vs Benefit', color: 'bg-[#50DCE1]' }
             ].map(view => (
               <button
                 key={view.key}
                 onClick={() => setCurrentView(view.key)}
                 className={`px-4 py-2 rounded-full text-sm font-bold transition-all transform hover:scale-105 ${
-                  currentView === view.key 
-                    ? `${view.color} text-white` 
-                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                  currentView === view.key
+                    ? `${view.color} text-black`
+                    : 'bg-slate-700 text-gray-300 hover:bg-slate-600 hover:border-[#50DCE1] border border-transparent'
                 }`}
               >
                 {view.label}
@@ -1497,159 +1498,6 @@ public void AddItemToCart_ItemIsAdded()
           {currentView === 'research' && renderResearchView()}
           {currentView === 'comparison' && renderComparisonView()}
         </div>
-      </div>
-    );
-  };
-  const WhatIsNotTDDSlide = () => {
-    const [currentMyth, setCurrentMyth] = useState(0);
-    const [showAll, setShowAll] = useState(false);
-
-    const myths = [
-      {
-        myth: "TDD is just a synonym for writing tests",
-        reality: "TDD is a design methodology",
-        explanation: "TDD uses tests to drive the design of your code. It's about the process and mindset, not just having tests.",
-        icon: "🧪",
-        color: "bg-red-500"
-      },
-      {
-        myth: "TDD means writing multiple tests upfront before any production code",
-        reality: "TDD is about one test at a time",
-        explanation: "You write ONE failing test, make it pass, then refactor. It's an incremental, iterative process.",
-        icon: "📝",
-        color: "bg-orange-500"
-      },
-      {
-        myth: "TDD guarantees zero bugs",
-        reality: "TDD reduces bugs, doesn't eliminate them",
-        explanation: "TDD significantly reduces bugs and gives confidence, but it's not a silver bullet. Quality still requires good practices.",
-        icon: "🐛",
-        color: "bg-yellow-500"
-      },
-      {
-        myth: "TDD is good for adding tests to existing production code",
-        reality: "TDD is for new code development",
-        explanation: "Adding tests to existing code is retrofitting, not TDD. TDD requires writing tests BEFORE the production code exists.",
-        icon: "🔧",
-        color: "bg-purple-500"
-      },
-      {
-        myth: "TDD slows down development",
-        reality: "TDD speeds up development long-term",
-        explanation: "While initial development might feel slower, TDD reduces debugging time, refactoring fear, and maintenance costs.",
-        icon: "🐌",
-        color: "bg-blue-500"
-      },
-      {
-        myth: "TDD replaces other testing practices",
-        reality: "TDD complements other testing",
-        explanation: "TDD focuses on unit tests. You still need integration tests, UI tests, performance tests, and manual testing.",
-        icon: "🎭",
-        color: "bg-green-500"
-      }
-    ];
-
-    const nextMyth = () => {
-      setCurrentMyth((prev) => (prev + 1) % myths.length);
-    };
-
-    const toggleShowAll = () => {
-      setShowAll(!showAll);
-    };
-
-    if (showAll) {
-      return (
-        <div className="min-h-full flex flex-col">
-          <div className="text-center mb-8">
-            <h1 className="text-5xl font-bold mb-4 text-red-400">What is NOT TDD</h1>
-            <p className="text-xl text-gray-300">Common Misconceptions Clarified</p>
-            <button
-              onClick={toggleShowAll}
-              className="mt-4 bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg transition-colors"
-            >
-              ← Back to Interactive View
-            </button>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6 overflow-y-auto">
-            {myths.map((item, index) => (
-              <div key={index} className="bg-gray-800 p-6 rounded-xl hover:bg-gray-700 transition-all">
-                <div className="flex items-start space-x-4">
-                  <div className="text-3xl">{item.icon}</div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-bold text-red-400 mb-2">❌ Myth:</h3>
-                    <p className="text-sm text-gray-300 mb-3">{item.myth}</p>
-                    <h4 className="text-lg font-bold text-green-400 mb-2">✅ Reality:</h4>
-                    <p className="text-sm text-white font-semibold mb-2">{item.reality}</p>
-                    <p className="text-xs text-gray-400">{item.explanation}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      );
-    }
-
-    const currentMythData = myths[currentMyth];
-
-    return (
-      <div className="min-h-full flex flex-col">
-        <div className="text-center mb-8">
-          <h1 className="text-5xl font-bold mb-4 text-red-400">What is NOT TDD</h1>
-          <p className="text-xl text-gray-300 mb-4">Let's bust some common myths</p>
-          
-          <div className="flex justify-center gap-4">
-            <button
-              onClick={toggleShowAll}
-              className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-white transition-colors"
-            >
-              📋 Show All Myths
-            </button>
-            <span className="bg-gray-700 px-4 py-2 rounded-lg text-gray-300">
-              {currentMyth + 1} / {myths.length}
-            </span>
-          </div>
-        </div>
-
-        <div className={`${currentMythData.color} p-8 rounded-2xl mb-8 text-center flex-1 flex flex-col justify-center transform transition-all duration-500`}>
-          <div className="text-6xl mb-6">{currentMythData.icon}</div>
-          
-          <div className="bg-black bg-opacity-30 p-6 rounded-xl mb-6">
-            <h2 className="text-2xl font-bold text-red-200 mb-3">❌ Common Myth:</h2>
-            <p className="text-xl mb-6 italic">"{currentMythData.myth}"</p>
-            
-            <h3 className="text-2xl font-bold text-green-200 mb-3">✅ The Reality:</h3>
-            <p className="text-xl font-semibold mb-4">{currentMythData.reality}</p>
-            
-            <div className="border-t border-white border-opacity-30 pt-4">
-              <p className="text-lg opacity-90">{currentMythData.explanation}</p>
-            </div>
-          </div>
-
-          <button
-            onClick={nextMyth}
-            className="bg-white text-gray-900 px-8 py-4 rounded-full text-xl font-bold hover:bg-gray-200 transition-colors mx-auto"
-          >
-            Next Myth →
-          </button>
-        </div>
-
-        {/* Myth Navigation Dots */}
-        <div className="flex justify-center space-x-3 mb-4">
-          {myths.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentMyth(index)}
-              className={`w-4 h-4 rounded-full transition-all ${
-                index === currentMyth 
-                  ? 'bg-red-400 transform scale-125' 
-                  : 'bg-gray-600 hover:bg-gray-500'
-              }`}
-            />
-          ))}
-        </div>
-
       </div>
     );
   };
@@ -2118,11 +1966,11 @@ public class FizzBuzz
 
     const getPhaseColor = (phase: string) => {
       switch (phase) {
-        case 'think': return 'bg-purple-500';
+        case 'think': return 'bg-slate-700';
         case 'red': return 'bg-red-500';
         case 'green': return 'bg-green-500';
         case 'refactor': return 'bg-blue-500';
-        case 'summary': return 'bg-purple-600';
+        case 'summary': return 'bg-slate-700';
         default: return 'bg-gray-500';
       }
     };
@@ -2153,17 +2001,17 @@ public class FizzBuzz
     }
 
     return (
-      <div className="min-h-screen bg-gray-900 p-6 overflow-auto">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6 overflow-auto">
         {/* Navigation FIRST - At the top where it's always visible */}
-        <div className="bg-yellow-500 text-black p-4 rounded-xl mb-6 shadow-lg">
+        <div className="bg-[#50DCE1] text-black p-4 rounded-xl mb-6 shadow-lg">
           <div className="flex justify-between items-center">
             <button
               onClick={prevStep}
               disabled={currentStep === 0}
               className={`px-4 py-2 rounded-lg font-bold ${
                 currentStep === 0
-                  ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
-                  : 'bg-black text-white hover:bg-gray-800'
+                  ? 'bg-slate-400 text-slate-600 cursor-not-allowed'
+                  : 'bg-slate-800 text-white hover:bg-slate-700'
               }`}
             >
               ← PREV
@@ -2179,9 +2027,9 @@ public class FizzBuzz
                     key={index}
                     onClick={() => setCurrentStep(index)}
                     className={`w-8 h-8 rounded-full font-bold transition-all ${
-                      index === currentStep 
-                        ? 'bg-black text-white transform scale-110' 
-                        : 'bg-gray-300 text-black hover:bg-gray-100'
+                      index === currentStep
+                        ? 'bg-slate-800 text-white transform scale-110'
+                        : 'bg-slate-300 text-black hover:bg-slate-200'
                     }`}
                   >
                     {index + 1}
@@ -2195,8 +2043,8 @@ public class FizzBuzz
               disabled={currentStep === demoSteps.length - 1}
               className={`px-4 py-2 rounded-lg font-bold ${
                 currentStep === demoSteps.length - 1
-                  ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
-                  : 'bg-black text-white hover:bg-gray-800'
+                  ? 'bg-slate-400 text-slate-600 cursor-not-allowed'
+                  : 'bg-slate-800 text-white hover:bg-slate-700'
               }`}
             >
               NEXT →
@@ -2206,31 +2054,31 @@ public class FizzBuzz
 
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-5xl font-bold mb-4 text-white">Building FizzBuzz with TDD</h1>
-          
+          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">Building FizzBuzz with TDD</h1>
+
           {/* Quick Jump Buttons */}
           <div className="flex justify-center space-x-2 mb-4">
             <button
               onClick={() => jumpToPhase('think')}
-              className="px-3 py-1 rounded bg-purple-600 hover:bg-purple-700 text-white text-sm"
+              className="px-3 py-1 rounded bg-[#50DCE1] hover:bg-cyan-400 text-black text-sm font-semibold"
             >
               🧠 Think
             </button>
             <button
               onClick={() => jumpToPhase('red')}
-              className="px-3 py-1 rounded bg-red-600 hover:bg-red-700 text-white text-sm"
+              className="px-3 py-1 rounded bg-slate-700 hover:bg-slate-600 text-white text-sm"
             >
               🔴 Red
             </button>
             <button
               onClick={() => jumpToPhase('green')}
-              className="px-3 py-1 rounded bg-green-600 hover:bg-green-700 text-white text-sm"
+              className="px-3 py-1 rounded bg-slate-700 hover:bg-slate-600 text-white text-sm"
             >
               🟢 Green
             </button>
             <button
               onClick={() => jumpToPhase('refactor')}
-              className="px-3 py-1 rounded bg-blue-600 hover:bg-blue-700 text-white text-sm"
+              className="px-3 py-1 rounded bg-slate-700 hover:bg-slate-600 text-white text-sm"
             >
               🔵 Refactor
             </button>
@@ -2246,20 +2094,20 @@ public class FizzBuzz
         {/* Content - Simple vertical layout */}
         <div className="space-y-6">
           {/* Test Results */}
-          <div className="bg-gray-800 p-4 rounded-xl">
-            <h3 className="text-lg font-bold text-white mb-3">Test Results ({current.testStats.passed}/{current.testStats.total} Pass)</h3>
+          <div className="bg-slate-800 border border-[#50DCE1]/30 p-4 rounded-xl">
+            <h3 className="text-lg font-bold text-[#50DCE1] mb-3">Test Results ({current.testStats.passed}/{current.testStats.total} Pass)</h3>
             <div className="space-y-2">
               {current.testResults.map((test, index) => (
                 <div 
                   key={index}
                   className={`p-3 rounded-lg ${
-                    test.status === 'pass' 
-                      ? 'bg-green-900 border-l-4 border-green-400' 
-                      : 'bg-red-900 border-l-4 border-red-400'
+                    test.status === 'pass'
+                      ? 'bg-gradient-to-r from-[#50DCE1]/20 to-transparent border-l-4 border-[#50DCE1]'
+                      : 'bg-slate-700/50 border-l-4 border-red-400'
                   }`}
                 >
                   <div className="font-bold text-white">{test.name}</div>
-                  <div className={`text-sm ${test.status === 'pass' ? 'text-green-300' : 'text-red-300'}`}>
+                  <div className={`text-sm ${test.status === 'pass' ? 'text-[#50DCE1]' : 'text-red-300'}`}>
                     {test.message}
                   </div>
                 </div>
@@ -2718,11 +2566,11 @@ Speed Optimization Techniques:
     };
 
     return (
-      <div className="min-h-full flex flex-col">
+      <div className="min-h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-5xl font-bold mb-4 text-green-400">TDD Best Practices</h1>
-          <p className="text-xl text-gray-300">Proven techniques for .NET development success</p>
+          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">TDD Best Practices</h1>
+          <p className="text-xl text-[#50DCE1]">Practical wisdom for successful TDD adoption</p>
         </div>
 
         {/* Category Navigation */}
@@ -2732,9 +2580,9 @@ Speed Optimization Techniques:
               key={index}
               onClick={() => { setCurrentCategory(index); setSelectedPractice(0); }}
               className={`flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-bold transition-all transform hover:scale-105 ${
-                index === currentCategory 
-                  ? `${category.color} text-white` 
-                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                index === currentCategory
+                  ? 'bg-[#50DCE1] text-black'
+                  : 'bg-slate-700 text-gray-300 hover:bg-slate-600 hover:border-[#50DCE1] border border-transparent'
               }`}
             >
               <span>{category.icon}</span>
@@ -2744,19 +2592,19 @@ Speed Optimization Techniques:
         </div>
 
         {/* Current Category Header */}
-        <div className={`${currentCategoryData.color} p-4 rounded-xl mb-6 text-center`}>
-          <div className="text-3xl mb-2">{currentCategoryData.icon}</div>
-          <h2 className="text-2xl font-bold mb-2">{currentCategoryData.title}</h2>
-          <p className="text-lg opacity-90">{currentCategoryData.description}</p>
+        <div className="bg-gradient-to-r from-[#50DCE1] to-cyan-500 p-4 rounded-xl mb-6 text-center">
+          <div className="text-4xl mb-2">{currentCategoryData.icon}</div>
+          <h2 className="text-2xl font-bold mb-2 text-black">{currentCategoryData.title}</h2>
+          <p className="opacity-90 text-black font-semibold">{currentCategoryData.description}</p>
         </div>
 
         {/* Current Practice Content */}
-        <div className="bg-gray-800 p-6 rounded-xl mb-6 flex-1 overflow-y-auto">
+        <div className="flex-1 bg-slate-800 border border-[#50DCE1]/30 rounded-xl p-6 mb-6 overflow-y-auto">
           <div className="flex items-center space-x-3 mb-4">
-            <div className="text-2xl">{currentPractice.icon}</div>
+            <div className="text-3xl">{currentPractice.icon}</div>
             <div>
-              <h3 className="text-xl font-bold text-white">{currentPractice.title}</h3>
-              <p className="text-gray-400">{currentPractice.description}</p>
+              <h3 className="text-2xl font-bold text-[#50DCE1]">{currentPractice.title}</h3>
+              <p className="text-lg text-gray-300">{currentPractice.description}</p>
             </div>
           </div>
 
@@ -2772,47 +2620,45 @@ Speed Optimization Techniques:
             </div>
           )}
 
-          <div className="bg-blue-900 bg-opacity-50 p-3 rounded-lg">
-            <div className="flex items-start space-x-2">
-              <span className="text-blue-300 font-bold">💡 Pro Tip:</span>
-              <p className="text-blue-100 text-sm">{currentPractice.tip}</p>
+          <div className="bg-yellow-900 bg-opacity-50 p-4 rounded-lg">
+            <div className="flex items-start">
+              <span className="text-2xl mr-3">💡</span>
+              <div>
+                <h4 className="font-bold text-yellow-200 mb-1">Pro Tip:</h4>
+                <p className="text-yellow-100 text-sm">{currentPractice.tip}</p>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Navigation Controls */}
-        <div className="flex justify-between items-center mt-6 mb-8">
+        <div className="flex justify-between items-center mt-6">
           <button
-            onClick={nextCategory}
-            className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg text-white font-bold transition-all"
+            onClick={nextPractice}
+            className="bg-[#50DCE1] hover:bg-cyan-400 text-black px-6 py-3 rounded-full font-bold transition-colors"
           >
-            Next Category: {practiceCategories[(currentCategory + 1) % practiceCategories.length].title} →
+            Next Practice →
           </button>
 
-          <div className="text-center">
-            <div className="text-sm text-gray-400 mb-2">
-              Practice {selectedPractice + 1} of {currentCategoryData.practices.length}
-            </div>
-            <div className="flex space-x-1">
-              {currentCategoryData.practices.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSelectedPractice(index)}
-                  className={`w-2 h-2 rounded-full transition-all ${
-                    index === selectedPractice 
-                      ? 'bg-green-400 transform scale-125' 
-                      : 'bg-gray-600 hover:bg-gray-500'
-                  }`}
-                />
-              ))}
-            </div>
+          <div className="flex space-x-2">
+            {currentCategoryData.practices.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setSelectedPractice(index)}
+                className={`w-3 h-3 rounded-full transition-all ${
+                  index === selectedPractice
+                    ? 'bg-[#50DCE1] transform scale-125'
+                    : 'bg-slate-600 hover:bg-slate-500'
+                }`}
+              />
+            ))}
           </div>
 
           <button
-            onClick={nextPractice}
-            className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-white font-bold transition-all"
+            onClick={nextCategory}
+            className="bg-slate-700 hover:bg-slate-600 hover:border-[#50DCE1] border border-transparent text-white px-6 py-3 rounded-full font-bold transition-colors"
           >
-            Next Practice →
+            Next Category: {practiceCategories[(currentCategory + 1) % practiceCategories.length].title} →
           </button>
         </div>
       </div>
@@ -2824,22 +2670,22 @@ Speed Optimization Techniques:
     <div className="min-h-full relative bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 flex flex-col items-center justify-center px-8 py-16">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-20 w-64 h-64 bg-blue-500 opacity-5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-green-500 opacity-5 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 left-20 w-64 h-64 bg-[#50DCE1] opacity-5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-[#50DCE1] opacity-10 rounded-full blur-3xl"></div>
       </div>
       
       <div className="relative z-10 max-w-6xl mx-auto text-center">
         {/* Main Quote - CENTER FOCUS */}
         <div className="relative mb-12">
           {/* Large decorative quote marks */}
-          <div className="absolute -top-16 -left-16 text-8xl text-blue-400 opacity-15 font-serif">"</div>
-          <div className="absolute -bottom-16 -right-16 text-8xl text-blue-400 opacity-15 font-serif">"</div>
+          <div className="absolute -top-16 -left-16 text-8xl text-[#50DCE1] opacity-15 font-serif">"</div>
+          <div className="absolute -bottom-16 -right-16 text-8xl text-[#50DCE1] opacity-15 font-serif">"</div>
           
           <blockquote className="relative z-10">
             <p className="text-4xl md:text-5xl lg:text-6xl font-light italic text-white leading-tight mb-10">
               I am not a great programmer.
               <br />
-              <span className="bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent font-semibold">
+              <span className="bg-gradient-to-r from-[#50DCE1] via-cyan-400 to-[#50DCE1] bg-clip-text text-transparent font-semibold">
                 I am a good programmer with great habits
               </span>
             </p>
@@ -2851,7 +2697,7 @@ Speed Optimization Techniques:
         <div className="flex flex-col items-center mb-6">
           <div className="relative inline-block mb-4">
             {/* Subtle glow effect */}
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 via-purple-500 to-green-400 opacity-10 blur-lg scale-110"></div>
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#50DCE1] via-cyan-400 to-[#50DCE1] opacity-10 blur-lg scale-110"></div>
             <div className="relative w-32 h-32 mx-auto overflow-hidden rounded-full border-2 border-gray-500 bg-gray-700 shadow-xl">
               <img 
                 src="/kent-beck.webp" 
@@ -2865,15 +2711,15 @@ Speed Optimization Techniques:
             </div>
           </div>
           <div className="space-y-1">
-            <h2 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <h2 className="text-xl font-bold bg-gradient-to-r from-[#50DCE1] to-cyan-400 bg-clip-text text-transparent">
               Kent Beck
             </h2>
             <p className="text-base text-gray-300">Creator of Test-Driven Development</p>
             <div className="flex justify-center space-x-2 mt-2">
-              <span className="px-2 py-1 bg-blue-500 bg-opacity-20 text-blue-300 rounded-full text-xs border border-blue-500 border-opacity-30">
+              <span className="px-2 py-1 bg-[#50DCE1] bg-opacity-20 text-[#50DCE1] rounded-full text-xs border border-[#50DCE1] border-opacity-30">
                 Software Pioneer
               </span>
-              <span className="px-2 py-1 bg-green-500 bg-opacity-20 text-green-300 rounded-full text-xs border border-green-500 border-opacity-30">
+              <span className="px-2 py-1 bg-[#50DCE1] bg-opacity-20 text-[#50DCE1] rounded-full text-xs border border-[#50DCE1] border-opacity-30">
                 Agile Methodologist
               </span>
             </div>

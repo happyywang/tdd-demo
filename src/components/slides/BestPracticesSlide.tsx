@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { PracticeCategory } from '../../types';
 import AnimatedPingPong from './AnimatedPingPong';
+// Updated with Rosen Next brand colors
 
 const BestPracticesSlide = () => {
   const [currentCategory, setCurrentCategory] = useState(0);
@@ -305,10 +306,10 @@ public void ProcessOrder_ValidOrder_OrderIsPersisted()
   const currentPractice = currentCat.practices[selectedPractice];
 
   return (
-    <div className="min-h-full flex flex-col">
+    <div className="min-h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
       <div className="text-center mb-8">
-        <h1 className="text-5xl font-bold mb-4 text-blue-400">TDD Best Practices</h1>
-        <p className="text-xl text-gray-300">Practical wisdom for successful TDD adoption</p>
+        <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">TDD Best Practices</h1>
+        <p className="text-xl text-[#50DCE1]">Practical wisdom for successful TDD adoption</p>
       </div>
 
       {/* Category Navigation */}
@@ -321,9 +322,9 @@ public void ProcessOrder_ValidOrder_OrderIsPersisted()
               setSelectedPractice(0);
             }}
             className={`px-4 py-2 rounded-full text-sm font-bold transition-all transform hover:scale-105 ${
-              index === currentCategory 
-                ? `${category.color} text-white` 
-                : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+              index === currentCategory
+                ? 'bg-[#50DCE1] text-black'
+                : 'bg-slate-700 text-gray-300 hover:bg-slate-600 hover:border-[#50DCE1] border border-transparent'
             }`}
           >
             {category.icon} {category.title}
@@ -332,16 +333,16 @@ public void ProcessOrder_ValidOrder_OrderIsPersisted()
       </div>
 
       {/* Current Category Header */}
-      <div className={`${currentCat.color} p-4 rounded-xl mb-6 text-center`}>
+      <div className="bg-gradient-to-r from-[#50DCE1] to-cyan-500 p-4 rounded-xl mb-6 text-center">
         <div className="text-4xl mb-2">{currentCat.icon}</div>
-        <h2 className="text-2xl font-bold mb-2">{currentCat.title}</h2>
-        <p className="opacity-90">{currentCat.description}</p>
+        <h2 className="text-2xl font-bold mb-2 text-black">{currentCat.title}</h2>
+        <p className="opacity-90 text-black font-semibold">{currentCat.description}</p>
       </div>
 
       {/* Practice Content */}
-      <div className="flex-1 bg-gray-800 rounded-xl p-6">
+      <div className="flex-1 bg-slate-800 border border-[#50DCE1]/30 rounded-xl p-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-2xl font-bold text-white flex items-center">
+          <h3 className="text-2xl font-bold text-[#50DCE1] flex items-center">
             <span className="text-3xl mr-3">{currentPractice.icon}</span>
             {currentPractice.title}
           </h3>
@@ -351,9 +352,9 @@ public void ProcessOrder_ValidOrder_OrderIsPersisted()
                 key={index}
                 onClick={() => setSelectedPractice(index)}
                 className={`w-3 h-3 rounded-full transition-all ${
-                  index === selectedPractice 
-                    ? 'bg-blue-400 transform scale-125' 
-                    : 'bg-gray-600 hover:bg-gray-500'
+                  index === selectedPractice
+                    ? 'bg-[#50DCE1] transform scale-125'
+                    : 'bg-slate-600 hover:bg-slate-500'
                 }`}
               />
             ))}
@@ -399,14 +400,14 @@ public void ProcessOrder_ValidOrder_OrderIsPersisted()
       <div className="flex justify-between items-center mt-6">
         <button
           onClick={nextPractice}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-bold transition-colors"
+          className="bg-[#50DCE1] hover:bg-cyan-400 text-black px-6 py-3 rounded-full font-bold transition-colors"
         >
           Next Practice →
         </button>
-        
+
         <button
           onClick={nextCategory}
-          className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-full font-bold transition-colors"
+          className="bg-slate-700 hover:bg-slate-600 hover:border-[#50DCE1] border border-transparent text-white px-6 py-3 rounded-full font-bold transition-colors"
         >
           Next Category: {practiceCategories[(currentCategory + 1) % practiceCategories.length].title} →
         </button>
