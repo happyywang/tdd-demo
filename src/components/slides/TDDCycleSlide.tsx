@@ -1,5 +1,18 @@
 import { useState, useEffect, useRef } from 'react';
 
+interface StepType {
+  id: string;
+  name: string;
+  shortName: string;
+  color: string;
+  bgColor: string;
+  icon: string;
+  position: { x: number; y: number };
+  labelPosition: { x: number; y: number };
+  sound: string;
+  isSpecial?: boolean;
+}
+
 const TDDCycleSlide = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isAnimating, setIsAnimating] = useState(true);
@@ -8,7 +21,7 @@ const TDDCycleSlide = () => {
   const prevStepRef = useRef(0);
 
   // Traditional 3-step cycle
-  const traditionalSteps = [
+  const traditionalSteps: StepType[] = [
     {
       id: 'red',
       name: 'Write Failing Test',
@@ -45,7 +58,7 @@ const TDDCycleSlide = () => {
   ];
 
   // Extended 4-step TRGR cycle - circular layout with all steps on the ring
-  const extendedSteps = [
+  const extendedSteps: StepType[] = [
     {
       id: 'think',
       name: 'Think: Break Down Goals, Focus Intent',
