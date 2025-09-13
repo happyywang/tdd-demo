@@ -6,6 +6,7 @@ import DemoSlide from './components/slides/DemoSlide';
 import BestPracticesSlide from './components/slides/BestPracticesSlide';
 import BugFirstTDDSlide from './components/slides/BugFirstTDDSlide';
 import AnimatedPingPong from './components/slides/AnimatedPingPong';
+import TDDCycleSlide from './components/slides/TDDCycleSlide';
 
 // All TypeScript interfaces moved to types.ts
 
@@ -1019,13 +1020,13 @@ public void AddItemToCart_ItemIsAdded()
 
     return (
       <div className="min-h-full flex flex-col">
-        <div className="text-center mb-6">
+        <div className="text-center mb-8">
           <h1 className="text-5xl font-bold mb-4">
             <span className="text-green-400">TDD</span>
             <span className="text-gray-400"> vs </span>
             <span className="text-blue-400">BDD</span>
           </h1>
-          <p className="text-lg text-gray-300">Understanding the differences and when to use each</p>
+          <p className="text-xl text-gray-300">Understanding the differences and when to use each</p>
           
           {/* View Toggle */}
           <div className="flex justify-center space-x-2 mt-6">
@@ -1240,9 +1241,9 @@ public void AddItemToCart_ItemIsAdded()
 
     return (
       <div className="min-h-full flex flex-col">
-        <div className="text-center mb-6">
+        <div className="text-center mb-8">
           <h1 className="text-5xl font-bold mb-4 text-orange-400">TDD Challenges</h1>
-          <p className="text-lg text-gray-300">Let's be honest about the difficulties</p>
+          <p className="text-xl text-gray-300">Let's be honest about the difficulties</p>
           
           {/* View Toggle */}
           <div className="flex justify-center space-x-2 mt-6">
@@ -1465,7 +1466,7 @@ public void AddItemToCart_ItemIsAdded()
 
     return (
       <div className="min-h-full flex flex-col">
-        <div className="text-center mb-6">
+        <div className="text-center mb-8">
           <h1 className="text-5xl font-bold mb-4 text-yellow-400">Why TDD?</h1>
           
           {/* View Toggle */}
@@ -1665,7 +1666,7 @@ public void AddItemToCart_ItemIsAdded()
       case 'history':
         return <HistorySlide />;
       case 'what-is-tdd':
-        return <WhatIsTDDSlide />;
+        return <TDDCycleSlide />;
       case 'what-is-not-tdd':
         return <WhatIsNotTDDSlide />;
       case 'why-tdd':
@@ -2204,8 +2205,8 @@ public class FizzBuzz
         </div>
 
         {/* Header */}
-        <div className="text-center mb-6">
-          <h1 className="text-3xl font-bold mb-2 text-white">Building FizzBuzz with TDD</h1>
+        <div className="text-center mb-8">
+          <h1 className="text-5xl font-bold mb-4 text-white">Building FizzBuzz with TDD</h1>
           
           {/* Quick Jump Buttons */}
           <div className="flex justify-center space-x-2 mb-4">
@@ -2719,9 +2720,9 @@ Speed Optimization Techniques:
     return (
       <div className="min-h-full flex flex-col">
         {/* Header */}
-        <div className="text-center mb-6">
+        <div className="text-center mb-8">
           <h1 className="text-5xl font-bold mb-4 text-green-400">TDD Best Practices</h1>
-          <p className="text-lg text-gray-300">Proven techniques for .NET development success</p>
+          <p className="text-xl text-gray-300">Proven techniques for .NET development success</p>
         </div>
 
         {/* Category Navigation */}

@@ -58,11 +58,11 @@ const BugFirstTDDSlide = () => {
       
       <div className="relative z-10 max-w-7xl mx-auto text-center">
         {/* Title */}
-        <div className="mb-16">
+        <div className="mb-8">
           <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
             TDD From the Trenches
           </h1>
-          <h2 className="text-2xl text-gray-300 mb-2">Recommend: start from a bug fix</h2>
+          <h2 className="text-xl text-gray-300">Recommend: start from a bug fix</h2>
         </div>
 
         {/* Interactive Flow */}

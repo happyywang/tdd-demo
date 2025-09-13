@@ -306,9 +306,9 @@ public void ProcessOrder_ValidOrder_OrderIsPersisted()
 
   return (
     <div className="min-h-full flex flex-col">
-      <div className="text-center mb-6">
+      <div className="text-center mb-8">
         <h1 className="text-5xl font-bold mb-4 text-blue-400">TDD Best Practices</h1>
-        <p className="text-lg text-gray-300">Practical wisdom for successful TDD adoption</p>
+        <p className="text-xl text-gray-300">Practical wisdom for successful TDD adoption</p>
       </div>
 
       {/* Category Navigation */}
