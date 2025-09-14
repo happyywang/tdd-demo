@@ -7,6 +7,7 @@ import BestPracticesSlide from './components/slides/BestPracticesSlide';
 import BugFirstTDDSlide from './components/slides/BugFirstTDDSlide';
 import AnimatedPingPong from './components/slides/AnimatedPingPong';
 import TDDCycleSlide from './components/slides/TDDCycleSlide';
+import WhatToTestWithTDDSlide from './components/slides/WhatToTestWithTDDSlide';
 import WhatIsNotTDDSlide from './components/slides/WhatIsNotTDDSlide';
 
 // All TypeScript interfaces moved to types.ts
@@ -383,7 +384,13 @@ const TDDPresentation = () => {
       title: 'What is TDD',
       type: 'what-is-tdd'
     },
-    // Slide 4: What is NOT TDD
+    // Slide 4: What to Test with TDD
+    {
+      id: 'what-to-test-with-tdd',
+      title: 'What to Test with TDD',
+      type: 'what-to-test-with-tdd'
+    },
+    // Slide 5: What is NOT TDD
     {
       id: 'what-is-not-tdd',
       title: 'What is NOT TDD',
@@ -483,6 +490,7 @@ const TDDPresentation = () => {
     const agendaItems = [
       { title: "History", subtitle: "Origins of TDD", icon: "📚" },
       { title: "What is TDD", subtitle: "Core Concepts", icon: "🔍" },
+      { title: "What to Test with TDD", subtitle: "Testing Pyramid & Scope", icon: "🎯" },
       { title: "What is NOT TDD", subtitle: "Common Misconceptions", icon: "❌" },
       { title: "Why TDD", subtitle: "Benefits & Value", icon: "💡" },
       { title: "Disadvantages", subtitle: "Honest Assessment", icon: "⚠️" },
@@ -1515,6 +1523,8 @@ public void AddItemToCart_ItemIsAdded()
         return <HistorySlide />;
       case 'what-is-tdd':
         return <TDDCycleSlide />;
+      case 'what-to-test-with-tdd':
+        return <WhatToTestWithTDDSlide />;
       case 'what-is-not-tdd':
         return <WhatIsNotTDDSlide />;
       case 'why-tdd':
