@@ -408,31 +408,25 @@ const TDDPresentation = () => {
       title: 'Disadvantages of TDD',
       type: 'disadvantages'
     },
-    // Slide 7: TDD vs BDD
-    {
-      id: 'tdd-vs-bdd',
-      title: 'TDD vs BDD',
-      type: 'tdd-vs-bdd'
-    },
-    // Slide 8: Best Practices
+    // Slide 7: Best Practices
     {
       id: 'best-practices',
       title: 'Best Practices',
       type: 'best-practices'
     },
-    // Slide 9: Demo
+    // Slide 8: Demo
     {
       id: 'demo',
       title: 'Demo',
       type: 'demo'
     },
-    // Slide 10: Bug-First TDD
+    // Slide 9: Bug-First TDD
     {
       id: 'bug-first-tdd',
       title: 'TDD From the Trenches: Bug-Driven Development',
       type: 'bug-first-tdd'
     },
-    // Slide 11: Kent Beck Quote
+    // Slide 10: Kent Beck Quote
     {
       id: 'kent-beck-quote',
       title: 'Kent Beck Quote',
@@ -494,7 +488,6 @@ const TDDPresentation = () => {
       { title: "What is NOT TDD", subtitle: "Common Misconceptions", icon: "❌" },
       { title: "Why TDD", subtitle: "Benefits & Value", icon: "💡" },
       { title: "Disadvantages", subtitle: "Honest Assessment", icon: "⚠️" },
-      { title: "TDD vs BDD", subtitle: "Comparative Analysis", icon: "⚖️" },
       { title: "Best Practices", subtitle: "Implementation Guide", icon: "⭐" },
       { title: "Demo", subtitle: "Hands-on Practice", icon: "🚀" }
     ];
@@ -807,267 +800,6 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
     );
   };
 
-  // TDD vs BDD Slide Component
-  const TDDvsBDDSlide = () => {
-    const [currentView, setCurrentView] = useState('comparison'); // 'comparison', 'examples', 'decision'
-    const [selectedAspect, setSelectedAspect] = useState(0);
-
-    const comparisonAspects = [
-      {
-        aspect: "Focus",
-        tdd: "Technical implementation and design",
-        bdd: "Business behavior and user scenarios",
-        tddIcon: "🔧",
-        bddIcon: "👥"
-      },
-      {
-        aspect: "Language",
-        tdd: "Technical: Assert, Mock, Setup",
-        bdd: "Natural: Given, When, Then",
-        tddIcon: "💻",
-        bddIcon: "📝"
-      },
-      {
-        aspect: "Audience",
-        tdd: "Developers and technical team",
-        bdd: "Developers, QA, Business stakeholders",
-        tddIcon: "👨‍💻",
-        bddIcon: "🤝"
-      },
-      {
-        aspect: "Scope",
-        tdd: "Unit level, method/class behavior",
-        bdd: "Feature level, user workflows",
-        tddIcon: "🔬",
-        bddIcon: "🎯"
-      },
-      {
-        aspect: "Test Structure",
-        tdd: "Arrange, Act, Assert",
-        bdd: "Given, When, Then",
-        tddIcon: "📋",
-        bddIcon: "📖"
-      }
-    ];
-
-    const examples = {
-      tdd: {
-        title: "TDD Example",
-        code: `[TestMethod]
-public void AddItemToCart_ItemIsAdded()
-{
-    // Arrange
-    var cart = new Cart();
-    var item = new Product("Apple", 1.00m);
-
-    // Act
-    cart.Add(item);
-
-    // Assert
-    Assert.IsTrue(cart.Contains(item));
-}`,
-        focus: "Tests the technical implementation of adding items to cart"
-      },
-      bdd: {
-        title: "BDD Example",
-        code: `Feature: Shopping Cart
-
-  Scenario: Add item to cart
-    Given I have a shopping cart
-    And I am on the product page
-    When I add an "Apple" to the cart
-    Then the cart should contain "Apple"
-    And the cart total should reflect the price`,
-        focus: "Tests the user behavior and business value of cart functionality"
-      }
-    };
-
-    const renderComparisonView = () => {
-      const current = comparisonAspects[selectedAspect];
-      
-      return (
-        <div className="min-h-full flex flex-col">
-          <div className="mb-6">
-            <div className="grid md:grid-cols-2 gap-6 mb-6">
-              {/* TDD Side */}
-              <div className="bg-gradient-to-br from-slate-700 to-slate-800 border border-[#50DCE1]/30 p-6 rounded-xl">
-                <div className="text-center mb-4">
-                  <div className="text-4xl mb-2">{current.tddIcon}</div>
-                  <h3 className="text-2xl font-bold text-[#50DCE1]">TDD</h3>
-                  <p className="text-sm text-gray-300">Test-Driven Development</p>
-                </div>
-                <div className="bg-black bg-opacity-30 p-4 rounded-lg">
-                  <h4 className="font-bold text-[#50DCE1] mb-2">{current.aspect}:</h4>
-                  <p className="text-gray-200">{current.tdd}</p>
-                </div>
-              </div>
-
-              {/* BDD Side */}
-              <div className="bg-gradient-to-br from-[#50DCE1] to-cyan-500 p-6 rounded-xl">
-                <div className="text-center mb-4">
-                  <div className="text-4xl mb-2">{current.bddIcon}</div>
-                  <h3 className="text-2xl font-bold text-black">BDD</h3>
-                  <p className="text-sm text-black">Behavior-Driven Development</p>
-                </div>
-                <div className="bg-black bg-opacity-30 p-4 rounded-lg">
-                  <h4 className="font-bold text-[#50DCE1] mb-2">{current.aspect}:</h4>
-                  <p className="text-white">{current.bdd}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Aspect Navigation */}
-          <div className="mb-4">
-            <h4 className="text-xl font-bold text-center mb-4 text-[#50DCE1]">Compare Different Aspects:</h4>
-            <div className="flex flex-wrap justify-center gap-2">
-              {comparisonAspects.map((aspect, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSelectedAspect(index)}
-                  className={`px-4 py-2 rounded-full text-sm font-bold transition-all ${
-                    index === selectedAspect
-                      ? 'bg-[#50DCE1] text-black transform scale-105'
-                      : 'bg-slate-700 text-gray-300 hover:bg-slate-600 hover:border-[#50DCE1] border border-transparent'
-                  }`}
-                >
-                  {aspect.aspect}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      );
-    };
-
-    const renderExamplesView = () => (
-      <div className="flex flex-col h-full">
-        <div className="grid md:grid-cols-2 gap-6 mb-6">
-          {/* TDD Example */}
-          <div className="bg-slate-800 border border-[#50DCE1]/30 p-6 rounded-xl">
-            <h3 className="text-2xl font-bold text-[#50DCE1] mb-4">{examples.tdd.title}</h3>
-            <div className="bg-black p-4 rounded-lg mb-4 overflow-auto max-h-64">
-              <code className="text-[#50DCE1] text-sm whitespace-pre-line">
-                {examples.tdd.code}
-              </code>
-            </div>
-            <p className="text-sm text-gray-300 italic">{examples.tdd.focus}</p>
-          </div>
-
-          {/* BDD Example */}
-          <div className="bg-gradient-to-br from-[#50DCE1] to-cyan-500 p-6 rounded-xl">
-            <h3 className="text-2xl font-bold text-black mb-4">{examples.bdd.title}</h3>
-            <div className="bg-black bg-opacity-30 p-4 rounded-lg mb-4 overflow-auto max-h-64">
-              <code className="text-[#50DCE1] text-sm whitespace-pre-line">
-                {examples.bdd.code}
-              </code>
-            </div>
-            <p className="text-sm text-black font-semibold italic">{examples.bdd.focus}</p>
-          </div>
-        </div>
-
-        <div className="text-center bg-slate-800 bg-opacity-50 border border-[#50DCE1]/50 p-6 rounded-lg shadow-lg">
-          <p className="text-xl text-gray-200 font-medium">
-            <strong className="text-[#50DCE1]">Key Insight:</strong> TDD focuses on "How to build it right" while BDD focuses on "Building the right thing"
-          </p>
-        </div>
-      </div>
-    );
-
-    const renderDecisionView = () => (
-      <div className="min-h-full flex flex-col justify-center">
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold mb-4 text-[#50DCE1]">Which Should You Choose?</h2>
-          <p className="text-lg text-gray-300">They're not mutually exclusive!</p>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-slate-800 bg-opacity-50 border border-[#50DCE1]/30 p-6 rounded-xl text-center">
-            <h3 className="text-xl font-bold text-[#50DCE1] mb-4">Choose TDD When:</h3>
-            <ul className="space-y-2 text-sm text-left">
-              <li>• Building internal APIs</li>
-              <li>• Complex business logic</li>
-              <li>• Developer-focused libraries</li>
-              <li>• Refactoring existing code</li>
-              <li>• Technical debt reduction</li>
-            </ul>
-          </div>
-
-          <div className="bg-gradient-to-br from-[#50DCE1] to-cyan-500 p-6 rounded-xl text-center">
-            <h3 className="text-xl font-bold text-black mb-4">Choose BDD When:</h3>
-            <ul className="space-y-2 text-sm text-left text-black font-semibold">
-              <li>• User-facing features</li>
-              <li>• Cross-team communication needed</li>
-              <li>• Business stakeholder involvement</li>
-              <li>• Integration testing</li>
-              <li>• Requirements clarification</li>
-            </ul>
-          </div>
-
-          <div className="bg-slate-700 bg-opacity-50 border border-[#50DCE1]/50 p-6 rounded-xl text-center">
-            <h3 className="text-xl font-bold text-[#50DCE1] mb-4">Use Both When:</h3>
-            <ul className="space-y-2 text-sm text-left">
-              <li>• Large, complex systems</li>
-              <li>• Mature development teams</li>
-              <li>• Strong DevOps culture</li>
-              <li>• Long-term products</li>
-              <li>• High-quality requirements</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="text-center">
-          <div className="bg-slate-800 bg-opacity-50 border border-[#50DCE1]/50 p-4 rounded-lg inline-block">
-            <h4 className="text-lg font-bold text-[#50DCE1] mb-2">💡 Practical Recommendation</h4>
-            <p className="text-sm text-gray-200">
-              Start with TDD for technical mastery, add BDD for business alignment. They complement each other perfectly!
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-
-    return (
-      <div className="min-h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
-        <div className="text-center mb-8">
-          <h1 className="text-5xl font-bold mb-4">
-            <span className="text-[#50DCE1]">TDD</span>
-            <span className="text-gray-400"> vs </span>
-            <span className="text-[#50DCE1]">BDD</span>
-          </h1>
-          <p className="text-xl text-gray-300">Understanding the differences and when to use each</p>
-
-          {/* View Toggle */}
-          <div className="flex justify-center space-x-2 mt-6">
-            {[
-              { key: 'comparison', label: '⚖️ Side by Side', color: 'bg-[#50DCE1]' },
-              { key: 'examples', label: '📝 Code Examples', color: 'bg-[#50DCE1]' },
-              { key: 'decision', label: '🎯 Which to Choose', color: 'bg-[#50DCE1]' }
-            ].map(view => (
-              <button
-                key={view.key}
-                onClick={() => setCurrentView(view.key)}
-                className={`px-4 py-2 rounded-full text-sm font-bold transition-all transform hover:scale-105 ${
-                  currentView === view.key
-                    ? `${view.color} text-black`
-                    : 'bg-slate-700 text-gray-300 hover:bg-slate-600 hover:border-[#50DCE1] border border-transparent'
-                }`}
-              >
-                {view.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Render Current View */}
-        <div className="flex-1">
-          {currentView === 'comparison' && renderComparisonView()}
-          {currentView === 'examples' && renderExamplesView()}
-          {currentView === 'decision' && renderDecisionView()}
-        </div>
-      </div>
-    );
-  };
   const DisadvantagesSlide = () => {
     const [currentView, setCurrentView] = useState('challenges'); // 'challenges', 'mitigation', 'reality'
     const [currentChallenge, setCurrentChallenge] = useState(0);
@@ -1139,8 +871,8 @@ public void AddItemToCart_ItemIsAdded()
       const current = challenges[currentChallenge];
       
       return (
-        <div className="min-h-full flex flex-col">
-          <div className={`${current.color} p-6 rounded-2xl mb-6 flex-1 flex flex-col justify-center`}>
+        <div className="h-full flex flex-col py-2">
+          <div className={`${current.color} p-3 rounded-xl mb-2 flex-1 flex flex-col justify-center overflow-y-auto`}>
             <div className="text-center mb-4">
               <div className="text-5xl mb-3">{current.icon}</div>
               <h3 className="text-3xl font-bold mb-3">{current.title}</h3>
@@ -1150,7 +882,7 @@ public void AddItemToCart_ItemIsAdded()
               <div className="bg-black bg-opacity-30 p-4 rounded-lg">
                 <h4 className="text-lg font-bold text-red-200 mb-2">🚫 The Problem:</h4>
                 <p className="text-lg mb-2">{current.problem}</p>
-                <p className="text-sm text-gray-200 italic">{current.detail}</p>
+                <p className="text-base text-gray-200 italic">{current.detail}</p>
               </div>
 
               <div className="bg-black bg-opacity-30 p-4 rounded-lg">
@@ -1162,7 +894,7 @@ public void AddItemToCart_ItemIsAdded()
 
           <button
             onClick={nextChallenge}
-            className="bg-white text-gray-900 px-6 py-3 rounded-full text-lg font-bold hover:bg-gray-200 transition-colors mx-auto mb-4"
+            className="bg-white text-gray-900 px-6 py-3 rounded-full text-lg font-bold hover:bg-gray-200 transition-colors mx-auto mb-3"
           >
             Next Challenge →
           </button>
@@ -1186,18 +918,31 @@ public void AddItemToCart_ItemIsAdded()
 
     const renderMitigationView = () => {
       return (
-        <div className="min-h-full overflow-y-auto">
-          <div className="space-y-4">
+        <div className="h-full flex flex-col py-4">
+          <div className="flex-1 grid grid-cols-1 gap-2 overflow-y-auto">
             {challenges.map((challenge, index) => (
-              <div key={index} className="bg-gray-800 p-4 rounded-xl hover:bg-gray-700 transition-all">
-                <div className="flex items-start space-x-4">
-                  <div className="text-2xl">{challenge.icon}</div>
+              <div key={index} className="grid md:grid-cols-2 gap-4 bg-gray-800 rounded-lg overflow-hidden border border-gray-700">
+                {/* Challenge Side (Left) */}
+                <div className="bg-red-900 bg-opacity-30 p-2 flex items-center space-x-2">
+                  <div className="text-xl flex-shrink-0">{challenge.icon}</div>
                   <div className="flex-1">
-                    <h4 className="text-lg font-bold text-orange-400 mb-2">{challenge.title}</h4>
-                    <div className="bg-green-900 bg-opacity-50 p-3 rounded-lg">
-                      <h5 className="text-sm font-bold text-green-300 mb-1">💡 How to Address:</h5>
-                      <p className="text-sm text-gray-200">{challenge.mitigation}</p>
-                    </div>
+                    <h4 className="text-sm font-bold text-red-300">
+                      {challenge.title === "Mindset Shift Required" ? "How to adapt mindset?" :
+                       challenge.title === "Test Maintenance Burden" ? "How to keep tests sustainable?" :
+                       challenge.title === "Initial Development Slowdown" ? "How to handle initial slowdown?" :
+                       challenge.title === "Legacy Code Integration" ? "How to integrate with legacy code?" :
+                       challenge.title === "Over-Testing Risk" ? "How to avoid over-testing?" :
+                       challenge.title === "Tool and Infrastructure Overhead" ? "How to manage tool overhead?" :
+                       challenge.title}
+                    </h4>
+                  </div>
+                </div>
+
+                {/* Solution Side (Right) */}
+                <div className="bg-green-900 bg-opacity-30 p-2">
+                  <div className="flex items-center space-x-2">
+                    <div className="text-lg flex-shrink-0">💡</div>
+                    <p className="text-sm text-green-200 leading-relaxed font-bold">{challenge.mitigation}</p>
                   </div>
                 </div>
               </div>
@@ -1393,40 +1138,40 @@ public void AddItemToCart_ItemIsAdded()
     };
 
     const renderResearchView = () => (
-      <div className="min-h-full flex flex-col justify-center">
-        <div className="text-center mb-8">
+      <div className="min-h-full flex flex-col">
+        <div className="text-center mb-6">
           <h2 className="text-4xl font-bold mb-4 text-[#50DCE1]">Research Evidence</h2>
           <p className="text-lg text-gray-300">What the studies tell us</p>
         </div>
 
-        <div className="space-y-6">
-          <div className="bg-gradient-to-r from-slate-800 to-slate-700 border border-[#50DCE1]/30 p-6 rounded-xl">
-            <h3 className="text-2xl font-bold mb-4">{researchData.nagappan2008.title}</h3>
+        <div className="space-y-3 flex-1 overflow-y-auto">
+          <div className="bg-gradient-to-r from-slate-800 to-slate-700 border border-[#50DCE1]/30 p-4 rounded-xl">
+            <h3 className="text-lg font-bold mb-2">{researchData.nagappan2008.title}</h3>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-black bg-opacity-30 p-4 rounded-lg">
-                <h4 className="text-lg font-bold text-[#50DCE1] mb-2">🔽 Defect Density Dropped</h4>
-                <p className="text-3xl font-bold">{researchData.nagappan2008.defectReduction}</p>
-                <p className="text-sm text-gray-200 mt-2">Significantly fewer bugs in production</p>
+                <h4 className="text-sm font-bold text-[#50DCE1] mb-1">🔽 Defect Density Dropped</h4>
+                <p className="text-2xl font-bold">{researchData.nagappan2008.defectReduction}</p>
+                <p className="text-xs text-gray-200 mt-1">Significantly fewer bugs in production</p>
               </div>
               <div className="bg-black bg-opacity-30 p-4 rounded-lg">
-                <h4 className="text-lg font-bold text-[#50DCE1] mb-2">🔼 Initial Dev Time</h4>
-                <p className="text-3xl font-bold">+{researchData.nagappan2008.timeIncrease}</p>
-                <p className="text-sm text-gray-200 mt-2">Short-term investment for long-term gain</p>
+                <h4 className="text-sm font-bold text-[#50DCE1] mb-1">🔼 Initial Dev Time</h4>
+                <p className="text-2xl font-bold">+{researchData.nagappan2008.timeIncrease}</p>
+                <p className="text-xs text-gray-200 mt-1">Short-term investment for long-term gain</p>
               </div>
             </div>
-            <p className="text-sm text-gray-200 mt-4 italic">{researchData.nagappan2008.credibility}</p>
+            <p className="text-xs text-gray-200 mt-2 italic">{researchData.nagappan2008.credibility}</p>
           </div>
 
-          <div className="bg-gradient-to-r from-[#50DCE1] to-cyan-500 p-6 rounded-xl">
-            <h3 className="text-2xl font-bold mb-4 text-black">{researchData.metaAnalysis.title}</h3>
+          <div className="bg-gradient-to-r from-[#50DCE1] to-cyan-500 p-4 rounded-xl">
+            <h3 className="text-lg font-bold mb-2 text-black">{researchData.metaAnalysis.title}</h3>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="bg-black bg-opacity-30 p-4 rounded-lg text-center">
-                <p className="text-2xl font-bold text-[#50DCE1]">{researchData.metaAnalysis.qualityImprovement}</p>
-                <p className="text-sm text-white">Internal Quality Improvement</p>
+                <p className="text-xl font-bold text-[#50DCE1]">{researchData.metaAnalysis.qualityImprovement}</p>
+                <p className="text-xs text-white">Internal Quality Improvement</p>
               </div>
               <div className="bg-black bg-opacity-30 p-4 rounded-lg text-center">
-                <p className="text-2xl font-bold text-[#50DCE1]">{researchData.metaAnalysis.externalQuality}</p>
-                <p className="text-sm text-white">External Quality Improvement</p>
+                <p className="text-xl font-bold text-[#50DCE1]">{researchData.metaAnalysis.externalQuality}</p>
+                <p className="text-xs text-white">External Quality Improvement</p>
               </div>
             </div>
           </div>
@@ -1463,13 +1208,6 @@ public void AddItemToCart_ItemIsAdded()
           </div>
         </div>
 
-        <div className="text-center mt-8">
-          <div className="bg-slate-800 bg-opacity-50 border border-[#50DCE1]/50 p-4 rounded-lg inline-block">
-            <p className="text-lg font-bold text-[#50DCE1]">
-              💰 ROI typically becomes positive after 2-3 months
-            </p>
-          </div>
-        </div>
       </div>
     );
 
@@ -1531,8 +1269,6 @@ public void AddItemToCart_ItemIsAdded()
         return <WhyTDDSlide />;
       case 'disadvantages':
         return <DisadvantagesSlide />;
-      case 'tdd-vs-bdd':
-        return <TDDvsBDDSlide />;
       case 'best-practices':
         return <BestPracticesSlide />;
       case 'demo':
