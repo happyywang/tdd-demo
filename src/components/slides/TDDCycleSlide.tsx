@@ -9,7 +9,6 @@ interface StepType {
   icon: string;
   position: { x: number; y: number };
   labelPosition: { x: number; y: number };
-  sound: string;
   isSpecial?: boolean;
 }
 
@@ -30,8 +29,7 @@ const TDDCycleSlide = () => {
       bgColor: 'bg-red-600',
       icon: '🔴',
       position: { x: 50, y: 15 }, // Top - 12 o'clock
-      labelPosition: { x: 25, y: 2 }, // Left and up
-      sound: 'error'
+      labelPosition: { x: 25, y: 2 } // Left and up
     },
     {
       id: 'green',
@@ -41,8 +39,7 @@ const TDDCycleSlide = () => {
       bgColor: 'bg-emerald-600',
       icon: '🟢',
       position: { x: 87, y: 55 }, // Right - moved slightly right
-      labelPosition: { x: 107, y: 55 }, // To the right
-      sound: 'success'
+      labelPosition: { x: 107, y: 55 } // To the right
     },
     {
       id: 'refactor',
@@ -52,8 +49,7 @@ const TDDCycleSlide = () => {
       bgColor: 'bg-slate-600',
       icon: '🔵',
       position: { x: 13, y: 55 }, // Left - moved slightly left
-      labelPosition: { x: -7, y: 55 }, // To the left
-      sound: 'refactor'
+      labelPosition: { x: -7, y: 55 } // To the left
     }
   ];
 
@@ -68,7 +64,6 @@ const TDDCycleSlide = () => {
       icon: '🧠',
       position: { x: 50, y: 15 }, // Top - 12 o'clock
       labelPosition: { x: 50, y: 2 },
-      sound: 'think',
       isSpecial: true
     },
     {
@@ -79,8 +74,7 @@ const TDDCycleSlide = () => {
       bgColor: 'bg-red-600',
       icon: '🔴',
       position: { x: 86, y: 50 }, // Right - moved right
-      labelPosition: { x: 106, y: 50 },
-      sound: 'error'
+      labelPosition: { x: 106, y: 50 }
     },
     {
       id: 'green',
@@ -90,8 +84,7 @@ const TDDCycleSlide = () => {
       bgColor: 'bg-emerald-600',
       icon: '🟢',
       position: { x: 50, y: 88 }, // Bottom - moved further down
-      labelPosition: { x: 25, y: 95 },
-      sound: 'success'
+      labelPosition: { x: 25, y: 95 }
     },
     {
       id: 'refactor',
@@ -101,51 +94,12 @@ const TDDCycleSlide = () => {
       bgColor: 'bg-slate-600',
       icon: '🔵',
       position: { x: 14, y: 50 }, // Left - moved left
-      labelPosition: { x: -16, y: 50 },
-      sound: 'refactor'
+      labelPosition: { x: -16, y: 50 }
     }
   ];
 
   const currentSteps = showExtended ? extendedSteps : traditionalSteps;
 
-  // Sound effects (web audio API)
-  const playSound = (type: string) => {
-    if (!isAnimating) return;
-
-    try {
-      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
-      const oscillator = audioContext.createOscillator();
-      const gainNode = audioContext.createGain();
-
-      oscillator.connect(gainNode);
-      gainNode.connect(audioContext.destination);
-
-      // Different frequencies for different phases
-      switch (type) {
-        case 'think':
-          oscillator.frequency.value = 300; // Medium-low pitch for Think
-          break;
-        case 'error':
-          oscillator.frequency.value = 200; // Lower pitch for Red
-          break;
-        case 'success':
-          oscillator.frequency.value = 800; // Higher pitch for Green
-          break;
-        case 'refactor':
-          oscillator.frequency.value = 400; // Medium pitch for Refactor
-          break;
-      }
-
-      oscillator.type = 'sine';
-      gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-
-      oscillator.start(audioContext.currentTime);
-      oscillator.stop(audioContext.currentTime + 0.1);
-    } catch (error) {
-      // Silently handle audio context errors
-    }
-  };
 
   // Auto-advance animation with cycle counting
   useEffect(() => {
@@ -163,8 +117,6 @@ const TDDCycleSlide = () => {
 
         prevStepRef.current = nextStep;
 
-        // Play sound for new step
-        playSound(currentSteps[nextStep].sound);
 
         return nextStep;
       });
@@ -321,7 +273,7 @@ const TDDCycleSlide = () => {
                 {/* Ripple Effect for Active Step */}
                 {isActive && (
                   <div
-                    className="absolute w-24 h-24 rounded-full border-2 border-white animate-ping opacity-30"
+                    className="absolute w-30 h-30 rounded-full border-2 border-white animate-ping opacity-30"
                     style={{
                       left: `${step.position.x}%`,
                       top: `${step.position.y}%`,
