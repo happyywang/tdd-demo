@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { LAYOUT, ANIMATIONS, CONTENT, DEMO_CONFIG } from './constants';
 import { Slide, DemoStep, PingPongPhase } from './types';
 import DemoSlide from './components/slides/DemoSlide';
-import BestPracticesSlide from './components/slides/BestPracticesSlide';
+import TDDBestPracticesSlide from './components/slides/TDDBestPracticesSlide';
 import BugFirstTDDSlide from './components/slides/BugFirstTDDSlide';
 import AnimatedPingPong from './components/slides/AnimatedPingPong';
 import TDDCycleSlide from './components/slides/TDDCycleSlide';
@@ -408,11 +408,11 @@ const TDDPresentation = () => {
       title: 'Disadvantages of TDD',
       type: 'disadvantages'
     },
-    // Slide 7: Best Practices
+    // Slide 7: TDD Best Practices
     {
-      id: 'best-practices',
-      title: 'Best Practices',
-      type: 'best-practices'
+      id: 'tdd-best-practices',
+      title: 'TDD Best Practices',
+      type: 'tdd-best-practices'
     },
     // Slide 8: Demo
     {
@@ -488,7 +488,7 @@ const TDDPresentation = () => {
       { title: "What is NOT TDD", subtitle: "Common Misconceptions", icon: "❌" },
       { title: "Why TDD", subtitle: "Benefits & Value", icon: "💡" },
       { title: "Disadvantages", subtitle: "Honest Assessment", icon: "⚠️" },
-      { title: "Best Practices", subtitle: "Implementation Guide", icon: "⭐" },
+      { title: "TDD Best Practices", subtitle: "Essential Practices", icon: "🎯" },
       { title: "Demo", subtitle: "Hands-on Practice", icon: "🚀" }
     ];
 
@@ -1269,8 +1269,8 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
         return <WhyTDDSlide />;
       case 'disadvantages':
         return <DisadvantagesSlide />;
-      case 'best-practices':
-        return <BestPracticesSlide />;
+      case 'tdd-best-practices':
+        return <TDDBestPracticesSlide />;
       case 'demo':
         return <DemoSlide />;
       case 'bug-first-tdd':

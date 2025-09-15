@@ -59,7 +59,7 @@ const AnimatedPingPong = memo(() => {
   const currentPhaseData = useMemo(() => phases[currentPhase], [phases, currentPhase]);
 
   return (
-    <div className={`relative w-full h-96 ${COLORS.BACKGROUNDS.SECONDARY} rounded-2xl overflow-hidden`}>
+    <div className={`relative w-full h-48 ${COLORS.BACKGROUNDS.SECONDARY} rounded-2xl overflow-hidden`}>
       {/* TDD Phase Indicator at top */}
       <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20">
         <div className={`${SPACING.PADDING_X.LG} ${SPACING.PADDING_Y.SM} rounded-full ${COLORS.TEXT.PRIMARY} ${TYPOGRAPHY.WEIGHTS.BOLD} ${TYPOGRAPHY.SIZES.LG} ${
