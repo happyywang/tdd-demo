@@ -3,7 +3,7 @@ export interface Slide {
   id: string;
   title: string;
   type: 'title' | 'agenda' | 'history' | 'what-is-tdd' | 'what-to-test-with-tdd' | 'what-is-not-tdd' | 'why-tdd' |
-        'disadvantages' | 'tdd-vs-bdd' | 'best-practices' | 'demo' | 'kent-beck-quote' | 'bug-first-tdd';
+        'disadvantages' | 'tdd-vs-bdd' | 'best-practices' | 'tdd-best-practices' | 'demo' | 'kent-beck-quote' | 'bug-first-tdd';
 }
 
 export interface TestStats {
