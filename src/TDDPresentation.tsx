@@ -493,7 +493,7 @@ const TDDPresentation = () => {
     ];
 
     return (
-      <div className="min-h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
+      <div className="h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
         <h1 className="text-6xl font-bold mb-12 text-center bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">
           Agenda
         </h1>
@@ -953,7 +953,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
     };
 
     const renderRealityView = () => (
-      <div className="min-h-full flex flex-col justify-center">
+      <div className="h-full flex flex-col justify-center">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold mb-4 text-[#50DCE1]">The Honest Truth About TDD</h2>
         </div>
@@ -994,7 +994,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
     );
 
     return (
-      <div className="min-h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
+      <div className="h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
         <div className="text-center mb-8">
           <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">TDD Challenges</h1>
           <p className="text-xl text-gray-300">Let's be honest about the difficulties</p>
@@ -1098,7 +1098,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
       const current = dailyBenefits[currentBenefit];
       
       return (
-        <div className="min-h-full flex flex-col">
+        <div className="h-full flex flex-col">
           <div className="text-center mb-6">
             <h2 className="text-4xl font-bold mb-4 text-[#50DCE1]">Daily Developer Benefits</h2>
             <p className="text-lg text-gray-300">What TDD feels like in practice</p>
@@ -1138,7 +1138,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
     };
 
     const renderResearchView = () => (
-      <div className="min-h-full flex flex-col">
+      <div className="h-full flex flex-col">
         <div className="text-center mb-6">
           <h2 className="text-4xl font-bold mb-4 text-[#50DCE1]">Research Evidence</h2>
           <p className="text-lg text-gray-300">What the studies tell us</p>
@@ -1180,7 +1180,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
     );
 
     const renderComparisonView = () => (
-      <div className="min-h-full flex flex-col justify-center">
+      <div className="h-full flex flex-col justify-center">
         <div className="text-center mb-8">
           <h2 className="text-4xl font-bold mb-4 text-[#50DCE1]">The TDD Investment</h2>
           <p className="text-lg text-gray-300">Short-term cost, long-term gain</p>
@@ -1212,7 +1212,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
     );
 
     return (
-      <div className="min-h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
+      <div className="h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
         <div className="text-center mb-8">
           <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">Why TDD?</h1>
           
@@ -2312,7 +2312,7 @@ Speed Optimization Techniques:
     };
 
     return (
-      <div className="min-h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
+      <div className="h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">TDD Best Practices</h1>
@@ -2413,7 +2413,7 @@ Speed Optimization Techniques:
 
   // Kent Beck Quote Slide Component
   const KentBeckQuoteSlide = () => (
-    <div className="min-h-full relative bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 flex flex-col items-center justify-center px-8 py-16">
+    <div className="h-full relative bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 flex flex-col items-center justify-center px-8 py-16">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-20 w-64 h-64 bg-[#50DCE1] opacity-5 rounded-full blur-3xl"></div>
@@ -2477,18 +2477,18 @@ Speed Optimization Techniques:
   );
 
   return (
-    <div className="h-screen bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 text-white">
+    <div className="h-screen bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 text-white flex flex-col">
       {/* Progress Bar */}
       <div className="fixed top-0 left-0 w-full h-1 bg-gray-700 z-50">
-        <div 
+        <div
           className="h-full bg-gradient-to-r from-red-400 via-green-400 to-blue-400 transition-all duration-300"
           style={{ width: `${((currentSlide + 1) / slides.length) * 100}%` }}
         />
       </div>
 
       {/* Main Content */}
-      <div className="p-8 pt-12 min-h-screen pb-24">
-        <div className="max-w-6xl mx-auto">
+      <div className="flex-1 p-8 pt-12 pb-24 flex flex-col">
+        <div className="max-w-6xl mx-auto flex-1 flex flex-col w-full">
           {renderSlide()}
         </div>
       </div>

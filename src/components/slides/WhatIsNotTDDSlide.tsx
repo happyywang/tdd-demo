@@ -60,7 +60,7 @@ const WhatIsNotTDDSlide = () => {
   const currentMythData = myths[currentMyth];
 
   return (
-    <div className="min-h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
+    <div className="h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
       <Header currentIndex={currentMyth} totalCount={myths.length} />
 
       <div className="flex-1 flex items-center justify-center">
