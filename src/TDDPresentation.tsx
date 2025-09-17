@@ -384,23 +384,23 @@ const TDDPresentation = () => {
       title: 'What is TDD',
       type: 'what-is-tdd'
     },
-    // Slide 4: What to Test with TDD
+    // Slide 4: Why TDD
+    {
+      id: 'why-tdd',
+      title: 'Why TDD',
+      type: 'why-tdd'
+    },
+    // Slide 5: What to Test with TDD
     {
       id: 'what-to-test-with-tdd',
       title: 'What to Test with TDD',
       type: 'what-to-test-with-tdd'
     },
-    // Slide 5: What is NOT TDD
+    // Slide 6: What is NOT TDD
     {
       id: 'what-is-not-tdd',
       title: 'What is NOT TDD',
       type: 'what-is-not-tdd'
-    },
-    // Slide 5: Why TDD
-    {
-      id: 'why-tdd',
-      title: 'Why TDD',
-      type: 'why-tdd'
     },
     // Slide 6: Disadvantages
     {
@@ -484,9 +484,9 @@ const TDDPresentation = () => {
     const agendaItems = [
       { title: "History", subtitle: "Origins of TDD", icon: "📚" },
       { title: "What is TDD", subtitle: "Core Concepts", icon: "🔍" },
+      { title: "Why TDD", subtitle: "Benefits & Value", icon: "💡" },
       { title: "What to Test with TDD", subtitle: "Testing Pyramid & Scope", icon: "🎯" },
       { title: "What is NOT TDD", subtitle: "Common Misconceptions", icon: "❌" },
-      { title: "Why TDD", subtitle: "Benefits & Value", icon: "💡" },
       { title: "Disadvantages", subtitle: "Honest Assessment", icon: "⚠️" },
       { title: "TDD Best Practices", subtitle: "Essential Practices", icon: "🎯" },
       { title: "Demo", subtitle: "Hands-on Practice", icon: "🚀" }
@@ -1036,25 +1036,32 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
 
     const dailyBenefits = [
       {
-        title: "Confidence to Change Code",
+        title: "Confidence to Refactor & Change Code",
         icon: "🛡️",
         color: "bg-gradient-to-br from-slate-700 to-slate-800",
         description: "No more fear of breaking existing functionality",
         detail: "Tests act as a safety net, allowing bold refactoring and feature additions without anxiety"
       },
       {
-        title: "Faster Debugging",
-        icon: "🐛",
-        color: "bg-gradient-to-br from-[#50DCE1] to-cyan-500",
-        description: "When tests fail, you know exactly what broke",
-        detail: "Pinpoint failures instantly instead of hunting through logs and stack traces"
-      },
-      {
-        title: "Better API Design",
+        title: "Better Code Design & Architecture",
         icon: "🎨",
         color: "bg-gradient-to-br from-slate-600 to-slate-700",
         description: "Tests force you to think from user's perspective",
         detail: "Writing the test first makes you design more intuitive, testable interfaces"
+      },
+      {
+        title: "Fast Feedback Loop",
+        icon: "⚡",
+        color: "bg-gradient-to-br from-cyan-300 to-cyan-400",
+        description: "Know immediately when something breaks",
+        detail: "Instant validation of code changes, help team spot defects early and isolate problems"
+      },
+      {
+        title: "Faster Debugging",
+        icon: "🐛",
+        color: "bg-gradient-to-br from-[#50DCE1] to-cyan-500",
+        description: "When tests fail, you know exactly what broke",
+        detail: "Pinpoint issues to specific functions/methods. Less time spent in debugger hunting for problems"
       },
       {
         title: "Living Documentation",
@@ -1062,13 +1069,6 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
         color: "bg-gradient-to-br from-[#50DCE1] to-slate-500",
         description: "Tests show exactly how your code should work",
         detail: "New team members can read tests to understand system behavior and expectations"
-      },
-      {
-        title: "Incremental Progress",
-        icon: "🎯",
-        color: "bg-gradient-to-br from-slate-800 to-slate-700",
-        description: "Small, focused steps reduce overwhelm",
-        detail: "Break complex problems into manageable test-driven increments"
       }
     ];
 
@@ -1167,11 +1167,9 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
             <div className="grid md:grid-cols-2 gap-4">
               <div className="bg-black bg-opacity-30 p-4 rounded-lg text-center">
                 <p className="text-xl font-bold text-[#50DCE1]">{researchData.metaAnalysis.qualityImprovement}</p>
-                <p className="text-xs text-white">Internal Quality Improvement</p>
               </div>
               <div className="bg-black bg-opacity-30 p-4 rounded-lg text-center">
                 <p className="text-xl font-bold text-[#50DCE1]">{researchData.metaAnalysis.externalQuality}</p>
-                <p className="text-xs text-white">External Quality Improvement</p>
               </div>
             </div>
           </div>
