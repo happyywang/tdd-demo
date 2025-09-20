@@ -10,9 +10,9 @@ const WhatToTestWithTDDSlide = () => {
   const [currentSection, setCurrentSection] = useState(0);
 
   const sections: Section[] = [
+    { id: 'questions', title: 'Key Questions for Scope', icon: '❓' },
     { id: 'pyramid', title: 'Testing Pyramid', icon: '🔺' },
-    { id: 'granularity', title: 'Granularity of TDD', icon: '🎯' },
-    { id: 'questions', title: 'Key Questions for Scope', icon: '❓' }
+    { id: 'granularity', title: 'Granularity of TDD', icon: '🎯' }
   ];
 
   const handleSectionChange = (index: number) => {
@@ -80,14 +80,14 @@ const SectionTabs = ({
 
 const SectionContent = ({ sectionId }: { sectionId: string }) => {
   switch (sectionId) {
+    case 'questions':
+      return <KeyQuestionsSection />;
     case 'pyramid':
       return <TestingPyramidSection />;
     case 'granularity':
       return <GranularitySection />;
-    case 'questions':
-      return <KeyQuestionsSection />;
     default:
-      return <TestingPyramidSection />;
+      return <KeyQuestionsSection />;
   }
 };
 
