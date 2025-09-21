@@ -18,19 +18,44 @@ const demoSteps: DemoStep[] = [
     title: "Step 1: Think - Plan Test Scenarios 🧠",
     description: "Before writing any code, let's think about what test scenarios we need for FizzBuzz. This upfront planning helps us understand the full scope.",
     phase: "think",
-    allTestsCode: `// Test scenarios to implement:
-// ✓ Regular numbers (1, 2, 4) → return as string
-// ✓ Numbers divisible by 3 (3, 6, 9) → return "Fizz" 
-// ✓ Numbers divisible by 5 (5, 10, 20) → return "Buzz"
-// ✓ Numbers divisible by both 3 and 5 (15, 30) → return "FizzBuzz"
-
-// We'll implement these one at a time using Red-Green cycles`,
-    productionCode: `// No production code yet - we're still planning!
-// 
-// The FizzBuzz class will need:
-// - A static Convert(int input) method
-// - Logic to handle all four scenarios
-// - Clean, readable implementation`,
+    testScenarios: [
+      {
+        id: "regular",
+        description: "Regular numbers → return as string",
+        examples: "(1, 2, 4)",
+        isCompleted: false
+      },
+      {
+        id: "fizz",
+        description: "Divisible by 3 → return \"Fizz\"",
+        examples: "(3, 6, 9)",
+        isCompleted: false
+      },
+      {
+        id: "buzz",
+        description: "Divisible by 5 → return \"Buzz\"",
+        examples: "(5, 10, 20)",
+        isCompleted: false
+      },
+      {
+        id: "fizzbuzz",
+        description: "Divisible by 3 and 5 → return \"FizzBuzz\"",
+        examples: "(15, 30)",
+        isCompleted: false
+      }
+    ],
+    productionGoals: [
+      "FizzBuzz.Convert(int input)",
+      "Handles all four scenarios above",
+      "Clean, readable, minimal code"
+    ],
+    allTestsCode: `// We'll implement these scenarios one at a time using Red-Green cycles:
+// 1. Regular numbers first
+// 2. Then Fizz logic
+// 3. Then Buzz logic
+// 4. Finally FizzBuzz logic`,
+    productionCode: `// Goal: Build a simple, clean FizzBuzz converter
+// Starting with no code - we'll grow it step by step`,
     testResults: [],
     testStats: { total: 0, passed: 0, failed: 0 }
   },
@@ -471,7 +496,7 @@ const TDDPresentation = () => {
       <p className="text-4xl text-[#50DCE1] font-semibold mb-12">Test-Driven Development</p>
       <div className="text-2xl text-gray-300 space-y-4">
         <p>🎯 A Complete Guide to TDD</p>
-        <p>📅 30 minutes • 👥 Interactive • 💻 Demo</p>
+        <p>📅 45 minutes • 👥 Interactive • 💻 Demo</p>
       </div>
       <div className="mt-16 text-gray-400">
         <p>{CONTENT.NAVIGATION.PRESS_ARROW_TO_START}</p>
@@ -1282,6 +1307,132 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
 
   const DemoSlide = () => {
     const [currentStep, setCurrentStep] = useState(0);
+    const [copiedCode, setCopiedCode] = useState<string | null>(null);
+
+    // Copy to clipboard function
+    const copyToClipboard = async (code: string, id: string) => {
+      try {
+        await navigator.clipboard.writeText(code);
+        setCopiedCode(id);
+        setTimeout(() => setCopiedCode(null), 2000);
+      } catch (err) {
+        console.error('Failed to copy code:', err);
+      }
+    };
+
+    // Syntax highlighting for C# code - using React elements instead of HTML strings
+    const renderCSharpCode = (code: string) => {
+      const lines = code.split('\n');
+      return lines.map((line, lineIndex) => {
+        const tokens = [];
+        let currentIndex = 0;
+        const lineText = line;
+
+        // Simple tokenizer
+        const addToken = (text: string, className?: string) => {
+          if (text.length > 0) {
+            tokens.push(
+              <span key={`${lineIndex}-${tokens.length}`} className={className || 'text-gray-200'}>
+                {text}
+              </span>
+            );
+          }
+        };
+
+        // Process the line
+        let remaining = lineText;
+
+        // Check for comments
+        if (remaining.includes('//')) {
+          const commentIndex = remaining.indexOf('//');
+          const beforeComment = remaining.substring(0, commentIndex);
+          const comment = remaining.substring(commentIndex);
+
+          // Process before comment
+          addToken(beforeComment);
+          addToken(comment, 'text-gray-500');
+        } else {
+          // Process keywords, strings, etc.
+          const parts = remaining.split(/(\[TestMethod\]|"[^"]*"|\b(?:public|class|void|static|string|int|Assert\.AreEqual|return|FizzBuzz|Convert)\b)/);
+
+          parts.forEach((part, partIndex) => {
+            if (part === '[TestMethod]') {
+              addToken(part, 'text-purple-400');
+            } else if (part.match(/^"[^"]*"$/)) {
+              addToken(part, 'text-yellow-300');
+            } else if (part.match(/^(public|class|void|static|string|int)$/)) {
+              addToken(part, 'text-blue-400');
+            } else if (part.match(/^(Assert\.AreEqual|return)$/)) {
+              addToken(part, 'text-green-400');
+            } else if (part.match(/^(FizzBuzz|Convert)$/)) {
+              addToken(part, 'text-cyan-400');
+            } else {
+              addToken(part);
+            }
+          });
+        }
+
+        return (
+          <div key={lineIndex}>
+            {tokens.length > 0 ? tokens : <span className="text-gray-200">{lineText}</span>}
+          </div>
+        );
+      });
+    };
+
+    // CodeBlock component
+    const CodeBlock = ({ title, code, language, theme }: {
+      title: string;
+      code: string;
+      language: string;
+      theme: 'test' | 'production';
+    }) => {
+      const themeColors = {
+        test: {
+          title: 'text-yellow-400',
+          border: 'border-yellow-400/30',
+          background: 'bg-gray-800'
+        },
+        production: {
+          title: 'text-blue-400',
+          border: 'border-blue-400/30',
+          background: 'bg-gray-800'
+        }
+      };
+
+      const colors = themeColors[theme];
+      const codeId = `${theme}-${title}`;
+
+      return (
+        <div className={`${colors.background} border ${colors.border} p-4 rounded-xl`}>
+          <div className="flex justify-between items-center mb-3">
+            <h3 className={`text-lg font-bold ${colors.title}`}>{title}</h3>
+            <button
+              onClick={() => copyToClipboard(code, codeId)}
+              className={`px-3 py-1 rounded-md text-sm font-medium transition-all duration-200 ${
+                copiedCode === codeId
+                  ? 'bg-green-600 text-white'
+                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white'
+              }`}
+            >
+              {copiedCode === codeId ? '✓ Copied!' : '📋 Copy'}
+            </button>
+          </div>
+          <div className="bg-black p-4 rounded-lg overflow-auto" style={{
+            minHeight: LAYOUT.CODE_BLOCK_MIN_HEIGHT,
+            maxHeight: LAYOUT.CODE_BLOCK_MAX_HEIGHT
+          }}>
+            <pre className="text-sm whitespace-pre-wrap">
+              <code>
+                {language === 'csharp' ? renderCSharpCode(code) : (
+                  <span className="text-gray-200">{code}</span>
+                )}
+              </code>
+            </pre>
+          </div>
+        </div>
+      );
+    };
 
     const demoSteps: DemoStep[] = [
       {
@@ -1289,19 +1440,44 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
         description: "Before writing any code, let's think about what test scenarios we need for FizzBuzz. This upfront planning helps us understand the full scope.",
         phase: "think",
         tddInsight: "Start by identifying all the test scenarios needed. For FizzBuzz: regular numbers, Fizz (÷3), Buzz (÷5), and FizzBuzz (÷15).",
-        allTestsCode: `// Test scenarios to implement:
-// ✓ Regular numbers (1, 2, 4) → return as string
-// ✓ Numbers divisible by 3 (3, 6, 9) → return "Fizz" 
-// ✓ Numbers divisible by 5 (5, 10, 20) → return "Buzz"
-// ✓ Numbers divisible by both 3 and 5 (15, 30) → return "FizzBuzz"
-
-// We'll implement these one at a time using Red-Green cycles`,
-        productionCode: `// No production code yet - we're still planning!
-// 
-// The FizzBuzz class will need:
-// - A static Convert(int input) method
-// - Logic to handle all four scenarios
-// - Clean, readable implementation`,
+        testScenarios: [
+          {
+            id: "regular",
+            description: "Regular numbers → return as string",
+            examples: "(1, 2, 4)",
+            isCompleted: false
+          },
+          {
+            id: "fizz",
+            description: "Divisible by 3 → return \"Fizz\"",
+            examples: "(3, 6, 9)",
+            isCompleted: false
+          },
+          {
+            id: "buzz",
+            description: "Divisible by 5 → return \"Buzz\"",
+            examples: "(5, 10, 20)",
+            isCompleted: false
+          },
+          {
+            id: "fizzbuzz",
+            description: "Divisible by 3 and 5 → return \"FizzBuzz\"",
+            examples: "(15, 30)",
+            isCompleted: false
+          }
+        ],
+        productionGoals: [
+          "FizzBuzz.Convert(int input)",
+          "Handles all four scenarios above",
+          "Clean, readable, minimal code"
+        ],
+        allTestsCode: `// We'll implement these scenarios one at a time using Red-Green cycles:
+// 1. Regular numbers first
+// 2. Then Fizz logic
+// 3. Then Buzz logic
+// 4. Finally FizzBuzz logic`,
+        productionCode: `// Goal: Build a simple, clean FizzBuzz converter
+// Starting with no code - we'll grow it step by step`,
         testResults: [],
         testStats: { total: 0, passed: 0, failed: 0 }
       },
@@ -1842,7 +2018,7 @@ public class FizzBuzz
             <h3 className="text-lg font-bold text-[#50DCE1] mb-3">Test Results ({current.testStats.passed}/{current.testStats.total} Pass)</h3>
             <div className="space-y-2">
               {current.testResults.map((test, index) => (
-                <div 
+                <div
                   key={index}
                   className={`p-3 rounded-lg ${
                     test.status === 'pass'
@@ -1859,34 +2035,70 @@ public class FizzBuzz
             </div>
           </div>
 
-          {/* Test Code and Production Code Side by Side */}
-          <div className="grid md:grid-cols-2 gap-4">
-            {/* Test Code */}
-            <div className="bg-gray-800 p-4 rounded-xl">
-              <h3 className="text-lg font-bold mb-3 text-yellow-400">Test Code (MSTest)</h3>
-              <div className="bg-black p-4 rounded-lg overflow-auto" style={{ 
-                minHeight: LAYOUT.CODE_BLOCK_MIN_HEIGHT,
-                maxHeight: LAYOUT.CODE_BLOCK_MAX_HEIGHT
-              }}>
-                <pre className="text-yellow-300 text-sm whitespace-pre-wrap">
-                  <code>{current.allTestsCode}</code>
-                </pre>
-              </div>
-            </div>
+          {/* Test Scenarios and Production Goals - Only for Think phase */}
+          {current.phase === 'think' && (current.testScenarios || current.productionGoals) && (
+            <div className="grid md:grid-cols-2 gap-4">
+              {/* Test Scenarios Checklist */}
+              {current.testScenarios && (
+                <div className="bg-slate-800 border border-purple-400/30 p-4 rounded-xl">
+                  <h3 className="text-lg font-bold text-purple-400 mb-3">🎯 Test Scenarios to Implement</h3>
+                  <div className="space-y-3">
+                    {current.testScenarios.map((scenario) => (
+                      <div key={scenario.id} className="flex items-start space-x-3 p-3 bg-gray-700 rounded-lg border border-gray-600">
+                        <div className="text-2xl flex-shrink-0">
+                          {scenario.isCompleted ? '✅' : '⏳'}
+                        </div>
+                        <div className="flex-1">
+                          <div className="text-white font-medium">
+                            {scenario.description}
+                          </div>
+                          <div className="text-gray-400 text-sm">
+                            Examples: {scenario.examples}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
-            {/* Production Code */}
-            <div className="bg-gray-800 p-4 rounded-xl">
-              <h3 className="text-lg font-bold mb-3 text-blue-400">Production Code (C#)</h3>
-              <div className="bg-black p-4 rounded-lg overflow-auto" style={{ 
-                minHeight: LAYOUT.CODE_BLOCK_MIN_HEIGHT,
-                maxHeight: LAYOUT.CODE_BLOCK_MAX_HEIGHT
-              }}>
-                <pre className="text-blue-300 text-sm whitespace-pre-wrap">
-                  <code>{current.productionCode}</code>
-                </pre>
-              </div>
+              {/* Production Goals */}
+              {current.productionGoals && (
+                <div className="bg-slate-800 border border-blue-400/30 p-4 rounded-xl">
+                  <h3 className="text-lg font-bold text-blue-400 mb-3">📦 What We'll Build</h3>
+                  <div className="space-y-3">
+                    {current.productionGoals.map((goal, index) => (
+                      <div key={index} className="flex items-start space-x-3 p-3 bg-gray-700 rounded-lg border border-gray-600">
+                        <div className="text-blue-400 text-xl flex-shrink-0">•</div>
+                        <div className="text-white">{goal}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
-          </div>
+          )}
+
+          {/* Test Code and Production Code Side by Side - Hide for Think phase */}
+          {current.phase !== 'think' && (
+            <div className="grid md:grid-cols-2 gap-4">
+              {/* Test Code */}
+              <CodeBlock
+                title="Test Code (MSTest)"
+                code={current.allTestsCode}
+                language="csharp"
+                theme="test"
+              />
+
+              {/* Production Code */}
+              <CodeBlock
+                title="Production Code (C#)"
+                code={current.productionCode}
+                language="csharp"
+                theme="production"
+              />
+            </div>
+          )}
         </div>
 
         {/* Bottom spacer */}

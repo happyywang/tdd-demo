@@ -170,6 +170,54 @@ const DemoSlide = memo(({ demoSteps }: DemoSlideProps) => {
 
       {/* Content - Simple vertical layout */}
       <div className={`${SPACING.GAP.LG} space-y-6`}>
+        {/* Test Scenarios and Production Goals - Only for Think phase */}
+        {current.phase === 'think' && (current.testScenarios || current.productionGoals) && (
+          <div className={`grid md:grid-cols-2 ${SPACING.GAP.MD}`}>
+            {/* Test Scenarios Checklist */}
+            {current.testScenarios && (
+              <section className={`${UI_COMPONENTS.CARDS.DEFAULT}`} aria-labelledby="test-scenarios-title">
+                <h3 id="test-scenarios-title" className={`${TYPOGRAPHY.SIZES.LG} ${TYPOGRAPHY.WEIGHTS.BOLD} ${SPACING.MARGIN_B.SM} text-purple-400`}>
+                  🎯 Test Scenarios to Implement
+                </h3>
+                <div className="space-y-3">
+                  {current.testScenarios.map((scenario, index) => (
+                    <div key={scenario.id} className="flex items-start space-x-3 p-3 bg-gray-700 rounded-lg border border-gray-600">
+                      <div className="text-2xl flex-shrink-0">
+                        {scenario.isCompleted ? '✅' : '⏳'}
+                      </div>
+                      <div className="flex-1">
+                        <div className="text-white font-medium">
+                          {scenario.description}
+                        </div>
+                        <div className="text-gray-400 text-sm">
+                          Examples: {scenario.examples}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {/* Production Goals */}
+            {current.productionGoals && (
+              <section className={`${UI_COMPONENTS.CARDS.DEFAULT}`} aria-labelledby="production-goals-title">
+                <h3 id="production-goals-title" className={`${TYPOGRAPHY.SIZES.LG} ${TYPOGRAPHY.WEIGHTS.BOLD} ${SPACING.MARGIN_B.SM} text-blue-400`}>
+                  📦 What We'll Build
+                </h3>
+                <div className="space-y-3">
+                  {current.productionGoals.map((goal, index) => (
+                    <div key={index} className="flex items-start space-x-3 p-3 bg-gray-700 rounded-lg border border-gray-600">
+                      <div className="text-blue-400 text-xl flex-shrink-0">•</div>
+                      <div className="text-white">{goal}</div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+          </div>
+        )}
+
         {/* Test Results */}
         <section className={`${UI_COMPONENTS.CARDS.DEFAULT}`} aria-labelledby="test-results-title">
           <h3 id="test-results-title" className={`${TYPOGRAPHY.SIZES.LG} ${TYPOGRAPHY.WEIGHTS.BOLD} ${COLORS.TEXT.PRIMARY} ${SPACING.MARGIN_B.SM}`}>

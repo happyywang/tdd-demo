@@ -27,6 +27,15 @@ export interface DemoStep {
   allTestsCode: string;
   productionCode: string;
   tddInsight?: string;
+  testScenarios?: TestScenario[];
+  productionGoals?: string[];
+}
+
+export interface TestScenario {
+  id: string;
+  description: string;
+  examples: string;
+  isCompleted?: boolean;
 }
 
 export interface PingPongPhase {
