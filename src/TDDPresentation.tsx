@@ -1324,7 +1324,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
     const renderCSharpCode = (code: string) => {
       const lines = code.split('\n');
       return lines.map((line, lineIndex) => {
-        const tokens = [];
+        const tokens: JSX.Element[] = [];
         let currentIndex = 0;
         const lineText = line;
 
