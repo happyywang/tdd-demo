@@ -59,7 +59,7 @@ const BugFirstTDDSlide = () => {
       <div className="relative z-10 max-w-7xl mx-auto text-center">
         {/* Title */}
         <div className="mb-8">
-          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">
+          <h1 className="text-5xl font-bold mb-4 leading-tight bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">
             TDD From the Trenches
           </h1>
           <h2 className="text-xl text-[#50DCE1]">Recommend: start from a bug fix</h2>
@@ -72,7 +72,7 @@ const BugFirstTDDSlide = () => {
             <div className="absolute inset-0 bg-black/20 rounded-3xl"></div>
             <div className="relative z-10 text-center">
               <div className="text-8xl mb-6 animate-bounce">{steps[currentStep].icon}</div>
-              <h3 className={`text-4xl font-bold mb-4 ${steps[currentStep].accentColor}`}>
+              <h3 className={`text-4xl font-bold mb-4 leading-tight ${steps[currentStep].accentColor}`}>
                 {steps[currentStep].title}
               </h3>
               <p className="text-xl text-gray-200 leading-relaxed max-w-2xl mx-auto">

@@ -490,7 +490,7 @@ const TDDPresentation = () => {
   // Title Slide Component
   const TitleSlide = () => (
     <div className="flex flex-col items-center justify-center text-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" style={{minHeight: LAYOUT.SLIDE_MIN_HEIGHT}}>
-      <h1 className="text-8xl font-bold mb-8 bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">
+      <h1 className="text-8xl font-bold mb-8 leading-tight bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">
         User Group TDD
       </h1>
       <p className="text-4xl text-[#50DCE1] font-semibold">Test-Driven Development</p>
@@ -512,7 +512,7 @@ const TDDPresentation = () => {
 
     return (
       <div className="h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
-        <h1 className="text-6xl font-bold mb-12 text-center bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">
+        <h1 className="text-6xl font-bold mb-12 leading-tight text-center bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">
           Agenda
         </h1>
         <div className="grid md:grid-cols-2 gap-6 flex-1">
@@ -615,7 +615,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
     return (
       <div className="min-h-screen bg-gray-900 p-8 overflow-auto flex flex-col">
         <div className="text-center mb-6">
-          <h1 className="text-5xl font-bold mb-2 text-white">What is TDD?</h1>
+          <h1 className="text-5xl font-bold mb-2 leading-tight text-white">What is TDD?</h1>
           <p className="text-xl text-gray-300 mb-2">A development methodology where tests drive the design of production code</p>
           <p className="text-lg text-gray-400">Tests are written before the production code</p>
         </div>
@@ -753,7 +753,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 overflow-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">
+          <h1 className="text-6xl font-bold mb-6 leading-tight bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">
             History of TDD
           </h1>
           <p className="text-xl text-[#50DCE1]">Evolution of Test-Driven Development</p>
@@ -1014,7 +1014,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
     return (
       <div className="h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
         <div className="text-center mb-8">
-          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">TDD Challenges</h1>
+          <h1 className="text-5xl font-bold mb-4 leading-tight bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">TDD Challenges</h1>
           <p className="text-xl text-gray-300">Let's be honest about the difficulties</p>
 
           {/* View Toggle */}
@@ -1118,7 +1118,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
       return (
         <div className="h-full flex flex-col">
           <div className="text-center mb-6">
-            <h2 className="text-4xl font-bold mb-4 text-[#50DCE1]">Daily Developer Benefits</h2>
+            <h2 className="text-4xl font-bold mb-4 leading-tight text-[#50DCE1]">Daily Developer Benefits</h2>
             <p className="text-lg text-gray-300">What TDD feels like in practice</p>
           </div>
 
@@ -1158,7 +1158,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
     const renderResearchView = () => (
       <div className="h-full flex flex-col justify-center">
         <div className="text-center mb-8">
-          <h2 className="text-4xl font-bold mb-4 text-[#50DCE1]">Research Evidence</h2>
+          <h2 className="text-4xl font-bold mb-4 leading-tight text-[#50DCE1]">Research Evidence</h2>
           <p className="text-lg text-gray-300">What the studies tell us</p>
         </div>
 
@@ -1198,7 +1198,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
     const renderComparisonView = () => (
       <div className="h-full flex flex-col justify-center">
         <div className="text-center mb-8">
-          <h2 className="text-4xl font-bold mb-4 text-[#50DCE1]">The TDD Investment</h2>
+          <h2 className="text-4xl font-bold mb-4 leading-tight text-[#50DCE1]">The TDD Investment</h2>
           <p className="text-lg text-gray-300">Short-term cost, long-term gain</p>
         </div>
 
@@ -1230,7 +1230,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
     return (
       <div className="h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
         <div className="text-center mb-8">
-          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">Why TDD?</h1>
+          <h1 className="text-5xl font-bold mb-4 leading-tight bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">Why TDD?</h1>
           
           {/* View Toggle */}
           <div className="flex justify-center space-x-2 mb-6">
@@ -1967,7 +1967,7 @@ public class FizzBuzz
 
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">Building FizzBuzz with TDD</h1>
+          <h1 className="text-5xl font-bold mb-4 leading-tight bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">Building FizzBuzz with TDD</h1>
 
           {/* Quick Jump Buttons */}
           <div className="flex justify-center space-x-2 mb-4">
@@ -2518,7 +2518,7 @@ Speed Optimization Techniques:
       <div className="h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">TDD Best Practices</h1>
+          <h1 className="text-5xl font-bold mb-4 leading-tight bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">TDD Best Practices</h1>
           <p className="text-xl text-[#50DCE1]">Practical wisdom for successful TDD adoption</p>
         </div>
 

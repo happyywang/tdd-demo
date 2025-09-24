@@ -44,7 +44,7 @@ const WhatToTestWithTDDSlide = () => {
 
 const Header = () => (
   <div className="text-center mb-8">
-    <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">
+    <h1 className="text-5xl font-bold mb-4 leading-tight bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">
       What to Test with TDD
     </h1>
     <p className="text-xl text-[#50DCE1] font-semibold">Knowing Where and How to Apply TDD</p>
