@@ -493,14 +493,7 @@ const TDDPresentation = () => {
       <h1 className="text-8xl font-bold mb-8 bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">
         User Group TDD
       </h1>
-      <p className="text-4xl text-[#50DCE1] font-semibold mb-12">Test-Driven Development</p>
-      <div className="text-2xl text-gray-300 space-y-4">
-        <p>🎯 A Complete Guide to TDD</p>
-        <p>📅 45 minutes • 👥 Interactive • 💻 Demo</p>
-      </div>
-      <div className="mt-16 text-gray-400">
-        <p>{CONTENT.NAVIGATION.PRESS_ARROW_TO_START}</p>
-      </div>
+      <p className="text-4xl text-[#50DCE1] font-semibold">Test-Driven Development</p>
     </div>
   );
 
@@ -1163,13 +1156,13 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
     };
 
     const renderResearchView = () => (
-      <div className="h-full flex flex-col">
-        <div className="text-center mb-6">
+      <div className="h-full flex flex-col justify-center">
+        <div className="text-center mb-8">
           <h2 className="text-4xl font-bold mb-4 text-[#50DCE1]">Research Evidence</h2>
           <p className="text-lg text-gray-300">What the studies tell us</p>
         </div>
 
-        <div className="space-y-3 flex-1 overflow-y-auto">
+        <div className="space-y-6 max-w-4xl mx-auto w-full">
           <div className="bg-gradient-to-r from-slate-800 to-slate-700 border border-[#50DCE1]/30 p-4 rounded-xl">
             <h3 className="text-lg font-bold mb-2">{researchData.nagappan2008.title}</h3>
             <div className="grid md:grid-cols-2 gap-6">
