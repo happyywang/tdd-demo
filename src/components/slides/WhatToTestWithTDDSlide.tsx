@@ -12,7 +12,8 @@ const WhatToTestWithTDDSlide = () => {
   const sections: Section[] = [
     { id: 'questions', title: 'Key Questions for Scope', icon: '❓' },
     { id: 'pyramid', title: 'Testing Pyramid', icon: '🔺' },
-    { id: 'granularity', title: 'Granularity of TDD', icon: '🎯' }
+    { id: 'granularity', title: 'Granularity of TDD', icon: '🎯' },
+    { id: 'comparison', title: 'TDD vs Traditional Tests', icon: '⚖️' }
   ];
 
   const handleSectionChange = (index: number) => {
@@ -86,6 +87,8 @@ const SectionContent = ({ sectionId }: { sectionId: string }) => {
       return <TestingPyramidSection />;
     case 'granularity':
       return <GranularitySection />;
+    case 'comparison':
+      return <ComparisonSection />;
     default:
       return <KeyQuestionsSection />;
   }
@@ -268,6 +271,81 @@ const QuestionCard = ({
     <div>
       <div className={`font-semibold text-white text-lg ${color}`}>{question}</div>
       <div className="text-gray-400 text-sm">{description}</div>
+    </div>
+  </div>
+);
+
+const ComparisonSection = () => (
+  <div className="w-full flex flex-col justify-center">
+    <div className="max-w-6xl mx-auto">
+      <div className="text-center mb-8">
+        <h3 className="text-2xl font-bold text-[#50DCE1] mb-2">TDD-Style Test vs. Traditional Unit Test</h3>
+      </div>
+
+      <div className="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden">
+      <table className="w-full">
+        <thead className="bg-gray-900">
+          <tr>
+            <th className="px-6 py-4 text-left text-lg font-bold text-[#50DCE1] border-b border-gray-600 w-1/4">
+              Aspect
+            </th>
+            <th className="px-6 py-4 text-left text-lg font-bold text-green-400 border-b border-gray-600 w-3/8">
+              TDD-Style Test
+            </th>
+            <th className="px-6 py-4 text-left text-lg font-bold text-yellow-400 border-b border-gray-600 w-3/8">
+              Traditional Unit Test
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr className="border-b border-gray-700 hover:bg-gray-750">
+            <td className="px-6 py-4 font-semibold text-white">Focus</td>
+            <td className="px-6 py-4 text-gray-300">
+              Specification of behavior (what the system should do)
+            </td>
+            <td className="px-6 py-4 text-gray-300">
+              Verification of implementation correctness (how the system does it)
+            </td>
+          </tr>
+          <tr className="border-b border-gray-700 hover:bg-gray-750">
+            <td className="px-6 py-4 font-semibold text-white">Granularity</td>
+            <td className="px-6 py-4 text-gray-300">
+              Very small, single behavior per test
+            </td>
+            <td className="px-6 py-4 text-gray-300">
+              May test multiple paths or internal states
+            </td>
+          </tr>
+          <tr className="border-b border-gray-700 hover:bg-gray-750">
+            <td className="px-6 py-4 font-semibold text-white">Coupling</td>
+            <td className="px-6 py-4 text-gray-300">
+              Loosely coupled to code internals (black-box style)
+            </td>
+            <td className="px-6 py-4 text-gray-300">
+              Often white-box, might check private state or call counts
+            </td>
+          </tr>
+          <tr className="border-b border-gray-700 hover:bg-gray-750">
+            <td className="px-6 py-4 font-semibold text-white">Coverage</td>
+            <td className="px-6 py-4 text-gray-300">
+              Systematic behavioral coverage – tends to cover edge cases and intended use since tests are written first
+            </td>
+            <td className="px-6 py-4 text-gray-300">
+              Variable coverage – can miss behaviors or edge cases; depends on developer discipline
+            </td>
+          </tr>
+          <tr className="hover:bg-gray-750">
+            <td className="px-6 py-4 font-semibold text-white">Evolution</td>
+            <td className="px-6 py-4 text-gray-300">
+              Refactored along with code, kept minimal
+            </td>
+            <td className="px-6 py-4 text-gray-300">
+              Often grows in size, can get brittle over time
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
     </div>
   </div>
 );
