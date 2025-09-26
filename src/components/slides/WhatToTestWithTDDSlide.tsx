@@ -278,9 +278,6 @@ const QuestionCard = ({
 const ComparisonSection = () => (
   <div className="w-full flex flex-col justify-center">
     <div className="max-w-6xl mx-auto">
-      <div className="text-center mb-8">
-        <h3 className="text-2xl font-bold text-[#50DCE1] mb-2">TDD-Style Test vs. Traditional Unit Test</h3>
-      </div>
 
       <div className="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden">
       <table className="w-full">

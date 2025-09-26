@@ -160,7 +160,7 @@ const TDDCycleSlide = () => {
             onClick={toggleExtended}
             className="bg-gray-800 hover:bg-[#50DCE1] text-gray-300 hover:text-black px-4 py-2 rounded-md text-sm transition-colors border border-gray-600 hover:border-[#50DCE1] text-right"
           >
-            {showExtended ? '3-Step' : '4-Step TRGR'}
+            {showExtended ? '3-Step RGR' : '4-Step TRGR'}
           </button>
         </div>
 
@@ -241,7 +241,7 @@ const TDDCycleSlide = () => {
                   {/* Elegant Label Card */}
                   <div className={`px-4 py-2 rounded-xl transition-all duration-500 backdrop-blur-sm ${
                     isActive
-                      ? `bg-gradient-to-r ${step.color} text-white shadow-xl border border-white/30`
+                      ? `bg-gradient-to-r ${step.color} ${isThinkStep ? 'text-black' : 'text-white'} shadow-xl border border-white/30`
                       : 'bg-gray-800/80 text-gray-300 border border-gray-600/50'
                   }`}>
                     <div className={`text-center ${index === 0 ? 'text-sm' : 'text-xs'} font-semibold`}>
