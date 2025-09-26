@@ -16,7 +16,7 @@ import WhatIsNotTDDSlide from './components/slides/WhatIsNotTDDSlide';
 const demoSteps: DemoStep[] = [
   {
     title: "Step 1: Think - Plan Test Scenarios 🧠",
-    description: "Before writing any code, let's think about what test scenarios we need for FizzBuzz. This upfront planning helps us understand the full scope.",
+    description: "Before writing any tests, let's think about what test scenarios we need for FizzBuzz. This upfront planning helps us understand the full scope.",
     phase: "think",
     testScenarios: [
       {
@@ -824,58 +824,64 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
 
     const challenges = [
       {
-        title: "Mindset Shift Required",
+        title: "Mindset Shift",
         icon: "🧠",
         color: "bg-gradient-to-br from-slate-700 to-slate-800",
         problem: "Requires fundamental change from 'code first' to 'test first' thinking",
         impact: "Developers feel slower and uncomfortable initially",
         detail: "Years of 'write code then test' habits are hard to break. Feels unnatural and counterintuitive at first.",
-        mitigation: "Start with simple exercises, pair programming, and gradual adoption. Allow 2-3 months for comfort."
+        mitigation: "Gradual adoption, pair programming",
+        practicalTip: "Set 2–3 month adaptation period; use katas & retrospectives"
       },
       {
-        title: "Test Maintenance Burden",
+        title: "Test Sustainability",
         icon: "🔧",
         color: "bg-gradient-to-br from-[#50DCE1] to-cyan-500",
         problem: "Tests become another codebase that needs constant maintenance",
         impact: "Changing requirements means updating both code AND tests",
         detail: "Brittle tests break frequently. Refactoring becomes expensive when tests are tightly coupled to implementation.",
-        mitigation: "Focus on testing behavior, not implementation. Write resilient tests. Regular test refactoring sessions."
+        mitigation: "Prioritize behavior, refactor tests often",
+        practicalTip: "Test public interfaces; treat test code as production code"
       },
       {
-        title: "Initial Development Slowdown",
+        title: "Initial Slowdown",
         icon: "🐌",
         color: "bg-gradient-to-br from-slate-600 to-slate-700",
         problem: "15-35% longer development time initially (research confirmed)",
         impact: "Pressure from management and tight deadlines create resistance",
         detail: "Writing tests first feels like doing double work. Team velocity appears to drop in early sprints.",
-        mitigation: "Educate stakeholders on long-term benefits. Start with non-critical features. Measure defect reduction."
+        mitigation: "Explain long-term ROI, show metrics",
+        practicalTip: "Compare defect rates, debugging hours, and maintenance costs"
       },
       {
-        title: "Legacy Code Integration",
+        title: "Legacy Code Handling",
         icon: "🏚️",
         color: "bg-gradient-to-br from-[#50DCE1] to-slate-500",
         problem: "Extremely difficult to apply TDD to existing untested codebases",
         impact: "Requires extensive refactoring before TDD can be effective",
         detail: "Tightly coupled legacy code resists testing. Dependencies are hard to mock. Existing architecture fights TDD.",
-        mitigation: "Use 'Legacy Code Dilemma' techniques. Create seams. Apply TDD only to new features initially."
+        mitigation: "Apply TDD to new code; create seams",
+        practicalTip: "Use characterization tests; tackle legacy incrementally"
       },
       {
-        title: "Over-Testing Risk",
+        title: "Over-testing",
         icon: "🎯",
         color: "bg-gradient-to-br from-slate-800 to-slate-700",
         problem: "Tendency to test implementation details rather than behavior",
         impact: "Creates fragile test suites that break with every refactor",
         detail: "Developers often write too many low-level tests. Mock-heavy tests become maintenance nightmares.",
-        mitigation: "Focus on public interfaces. Use test pyramid. Prefer integration tests over unit tests when appropriate."
+        mitigation: "Follow the test pyramid, avoid trivial tests",
+        practicalTip: "Integration for workflows, unit tests for core logic"
       },
       {
-        title: "Tool and Infrastructure Overhead",
+        title: "Tooling Overhead",
         icon: "⚙️",
         color: "bg-gradient-to-br from-slate-700 to-slate-600",
         problem: "Requires investment in testing frameworks, CI/CD, and tooling",
         impact: "Additional complexity in build pipelines and development environment",
         detail: "Test runners, mocking frameworks, test databases. Slow test suites impact developer productivity.",
-        mitigation: "Invest in fast testing infrastructure. Parallel test execution. Proper test categorization (unit/integration)."
+        mitigation: "Invest in fast automation & CI/CD",
+        practicalTip: "Parallelize tests; Run test by category"
       }
     ];
 
@@ -936,35 +942,44 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
 
     const renderMitigationView = () => {
       return (
-        <div className="h-full flex flex-col py-4">
-          <div className="flex-1 grid grid-cols-1 gap-2 overflow-y-auto">
-            {challenges.map((challenge, index) => (
-              <div key={index} className="grid md:grid-cols-2 gap-4 bg-gray-800 rounded-lg overflow-hidden border border-gray-700">
-                {/* Challenge Side (Left) */}
-                <div className="bg-red-900 bg-opacity-30 p-2 flex items-center space-x-2">
-                  <div className="text-xl flex-shrink-0">{challenge.icon}</div>
-                  <div className="flex-1">
-                    <h4 className="text-sm font-bold text-red-300">
-                      {challenge.title === "Mindset Shift Required" ? "How to adapt mindset?" :
-                       challenge.title === "Test Maintenance Burden" ? "How to keep tests sustainable?" :
-                       challenge.title === "Initial Development Slowdown" ? "How to handle initial slowdown?" :
-                       challenge.title === "Legacy Code Integration" ? "How to integrate with legacy code?" :
-                       challenge.title === "Over-Testing Risk" ? "How to avoid over-testing?" :
-                       challenge.title === "Tool and Infrastructure Overhead" ? "How to manage tool overhead?" :
-                       challenge.title}
-                    </h4>
-                  </div>
-                </div>
+        <div className="h-full flex flex-col justify-center">
+          <div className="max-w-7xl mx-auto w-full">
 
-                {/* Solution Side (Right) */}
-                <div className="bg-green-900 bg-opacity-30 p-2">
-                  <div className="flex items-center space-x-2">
-                    <div className="text-lg flex-shrink-0">💡</div>
-                    <p className="text-sm text-green-200 leading-relaxed font-bold">{challenge.mitigation}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
+            <div className="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden">
+              <table className="w-full">
+                <thead className="bg-gray-900">
+                  <tr>
+                    <th className="px-4 py-3 text-left text-lg font-bold text-red-400 border-b border-gray-600 w-1/3">
+                      Challenge
+                    </th>
+                    <th className="px-4 py-3 text-left text-lg font-bold text-green-400 border-b border-gray-600 w-1/3">
+                      Solution
+                    </th>
+                    <th className="px-4 py-3 text-left text-lg font-bold text-blue-400 border-b border-gray-600 w-1/3">
+                      Practical Tip
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {challenges.map((challenge, index) => (
+                    <tr key={index} className={`border-b border-gray-700 hover:bg-gray-750 ${index === challenges.length - 1 ? 'border-b-0' : ''}`}>
+                      <td className="px-4 py-3">
+                        <div className="flex items-center space-x-2">
+                          <span className="text-lg">{challenge.icon}</span>
+                          <span className="font-semibold text-white text-sm">{challenge.title}</span>
+                        </div>
+                      </td>
+                      <td className="px-4 py-3 text-gray-300 text-base">
+                        {challenge.mitigation}
+                      </td>
+                      <td className="px-4 py-3 text-gray-300 text-base">
+                        {challenge.practicalTip}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       );
@@ -972,14 +987,11 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
 
     const renderRealityView = () => (
       <div className="h-full flex flex-col justify-center">
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold mb-4 text-[#50DCE1]">The Honest Truth About TDD</h2>
-        </div>
 
         <div className="grid md:grid-cols-2 gap-6 mb-8">
           <div className="bg-slate-800 bg-opacity-50 border border-red-500/30 p-6 rounded-xl">
             <h3 className="text-xl font-bold mb-4 text-red-400">❌ TDD is NOT for everyone</h3>
-            <ul className="space-y-2 text-sm">
+            <ul className="space-y-2 text-base">
               <li>• Tight deadline projects with no long-term maintenance</li>
               <li>• Prototyping and throw-away code</li>
               <li>• Teams unwilling to invest in learning</li>
@@ -990,7 +1002,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
 
           <div className="bg-gradient-to-br from-[#50DCE1] to-cyan-500 p-6 rounded-xl">
             <h3 className="text-xl font-bold mb-4 text-black">✅ TDD works best when</h3>
-            <ul className="space-y-2 text-sm text-black font-semibold">
+            <ul className="space-y-2 text-base text-black font-semibold">
               <li>• Long-term maintenance is expected</li>
               <li>• Team commits to learning period</li>
               <li>• Business logic complexity is high</li>
@@ -1003,7 +1015,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
         <div className="text-center">
           <div className="bg-slate-800 bg-opacity-50 border border-[#50DCE1]/50 p-4 rounded-lg inline-block">
             <h4 className="text-lg font-bold text-[#50DCE1] mb-2">🎯 Key Success Factors</h4>
-            <p className="text-sm text-gray-200">
+            <p className="text-base text-gray-200">
               Management support • Realistic timeline • Gradual adoption • Team commitment • Proper training
             </p>
           </div>
@@ -1184,10 +1196,10 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
             <h3 className="text-lg font-bold mb-2 text-black">{researchData.metaAnalysis.title}</h3>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="bg-black bg-opacity-30 p-4 rounded-lg text-center">
-                <p className="text-xl font-bold text-[#50DCE1]">{researchData.metaAnalysis.qualityImprovement}</p>
+                <p className="text-xl font-bold text-black">{researchData.metaAnalysis.qualityImprovement}</p>
               </div>
               <div className="bg-black bg-opacity-30 p-4 rounded-lg text-center">
-                <p className="text-xl font-bold text-[#50DCE1]">{researchData.metaAnalysis.externalQuality}</p>
+                <p className="text-xl font-bold text-black">{researchData.metaAnalysis.externalQuality}</p>
               </div>
             </div>
           </div>
@@ -1430,7 +1442,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
     const demoSteps: DemoStep[] = [
       {
         title: "Step 1: Think - Plan Test Scenarios 🧠",
-        description: "Before writing any code, let's think about what test scenarios we need for FizzBuzz. This upfront planning helps us understand the full scope.",
+        description: "Before writing any tests, let's think about what test scenarios we need for FizzBuzz. This upfront planning helps us understand the full scope.",
         phase: "think",
         tddInsight: "Start by identifying all the test scenarios needed. For FizzBuzz: regular numbers, Fizz (÷3), Buzz (÷5), and FizzBuzz (÷15).",
         testScenarios: [
