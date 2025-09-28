@@ -14,9 +14,10 @@ interface StepType {
 
 const TDDCycleSlide = () => {
   const [currentStep, setCurrentStep] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(true);
+  const [isAnimating, setIsAnimating] = useState(false);
   const [cycleCount, setCycleCount] = useState(0);
   const [showExtended, setShowExtended] = useState(false);
+  const [showAnimation, setShowAnimation] = useState(false);
   const prevStepRef = useRef(0);
 
   // Traditional 3-step cycle
@@ -103,7 +104,7 @@ const TDDCycleSlide = () => {
 
   // Auto-advance animation with cycle counting
   useEffect(() => {
-    if (!isAnimating) return;
+    if (!isAnimating || !showAnimation) return;
 
     const interval = setInterval(() => {
       setCurrentStep((prev) => {
@@ -123,7 +124,7 @@ const TDDCycleSlide = () => {
     }, 2000); // Faster animation - 2 seconds per step
 
     return () => clearInterval(interval);
-  }, [isAnimating, currentSteps.length]);
+  }, [isAnimating, currentSteps.length, showAnimation]);
 
   const handleStepClick = (index: number) => {
     setCurrentStep(index);
@@ -132,6 +133,14 @@ const TDDCycleSlide = () => {
 
   const toggleExtended = () => {
     setShowExtended(!showExtended);
+    setCurrentStep(0);
+    setCycleCount(0);
+    prevStepRef.current = 0;
+  };
+
+  const revealAnimation = () => {
+    setShowAnimation(true);
+    setIsAnimating(true);
     setCurrentStep(0);
     setCycleCount(0);
     prevStepRef.current = 0;
@@ -146,7 +155,20 @@ const TDDCycleSlide = () => {
       </div>
 
       <div className="flex-1 flex flex-col items-center justify-center">
-        <div className="max-w-4xl mx-auto relative">
+        <div className="max-w-4xl mx-auto relative mt-4">
+
+        {/* Click overlay when animation is hidden */}
+        {!showAnimation && (
+          <div
+            className="absolute inset-x-0 top-16 bottom-0 flex items-center justify-center z-20 cursor-pointer"
+            onClick={revealAnimation}
+          >
+            <div className="text-center px-6 py-4 bg-black/80 rounded-lg border border-[#50DCE1]/50 backdrop-blur-sm">
+              <div className="text-3xl mb-2 animate-pulse">👆</div>
+              <div className="text-base text-[#50DCE1] font-semibold">Click to show animation</div>
+            </div>
+          </div>
+        )}
 
         {/* Toggle button aligned with Write Failing Test label height, far right */}
         <div
@@ -166,10 +188,10 @@ const TDDCycleSlide = () => {
 
         {/* Main Animation Area - Expanded for outer labels */}
         <div className="flex justify-center">
-          <div className="relative w-[500px] h-[500px] mb-8">
+          <div className={`relative w-[500px] h-[500px] mb-8 transition-opacity duration-500 ${!showAnimation ? 'opacity-30' : 'opacity-100'}`}>
 
           {/* Floating Bubble Tip for Think step */}
-          {showExtended && (
+          {showExtended && showAnimation && (
             <div className="absolute top-4 right-4 bg-[#50DCE1] text-black px-3 py-2 rounded-full text-sm font-bold shadow-lg animate-bounce z-10">
               💡 Every cycle starts with Think!
               <div className="absolute -bottom-2 left-8 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-[#50DCE1]"></div>
@@ -181,7 +203,7 @@ const TDDCycleSlide = () => {
             <div className="text-center">
               <div className="text-4xl mb-2">🔄</div>
               <div className="text-sm font-bold text-white">TDD</div>
-              {cycleCount > 0 && (
+              {cycleCount > 0 && showAnimation && (
                 <div className="text-xs text-gray-400 mt-1">Cycle {cycleCount}</div>
               )}
             </div>
@@ -189,7 +211,7 @@ const TDDCycleSlide = () => {
 
           {/* Dynamic Steps */}
           {currentSteps.map((step, index) => {
-            const isActive = index === currentStep;
+            const isActive = index === currentStep && showAnimation;
             const isNext = index === (currentStep + 1) % currentSteps.length;
             const isThinkStep = showExtended && step.isSpecial;
 
@@ -251,7 +273,7 @@ const TDDCycleSlide = () => {
                 </div>
 
                 {/* Flowing Arrow to Next Step */}
-                {isActive && (
+                {isActive && showAnimation && (
                   <div
                     className="absolute animate-bounce"
                     style={{
@@ -271,7 +293,7 @@ const TDDCycleSlide = () => {
                 )}
 
                 {/* Ripple Effect for Active Step */}
-                {isActive && (
+                {isActive && showAnimation && (
                   <div
                     className="absolute w-30 h-30 rounded-full border-2 border-white animate-ping opacity-30"
                     style={{

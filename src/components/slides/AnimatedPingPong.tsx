@@ -9,6 +9,7 @@ const AnimatedPingPong = memo(() => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [showResult, setShowResult] = useState('❌');
   const [animationCycle, setAnimationCycle] = useState(0);
+  const [showAnimation, setShowAnimation] = useState(false);
 
   const phases: PingPongPhase[] = useMemo(() => [
     { name: 'Red', player: 'A', color: 'red', position: { x: 20, y: 50 }, result: '❌', text: CONTENT.PING_PONG.WRITE_FAILING_TEST },
@@ -17,9 +18,18 @@ const AnimatedPingPong = memo(() => {
     { name: 'Red', player: 'B', color: 'red', position: { x: 80, y: 50 }, result: '❌', text: CONTENT.PING_PONG.WRITE_FAILING_TEST },
     { name: 'Green', player: 'A', color: 'green', position: { x: 20, y: 50 }, result: '✅', text: CONTENT.PING_PONG.MAKE_TEST_PASS },
     { name: 'Refactor', player: 'B', color: 'blue', position: { x: 80, y: 50 }, result: '🔧', text: CONTENT.PING_PONG.REFACTOR_CODE },
+    { name: 'Red', player: 'A', color: 'red', position: { x: 20, y: 50 }, result: '❌', text: CONTENT.PING_PONG.WRITE_FAILING_TEST },
+    { name: 'Green', player: 'B', color: 'green', position: { x: 80, y: 50 }, result: '✅', text: CONTENT.PING_PONG.MAKE_TEST_PASS },
+    { name: 'Refactor', player: 'A', color: 'blue', position: { x: 20, y: 50 }, result: '🔧', text: CONTENT.PING_PONG.REFACTOR_CODE },
   ], []);
 
+  const revealAnimation = () => {
+    setShowAnimation(true);
+  };
+
   useEffect(() => {
+    if (!showAnimation) return;
+
     const interval = setInterval(() => {
       setIsAnimating(true);
       const nextPhase = (currentPhase + 1) % phases.length;
@@ -36,10 +46,10 @@ const AnimatedPingPong = memo(() => {
       setTimeout(() => {
         setIsAnimating(false);
         
-        // Check if we completed a full cycle
-        if (nextPhase === 0) {
+        // Check if we completed a full cycle (every 3 phases = 1 complete cycle)
+        if (nextPhase % 3 === 0 && nextPhase > 0) {
           setAnimationCycle(prev => prev + 1);
-          if (animationCycle >= DEMO_CONFIG.CYCLES_BEFORE_SUMMARY) {
+          if (animationCycle >= 2) { // 3 cycles total (0, 1, 2)
             clearInterval(interval);
             setTimeout(() => {
               setAnimationCycle(0);
@@ -54,12 +64,25 @@ const AnimatedPingPong = memo(() => {
     }, ANIMATIONS.PING_PONG_INTERVAL);
 
     return () => clearInterval(interval);
-  }, [currentPhase, animationCycle]);
+  }, [currentPhase, animationCycle, showAnimation]);
 
   const currentPhaseData = useMemo(() => phases[currentPhase], [phases, currentPhase]);
 
   return (
     <div className={`relative w-full h-48 ${COLORS.BACKGROUNDS.SECONDARY} rounded-2xl overflow-hidden`}>
+
+      {/* Click overlay when animation is hidden */}
+      {!showAnimation && (
+        <div
+          className="absolute inset-0 flex items-center justify-center z-30 cursor-pointer bg-gray-900/60 backdrop-blur-sm"
+          onClick={revealAnimation}
+        >
+          <div className="text-center px-6 py-4 bg-black/80 rounded-lg border border-[#50DCE1]/50">
+            <div className="text-2xl mb-2 animate-pulse">👆</div>
+            <div className="text-sm text-[#50DCE1] font-semibold">Click to show ping-pong demo</div>
+          </div>
+        </div>
+      )}
       {/* TDD Phase Indicator at top */}
       <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20">
         <div className={`${SPACING.PADDING_X.LG} ${SPACING.PADDING_Y.SM} rounded-full ${COLORS.TEXT.PRIMARY} ${TYPOGRAPHY.WEIGHTS.BOLD} ${TYPOGRAPHY.SIZES.LG} ${
@@ -129,7 +152,7 @@ const AnimatedPingPong = memo(() => {
       </div>
 
       {/* Final Summary */}
-      {animationCycle >= 2 && (
+      {animationCycle >= 2 && showAnimation && (
         <div className={`absolute inset-0 ${COLORS.BACKGROUNDS.OVERLAY} flex items-center justify-center`}>
           <div className={`text-center ${COLORS.TEXT.PRIMARY}`}>
             <h3 className={`${TYPOGRAPHY.SIZES['3XL']} ${TYPOGRAPHY.WEIGHTS.BOLD} ${SPACING.MARGIN_B.MD}`}>

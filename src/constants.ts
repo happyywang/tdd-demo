@@ -238,6 +238,6 @@ export const CONTENT = {
 // Demo Configuration
 export const DEMO_CONFIG = {
   TOTAL_STEPS: 10,
-  CYCLES_BEFORE_SUMMARY: 2,
+  CYCLES_BEFORE_SUMMARY: 1,
   ANIMATION_CYCLES: 3
 } as const;
