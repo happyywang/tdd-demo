@@ -106,7 +106,7 @@ const TestingPyramidSection = () => (
           top: '30px',
           left: '50%',
           transform: 'translateX(-50%)',
-          width: '140px',
+          width: '110px',
           height: '80px',
           backgroundColor: '#f87171', // 柔和红色
           clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)'
@@ -150,10 +150,10 @@ const TestingPyramidSection = () => (
           top: '250px',
           left: '50%',
           transform: 'translateX(-50%)',
-          width: '380px',
+          width: '420px',
           height: '120px',
           backgroundColor: '#4ade80', // 舒服的绿色
-          clipPath: 'polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)'
+          clipPath: 'polygon(18% 0%, 82% 0%, 100% 100%, 0% 100%)'
         }}
       >
         <div className="text-3xl mt-6">Unit Tests</div>
