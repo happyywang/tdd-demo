@@ -14,7 +14,7 @@ const WhatIsNotTDDSlide = () => {
     {
       myth: "TDD is just a synonym for writing tests",
       reality: "TDD is a design methodology",
-      explanation: "TDD uses tests to drive the design of your code. It's about the process and mindset, not just having tests.",
+      explanation: "TDD uses tests to drive the design of your production code. It's about the process and mindset, not just having tests.",
       icon: "🧪"
     },
     {

@@ -836,7 +836,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
       {
         title: "Test Sustainability",
         icon: "🔧",
-        color: "bg-gradient-to-br from-[#50DCE1] to-cyan-500",
+        color: "bg-gradient-to-br from-slate-700 to-slate-800",
         problem: "Tests become another codebase that needs constant maintenance",
         impact: "Changing requirements means updating both code AND tests",
         detail: "Brittle tests break frequently. Refactoring becomes expensive when tests are tightly coupled to implementation.",
@@ -856,7 +856,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
       {
         title: "Legacy Code Handling",
         icon: "🏚️",
-        color: "bg-gradient-to-br from-[#50DCE1] to-slate-500",
+        color: "bg-gradient-to-br from-slate-600 to-slate-700",
         problem: "Extremely difficult to apply TDD to existing untested codebases",
         impact: "Requires extensive refactoring before TDD can be effective",
         detail: "Tightly coupled legacy code resists testing. Dependencies are hard to mock. Existing architecture fights TDD.",
