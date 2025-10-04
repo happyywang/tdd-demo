@@ -1091,14 +1091,14 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
         icon: "🐛",
         color: "bg-gradient-to-br from-[#50DCE1] to-cyan-500",
         description: "When tests fail, you know exactly what broke",
-        detail: "Pinpoint issues to specific functions/methods. Less time spent in debugger hunting for problems"
+        detail: "Pinpoint issues to specific behavior. Less time spent hunting for problems"
       },
       {
         title: "Living Documentation",
         icon: "📚",
         color: "bg-gradient-to-br from-[#50DCE1] to-slate-500",
-        description: "Tests show exactly how your code should work",
-        detail: "New team members can read tests to understand system behavior and expectations"
+        description: "Tests show exactly what the system should behave",
+        detail: "Tests evolve with the product and always stay current as features change"
       }
     ];
 
@@ -1136,8 +1136,8 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
 
           <div className={`${current.color} p-8 rounded-2xl mb-6 text-center flex-1 flex flex-col justify-center`}>
             <div className="text-6xl mb-4">{current.icon}</div>
-            <h3 className="text-3xl font-bold mb-4">{current.title}</h3>
-            <p className="text-xl mb-4 italic">"{current.description}"</p>
+            <h3 className={`text-3xl font-bold mb-4 ${current.title === 'Faster Debugging' || current.title === 'Fast Feedback Loop' || current.title === 'Living Documentation' ? 'text-black' : ''}`}>{current.title}</h3>
+            <p className={`text-xl mb-4 italic ${current.title === 'Faster Debugging' || current.title === 'Fast Feedback Loop' || current.title === 'Living Documentation' ? 'text-black' : ''}`}>"{current.description}"</p>
             <div className="bg-black bg-opacity-30 p-4 rounded-lg">
               <p className="text-lg">{current.detail}</p>
             </div>
