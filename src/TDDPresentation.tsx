@@ -824,24 +824,34 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
 
     const challenges = [
       {
+        title: "Unclear or Unstable Requirements",
+        icon: "🔧",
+        color: "bg-gradient-to-br from-slate-700 to-slate-800",
+        problem: "TDD relies on precise, testable specifications.",
+        impact: "Teams either skip the TDD cycle or waste time rewriting tests after each requirement change.",
+        detail: "If requirements are vague or frequently changing, it's hard to define \"the failing test\".",
+        mitigation: "Collaborate closely with product owners to clarify expected behaviors before writing tests",
+        practicalTip: "Use short example-based discussions (\"Given–When–Then\") to turn vague requirements into concrete test cases."
+      },
+      {
         title: "Mindset Shift",
         icon: "🧠",
         color: "bg-gradient-to-br from-slate-700 to-slate-800",
         problem: "Requires fundamental change from 'code first' to 'test first' thinking",
         impact: "Developers feel slower and uncomfortable initially",
         detail: "Years of 'write code then test' habits are hard to break. Feels unnatural and counterintuitive at first.",
-        mitigation: "Gradual adoption, pair programming",
-        practicalTip: "Set 2–3 month adaptation period; use katas & retrospectives"
+        mitigation: "Gradual adoption, promote a test-first culture through pair programming.",
+        practicalTip: "Begin each feature by writing one small failing test before implementing any code."
       },
       {
-        title: "Test Sustainability",
-        icon: "🔧",
-        color: "bg-gradient-to-br from-slate-700 to-slate-800",
-        problem: "Tests become another codebase that needs constant maintenance",
-        impact: "Changing requirements means updating both code AND tests",
-        detail: "Brittle tests break frequently. Refactoring becomes expensive when tests are tightly coupled to implementation.",
-        mitigation: "Prioritize behavior, refactor tests often",
-        practicalTip: "Test public interfaces; treat test code as production code"
+        title: "Writing High-Quality, Behavior-Focused Tests",
+        icon: "🎯",
+        color: "bg-gradient-to-br from-slate-800 to-slate-700",
+        problem: "TDD requires more than just having tests — it demands tests that express business intent, boundaries, and expected behavior.",
+        impact: "Poorly written tests fail to guide design and reduce TDD's real value.",
+        detail: "Many existing tests verify internal logic or code paths rather than user-facing outcomes.",
+        mitigation: "Focus tests on observable business outcomes rather than internal logic.",
+        practicalTip: "Use expressive test names and scenarios to describe business intent, not technical details."
       },
       {
         title: "Initial Slowdown",
@@ -850,38 +860,8 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
         problem: "15-35% longer development time initially (research confirmed)",
         impact: "Pressure from management and tight deadlines create resistance",
         detail: "Writing tests first feels like doing double work. Team velocity appears to drop in early sprints.",
-        mitigation: "Explain long-term ROI, show metrics",
-        practicalTip: "Compare defect rates, debugging hours, and maintenance costs"
-      },
-      {
-        title: "Legacy Code Handling",
-        icon: "🏚️",
-        color: "bg-gradient-to-br from-slate-600 to-slate-700",
-        problem: "Extremely difficult to apply TDD to existing untested codebases",
-        impact: "Requires extensive refactoring before TDD can be effective",
-        detail: "Tightly coupled legacy code resists testing. Dependencies are hard to mock. Existing architecture fights TDD.",
-        mitigation: "Apply TDD to new code; create seams",
-        practicalTip: "Use characterization tests; tackle legacy incrementally"
-      },
-      {
-        title: "Over-testing",
-        icon: "🎯",
-        color: "bg-gradient-to-br from-slate-800 to-slate-700",
-        problem: "Tendency to test implementation details rather than behavior",
-        impact: "Creates fragile test suites that break with every refactor",
-        detail: "Developers often write too many low-level tests. Mock-heavy tests become maintenance nightmares.",
-        mitigation: "Follow the test pyramid, avoid trivial tests",
-        practicalTip: "Integration for workflows, unit tests for core logic"
-      },
-      {
-        title: "Tooling Overhead",
-        icon: "⚙️",
-        color: "bg-gradient-to-br from-slate-700 to-slate-600",
-        problem: "Requires investment in testing frameworks, CI/CD, and tooling",
-        impact: "Additional complexity in build pipelines and development environment",
-        detail: "Test runners, mocking frameworks, test databases. Slow test suites impact developer productivity.",
-        mitigation: "Invest in fast automation & CI/CD",
-        practicalTip: "Parallelize tests; Run test by category"
+        mitigation: "Set realistic expectations: TDD feels slower initially but accelerates long-term quality and refactoring.",
+        practicalTip: "Compare defect rates, debugging hours, and maintenance costs."
       }
     ];
 
@@ -942,7 +922,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
 
     const renderMitigationView = () => {
       return (
-        <div className="h-full flex flex-col justify-center">
+        <div className="h-full flex flex-col justify-start pt-4">
           <div className="max-w-7xl mx-auto w-full">
 
             <div className="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden">
@@ -985,43 +965,6 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
       );
     };
 
-    const renderRealityView = () => (
-      <div className="h-full flex flex-col justify-center">
-
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
-          <div className="bg-slate-800 bg-opacity-50 border border-red-500/30 p-6 rounded-xl">
-            <h3 className="text-xl font-bold mb-4 text-red-400">❌ TDD is NOT for everyone</h3>
-            <ul className="space-y-2 text-base">
-              <li>• Tight deadline projects with no long-term maintenance</li>
-              <li>• Prototyping and throw-away code</li>
-              <li>• Teams unwilling to invest in learning</li>
-              <li>• Heavily UI-focused applications</li>
-              <li>• Organizations that don't value code quality</li>
-            </ul>
-          </div>
-
-          <div className="bg-gradient-to-br from-[#50DCE1] to-cyan-500 p-6 rounded-xl">
-            <h3 className="text-xl font-bold mb-4 text-black">✅ TDD works best when</h3>
-            <ul className="space-y-2 text-base text-black font-semibold">
-              <li>• Long-term maintenance is expected</li>
-              <li>• Team commits to learning period</li>
-              <li>• Business logic complexity is high</li>
-              <li>• Refactoring happens frequently</li>
-              <li>• Quality is prioritized over speed</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="text-center">
-          <div className="bg-slate-800 bg-opacity-50 border border-[#50DCE1]/50 p-4 rounded-lg inline-block">
-            <h4 className="text-lg font-bold text-[#50DCE1] mb-2">🎯 Key Success Factors</h4>
-            <p className="text-base text-gray-200">
-              Management support • Realistic timeline • Gradual adoption • Team commitment • Proper training
-            </p>
-          </div>
-        </div>
-      </div>
-    );
 
     return (
       <div className="h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
@@ -1033,8 +976,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
           <div className="flex justify-center space-x-2 mt-6">
             {[
               { key: 'challenges', label: '⚠️ Challenges', color: 'bg-[#50DCE1]' },
-              { key: 'mitigation', label: '💡 Solutions', color: 'bg-[#50DCE1]' },
-              { key: 'reality', label: '🎯 Reality Check', color: 'bg-[#50DCE1]' }
+              { key: 'mitigation', label: '💡 Solutions', color: 'bg-[#50DCE1]' }
             ].map(view => (
               <button
                 key={view.key}
@@ -1055,7 +997,6 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
         <div className="flex-1">
           {currentView === 'challenges' && renderChallengesView()}
           {currentView === 'mitigation' && renderMitigationView()}
-          {currentView === 'reality' && renderRealityView()}
         </div>
       </div>
     );
