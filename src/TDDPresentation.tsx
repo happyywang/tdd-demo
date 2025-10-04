@@ -1207,37 +1207,6 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
       </div>
     );
 
-    const renderComparisonView = () => (
-      <div className="h-full flex flex-col justify-center">
-        <div className="text-center mb-8">
-          <h2 className="text-4xl font-bold mb-4 leading-tight text-[#50DCE1]">The TDD Investment</h2>
-          <p className="text-lg text-gray-300">Short-term cost, long-term gain</p>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-slate-800 bg-opacity-50 border border-red-500/30 p-6 rounded-xl">
-            <h3 className="text-2xl font-bold mb-4 text-red-400">⏳ Initial Cost</h3>
-            <ul className="space-y-3 text-lg">
-              <li>📈 15-35% longer initial development</li>
-              <li>🧠 Learning curve for team</li>
-              <li>⚡ Slower start on new features</li>
-            </ul>
-          </div>
-
-          <div className="bg-gradient-to-br from-[#50DCE1] to-cyan-500 p-6 rounded-xl">
-            <h3 className="text-2xl font-bold mb-4 text-black">🎯 Long-term Gains</h3>
-            <ul className="space-y-3 text-lg text-black font-semibold">
-              <li>🐛 40-91% fewer defects</li>
-              <li>🚀 Faster feature delivery later</li>
-              <li>😌 Less debugging stress</li>
-              <li>🔄 Easier refactoring</li>
-              <li>👥 Better team confidence</li>
-            </ul>
-          </div>
-        </div>
-
-      </div>
-    );
 
     return (
       <div className="h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
@@ -1248,8 +1217,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
           <div className="flex justify-center space-x-2 mb-6">
             {[
               { key: 'daily', label: '👨‍💻 Daily Benefits', color: 'bg-[#50DCE1]' },
-              { key: 'research', label: '📊 Research Data', color: 'bg-[#50DCE1]' },
-              { key: 'comparison', label: '⚖️ Cost vs Benefit', color: 'bg-[#50DCE1]' }
+              { key: 'research', label: '📊 Research Data', color: 'bg-[#50DCE1]' }
             ].map(view => (
               <button
                 key={view.key}
@@ -1270,7 +1238,6 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
         <div className="flex-1">
           {currentView === 'daily' && renderDailyView()}
           {currentView === 'research' && renderResearchView()}
-          {currentView === 'comparison' && renderComparisonView()}
         </div>
       </div>
     );
