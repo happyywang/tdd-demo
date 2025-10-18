@@ -9,11 +9,15 @@ import AnimatedPingPong from './components/slides/AnimatedPingPong';
 import TDDCycleSlide from './components/slides/TDDCycleSlide';
 import WhatToTestWithTDDSlide from './components/slides/WhatToTestWithTDDSlide';
 import WhatIsNotTDDSlide from './components/slides/WhatIsNotTDDSlide';
+import { bankAccountDemoSteps } from './bankAccountDemoSteps';
 
 // All TypeScript interfaces moved to types.ts
 
-// Demo Steps Data
-const demoSteps: DemoStep[] = [
+// Demo Steps Data (replaced with Bank Account demo)
+const demoSteps: DemoStep[] = bankAccountDemoSteps;
+
+// Old FizzBuzz demo steps (commented out for reference)
+const oldFizzBuzzDemoSteps: DemoStep[] = [
   {
     title: "Step 1: Think - Plan Test Scenarios 🧠",
     description: "Before writing any tests, let's think about what test scenarios we need for FizzBuzz. This upfront planning helps us understand the full scope.",

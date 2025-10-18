@@ -124,7 +124,7 @@ const DemoSlide = memo(({ demoSteps }: DemoSlideProps) => {
       {/* Header */}
       <div className={`text-center ${SPACING.MARGIN_B.LG}`}>
         <h1 className={`${TYPOGRAPHY.SIZES['3XL']} ${TYPOGRAPHY.WEIGHTS.BOLD} ${SPACING.MARGIN_B.SM} ${COLORS.TEXT.PRIMARY}`}>
-          Building FizzBuzz with TDD
+          Building a Bank Account System with TDD
         </h1>
         
         {/* Quick Jump Buttons */}
