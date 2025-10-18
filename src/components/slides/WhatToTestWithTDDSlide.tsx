@@ -6,6 +6,118 @@ interface Section {
   icon: string;
 }
 
+// Simple C# syntax highlighter component
+const CSharpCode = ({ code }: { code: string }) => {
+  const highlightSyntax = (text: string) => {
+    const keywords = [
+      'using', 'namespace', 'public', 'private', 'class', 'void', 'var', 'new', 'return',
+      'if', 'else', 'for', 'while', 'foreach', 'static', 'const', 'readonly'
+    ];
+    const attributes = ['TestClass', 'TestMethod'];
+
+    // Split by lines
+    const lines = text.split('\n');
+
+    return lines.map((line, lineIndex) => {
+      const parts: JSX.Element[] = [];
+      let remaining = line;
+      let partIndex = 0;
+
+      // Check for comments
+      if (remaining.trim().startsWith('//')) {
+        return (
+          <div key={lineIndex}>
+            <span className="text-gray-500">{line}</span>
+          </div>
+        );
+      }
+
+      // Check for attributes
+      if (remaining.trim().startsWith('[')) {
+        const attrMatch = remaining.match(/\[(\w+)\]/);
+        if (attrMatch) {
+          return (
+            <div key={lineIndex}>
+              <span className="text-cyan-400">{line}</span>
+            </div>
+          );
+        }
+      }
+
+      // Highlight keywords, strings, and types
+      let lastIndex = 0;
+      const tokens: { start: number; end: number; type: string; text: string }[] = [];
+
+      // Find strings
+      const stringRegex = /"([^"]*)"/g;
+      let match;
+      while ((match = stringRegex.exec(line)) !== null) {
+        tokens.push({ start: match.index, end: match.index + match[0].length, type: 'string', text: match[0] });
+      }
+
+      // Find keywords
+      keywords.forEach(keyword => {
+        const regex = new RegExp(`\\b${keyword}\\b`, 'g');
+        while ((match = regex.exec(line)) !== null) {
+          tokens.push({ start: match.index, end: match.index + keyword.length, type: 'keyword', text: keyword });
+        }
+      });
+
+      // Find numbers
+      const numberRegex = /\b\d+m?\b/g;
+      while ((match = numberRegex.exec(line)) !== null) {
+        tokens.push({ start: match.index, end: match.index + match[0].length, type: 'number', text: match[0] });
+      }
+
+      // Sort tokens by position
+      tokens.sort((a, b) => a.start - b.start);
+
+      // Remove overlapping tokens
+      const validTokens = tokens.filter((token, index) => {
+        if (index === 0) return true;
+        return token.start >= tokens[index - 1].end;
+      });
+
+      // Build highlighted line
+      let currentPos = 0;
+      const highlightedParts: JSX.Element[] = [];
+
+      validTokens.forEach((token, idx) => {
+        // Add text before token
+        if (token.start > currentPos) {
+          highlightedParts.push(
+            <span key={`text-${idx}`}>{line.substring(currentPos, token.start)}</span>
+          );
+        }
+
+        // Add highlighted token
+        const colorClass =
+          token.type === 'keyword' ? 'text-purple-400' :
+          token.type === 'string' ? 'text-green-400' :
+          token.type === 'number' ? 'text-orange-400' :
+          '';
+
+        highlightedParts.push(
+          <span key={`token-${idx}`} className={colorClass}>{token.text}</span>
+        );
+
+        currentPos = token.end;
+      });
+
+      // Add remaining text
+      if (currentPos < line.length) {
+        highlightedParts.push(
+          <span key="remaining">{line.substring(currentPos)}</span>
+        );
+      }
+
+      return <div key={lineIndex}>{highlightedParts.length > 0 ? highlightedParts : line}</div>;
+    });
+  };
+
+  return <>{highlightSyntax(code)}</>;
+};
+
 const WhatToTestWithTDDSlide = () => {
   const [currentSection, setCurrentSection] = useState(0);
 
@@ -276,7 +388,7 @@ const QuestionCard = ({
 );
 
 const ComparisonSection = () => (
-  <div className="w-full flex flex-col justify-center">
+  <div className="w-full flex flex-col justify-center space-y-8">
     <div className="max-w-6xl mx-auto">
 
       <div className="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden">
@@ -298,10 +410,19 @@ const ComparisonSection = () => (
           <tr className="border-b border-gray-700 hover:bg-gray-750">
             <td className="px-6 py-4 font-semibold text-white">Focus</td>
             <td className="px-6 py-4 text-gray-300">
-              Specification of behavior (what the system should do)
+              Observable behavior and business rules (what the system should do)
             </td>
             <td className="px-6 py-4 text-gray-300">
-              Verification of implementation correctness (how the system does it)
+              Implementation correctness and internal logic (how the system does it)
+            </td>
+          </tr>
+          <tr className="border-b border-gray-700 hover:bg-gray-750">
+            <td className="px-6 py-4 font-semibold text-white">Naming</td>
+            <td className="px-6 py-4 text-gray-300">
+              Describe behavior or requirements (e.g., Should_X_When_Y)
+            </td>
+            <td className="px-6 py-4 text-gray-300">
+              Describe methods or logic (e.g., TestMethod_XYZ)
             </td>
           </tr>
           <tr className="border-b border-gray-700 hover:bg-gray-750">
@@ -314,34 +435,132 @@ const ComparisonSection = () => (
             </td>
           </tr>
           <tr className="border-b border-gray-700 hover:bg-gray-750">
-            <td className="px-6 py-4 font-semibold text-white">Coupling</td>
+            <td className="px-6 py-4 font-semibold text-white">Dependency</td>
             <td className="px-6 py-4 text-gray-300">
-              Loosely coupled to code internals (black-box style)
+              Only public interfaces (black-box style)
             </td>
             <td className="px-6 py-4 text-gray-300">
-              Often white-box, might check private state or call counts
-            </td>
-          </tr>
-          <tr className="border-b border-gray-700 hover:bg-gray-750">
-            <td className="px-6 py-4 font-semibold text-white">Coverage</td>
-            <td className="px-6 py-4 text-gray-300">
-              Systematic behavioral coverage – tends to cover edge cases and intended use since tests are written first
-            </td>
-            <td className="px-6 py-4 text-gray-300">
-              Variable coverage – can miss behaviors or edge cases; depends on developer discipline
+              Often white-box, internal details
             </td>
           </tr>
           <tr className="hover:bg-gray-750">
-            <td className="px-6 py-4 font-semibold text-white">Evolution</td>
+            <td className="px-6 py-4 font-semibold text-white">Readability</td>
             <td className="px-6 py-4 text-gray-300">
-              Refactored along with code, kept minimal
+              Like specifications ("what should happen")
             </td>
             <td className="px-6 py-4 text-gray-300">
-              Often grows in size, can get brittle over time
+              Like verifications ("does this code return the right value")
             </td>
           </tr>
         </tbody>
       </table>
+      </div>
+    </div>
+
+    {/* Code Comparison Section */}
+    <div className="max-w-7xl mx-auto w-full">
+      <h3 className="text-2xl font-bold text-[#50DCE1] mb-6 text-center">
+        💡 Code Example: Discount Calculator
+      </h3>
+
+      <div className="grid md:grid-cols-2 gap-6">
+        {/* TDD-Style Test Code */}
+        <section className="bg-gray-800 rounded-xl p-6 shadow-lg">
+          <h4 className="text-lg font-bold mb-4 text-green-400">
+            TDD-Style Test
+          </h4>
+          <div
+            className="bg-black p-4 rounded-lg overflow-auto font-mono text-sm text-gray-300"
+            style={{
+              minHeight: '350px',
+              maxHeight: '500px'
+            }}
+          >
+            <pre className="whitespace-pre-wrap">
+              <code><CSharpCode code={`using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+[TestClass]
+public class DiscountCalculatorTests
+{
+    [TestMethod]
+    public void Should_ApplyTenPercentDiscount_When_AmountIs100OrMore()
+    {
+        // Arrange
+        var calculator = new DiscountCalculator();
+
+        // Act
+        var result = calculator.Calculate(120);
+
+        // Assert
+        Assert.AreEqual(108m, result);
+    }
+
+    [TestMethod]
+    public void Should_NotApplyDiscount_When_AmountIsBelow100()
+    {
+        // Arrange
+        var calculator = new DiscountCalculator();
+
+        // Act
+        var result = calculator.Calculate(80);
+
+        // Assert
+        Assert.AreEqual(80m, result);
+    }
+}`} /></code>
+            </pre>
+          </div>
+        </section>
+
+        {/* Traditional Unit Test Code */}
+        <section className="bg-gray-800 rounded-xl p-6 shadow-lg">
+          <h4 className="text-lg font-bold mb-4 text-yellow-400">
+            Traditional Unit Test
+          </h4>
+          <div
+            className="bg-black p-4 rounded-lg overflow-auto font-mono text-sm text-gray-300"
+            style={{
+              minHeight: '350px',
+              maxHeight: '500px'
+            }}
+          >
+            <pre className="whitespace-pre-wrap">
+              <code><CSharpCode code={`using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+[TestClass]
+public class DiscountCalculatorTests
+{
+    [TestMethod]
+    public void Calculate_ReturnsCorrectValues_ForVariousInputs()
+    {
+        // Arrange
+        var calculator = new DiscountCalculator();
+
+        // Act
+        var result1 = calculator.Calculate(120);
+        var result2 = calculator.Calculate(80);
+
+        // Assert
+        Assert.AreEqual(108m, result1);
+        Assert.AreEqual(80m, result2);
+    }
+
+    [TestMethod]
+    public void Calculate_UsesTenPercentDiscountFormula()
+    {
+        // Arrange
+        var calculator = new DiscountCalculator();
+
+        // Act
+        var result = calculator.Calculate(200);
+
+        // Assert
+        Assert.AreEqual(180m, result);
+    }
+}`} /></code>
+            </pre>
+          </div>
+        </section>
       </div>
     </div>
   </div>
