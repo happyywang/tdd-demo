@@ -9,57 +9,33 @@ import AnimatedPingPong from './components/slides/AnimatedPingPong';
 import TDDCycleSlide from './components/slides/TDDCycleSlide';
 import WhatToTestWithTDDSlide from './components/slides/WhatToTestWithTDDSlide';
 import WhatIsNotTDDSlide from './components/slides/WhatIsNotTDDSlide';
-import { bankAccountDemoSteps } from './bankAccountDemoSteps';
 
 // All TypeScript interfaces moved to types.ts
 
-// Demo Steps Data (replaced with Bank Account demo)
-const demoSteps: DemoStep[] = bankAccountDemoSteps;
-
-// Old FizzBuzz demo steps (commented out for reference)
-const oldFizzBuzzDemoSteps: DemoStep[] = [
+// Demo Steps Data
+const demoSteps: DemoStep[] = [
   {
-    title: "Step 1: Think - Plan Test Scenarios 🧠",
-    description: "Before writing any tests, let's think about what test scenarios we need for FizzBuzz. This upfront planning helps us understand the full scope.",
+    title: "Step 1: Think - Deposit (The simplest possible behavior) 🧠",
+    description: "The client needs a bank account that can accept deposits. If the client deposits 100, the balance should become 100. Smallest possible test case - no need to think about withdraw or limits yet.",
     phase: "think",
     testScenarios: [
       {
-        id: "regular",
-        description: "Regular numbers → return as string",
-        examples: "(1, 2, 4)",
-        isCompleted: false
-      },
-      {
-        id: "fizz",
-        description: "Divisible by 3 → return \"Fizz\"",
-        examples: "(3, 6, 9)",
-        isCompleted: false
-      },
-      {
-        id: "buzz",
-        description: "Divisible by 5 → return \"Buzz\"",
-        examples: "(5, 10, 20)",
-        isCompleted: false
-      },
-      {
-        id: "fizzbuzz",
-        description: "Divisible by 3 and 5 → return \"FizzBuzz\"",
-        examples: "(15, 30)",
+        id: "deposit",
+        description: "Deposit money → balance increases",
+        examples: "Deposit(100) → Balance = 100",
         isCompleted: false
       }
     ],
     productionGoals: [
-      "FizzBuzz.Convert(int input)",
-      "Handles all four scenarios above",
-      "Clean, readable, minimal code"
+      "BankAccount class with Balance property",
+      "Deposit(decimal amount) method",
+      "Balance tracks total deposits"
     ],
-    allTestsCode: `// We'll implement these scenarios one at a time using Red-Green cycles:
-// 1. Regular numbers first
-// 2. Then Fizz logic
-// 3. Then Buzz logic
-// 4. Finally FizzBuzz logic`,
-    productionCode: `// Goal: Build a simple, clean FizzBuzz converter
-// Starting with no code - we'll grow it step by step`,
+    allTestsCode: `// Starting with the simplest behavior:
+// - Deposit money into account
+// - Check balance reflects the deposit`,
+    productionCode: `// Goal: Build a simple bank account system
+// Starting with deposit functionality - the most basic operation`,
     testResults: [],
     testStats: { total: 0, passed: 0, failed: 0 }
   },
@@ -1351,6 +1327,904 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
       );
     };
 
+    const demoSteps: DemoStep[] = [
+      {
+        title: "Step 1: Think - Deposit (The simplest possible behavior) 🧠",
+        description: "",
+        phase: "think",
+        testScenarios: [
+          {
+            id: "deposit",
+            description: "Deposit money → balance increases",
+            examples: "Deposit(100) → Balance = 100",
+            isCompleted: false
+          }
+        ],
+        productionGoals: [
+          "The client needs a bank account that can accept deposits",
+          "If the client deposits 100, the balance should become 100",
+          "Smallest possible test case - no need to think about withdraw or limits yet"
+        ],
+        allTestsCode: `// Starting with the simplest behavior:
+// - Deposit money into account
+// - Check balance reflects the deposit`,
+        productionCode: `// Goal: Build a simple bank account system
+// Starting with deposit functionality - the most basic operation`,
+        testResults: [],
+        testStats: { total: 0, passed: 0, failed: 0 }
+      },
+      {
+        title: "Step 2: Red - Write the failing test 🔴",
+        description: "Write a test for deposit functionality. This test will fail because the BankAccount class and Deposit method don't exist yet.",
+        phase: "red",
+        allTestsCode: `[TestClass]
+public class BankAccountTests
+{
+    [TestMethod]
+    public void Deposit_ShouldIncreaseBalance()
+    {
+        var account = new BankAccount();
+        account.Deposit(100m);
+        Assert.AreEqual(100m, account.Balance);
+    }
+}`,
+        productionCode: `// BankAccount.cs
+public class BankAccount
+{
+    // No method yet!
+}`,
+        testResults: [
+          { name: "Deposit_ShouldIncreaseBalance", status: "fail", message: "'BankAccount' does not contain a definition for 'Deposit'" }
+        ],
+        testStats: { total: 1, passed: 0, failed: 1 }
+      },
+      {
+        title: "Step 3: Green - Implement just enough to pass 🟢",
+        description: "Write the minimum code to make the test pass. Add the Deposit method and Balance property.",
+        phase: "green",
+        allTestsCode: `[TestClass]
+public class BankAccountTests
+{
+    [TestMethod]
+    public void Deposit_ShouldIncreaseBalance()
+    {
+        var account = new BankAccount();
+        account.Deposit(100m);
+        Assert.AreEqual(100m, account.Balance);
+    }
+}`,
+        productionCode: `// BankAccount.cs
+public class BankAccount
+{
+    public decimal Balance { get; private set; }
+
+    public void Deposit(decimal amount)
+    {
+        Balance += amount;
+    }
+}`,
+        testResults: [
+          { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" }
+        ],
+        testStats: { total: 1, passed: 1, failed: 0 }
+      },
+      {
+        title: "Step 4: Refactor 🔵",
+        description: "The design is still clean and minimal. No refactor needed yet, but we've established our first working unit.",
+        phase: "refactor",
+        allTestsCode: `[TestClass]
+public class BankAccountTests
+{
+    [TestMethod]
+    public void Deposit_ShouldIncreaseBalance()
+    {
+        var account = new BankAccount();
+        account.Deposit(100m);
+        Assert.AreEqual(100m, account.Balance);
+    }
+}`,
+        productionCode: `// BankAccount.cs
+public class BankAccount
+{
+    public decimal Balance { get; private set; }
+
+    public void Deposit(decimal amount)
+    {
+        Balance += amount;
+    }
+}`,
+        testResults: [
+          { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" }
+        ],
+        testStats: { total: 1, passed: 1, failed: 0 }
+      },
+      {
+        title: "Step 5: Think - Withdraw (The next simplest possible behavior) 🧠",
+        description: "",
+        phase: "think",
+        testScenarios: [
+          {
+            id: "withdraw",
+            description: "Withdraw money → balance decreases",
+            examples: "Deposit(100), Withdraw(40) → Balance = 60",
+            isCompleted: false
+          }
+        ],
+        productionGoals: [
+          "Now the account should allow withdrawals",
+          "If client deposits 100 and withdraws 40, the balance should be 60",
+          "That's a new behavior — time for a new test"
+        ],
+        allTestsCode: `// Adding withdrawal capability:
+// - Withdraw money from account
+// - Balance should decrease accordingly`,
+        productionCode: `// BankAccount.cs - Current implementation
+public class BankAccount
+{
+    public decimal Balance { get; private set; }
+
+    public void Deposit(decimal amount)
+    {
+        Balance += amount;
+    }
+
+    // Need to add Withdraw method
+}`,
+        testResults: [
+          { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" }
+        ],
+        testStats: { total: 1, passed: 1, failed: 0 }
+      },
+      {
+        title: "Step 6: Red - Writing another failing test 🔴",
+        description: "Add a test for withdraw functionality. This test will fail because the Withdraw method doesn't exist yet.",
+        phase: "red",
+        allTestsCode: `[TestClass]
+public class BankAccountTests
+{
+    [TestMethod]
+    public void Deposit_ShouldIncreaseBalance()
+    {
+        var account = new BankAccount();
+        account.Deposit(100m);
+        Assert.AreEqual(100m, account.Balance);
+    }
+
+    [TestMethod]
+    public void Withdraw_ShouldDecreaseBalance()
+    {
+        var account = new BankAccount();
+        account.Deposit(100m);
+        account.Withdraw(40m);
+        Assert.AreEqual(60m, account.Balance);
+    }
+}`,
+        productionCode: `// BankAccount.cs - current implementation
+public class BankAccount
+{
+    public decimal Balance { get; private set; }
+
+    public void Deposit(decimal amount)
+    {
+        Balance += amount;
+    }
+
+    // No Withdraw method yet!
+}`,
+        testResults: [
+          { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" },
+          { name: "Withdraw_ShouldDecreaseBalance", status: "fail", message: "'BankAccount' does not contain a definition for 'Withdraw'" }
+        ],
+        testStats: { total: 2, passed: 1, failed: 1 }
+      },
+      {
+        title: "Step 7: Green - Implement Withdraw 🟢",
+        description: "Add the Withdraw method to make both tests pass. Keep it simple.",
+        phase: "green",
+        allTestsCode: `[TestClass]
+public class BankAccountTests
+{
+    [TestMethod]
+    public void Deposit_ShouldIncreaseBalance()
+    {
+        var account = new BankAccount();
+        account.Deposit(100m);
+        Assert.AreEqual(100m, account.Balance);
+    }
+
+    [TestMethod]
+    public void Withdraw_ShouldDecreaseBalance()
+    {
+        var account = new BankAccount();
+        account.Deposit(100m);
+        account.Withdraw(40m);
+        Assert.AreEqual(60m, account.Balance);
+    }
+}`,
+        productionCode: `// BankAccount.cs
+public class BankAccount
+{
+    public decimal Balance { get; private set; }
+
+    public void Deposit(decimal amount)
+    {
+        Balance += amount;
+    }
+
+    public void Withdraw(decimal amount)
+    {
+        Balance -= amount;
+    }
+}`,
+        testResults: [
+          { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" },
+          { name: "Withdraw_ShouldDecreaseBalance", status: "pass", message: "✓ Test passed" }
+        ],
+        testStats: { total: 2, passed: 2, failed: 0 }
+      },
+      {
+        title: "Step 8: Refactor 🔵",
+        description: "Deposit and Withdraw both manipulate the balance. Let's prevent invalid inputs (negative amounts).",
+        phase: "refactor",
+        allTestsCode: `[TestClass]
+public class BankAccountTests
+{
+    [TestMethod]
+    public void Deposit_ShouldIncreaseBalance()
+    {
+        var account = new BankAccount();
+        account.Deposit(100m);
+        Assert.AreEqual(100m, account.Balance);
+    }
+
+    [TestMethod]
+    public void Withdraw_ShouldDecreaseBalance()
+    {
+        var account = new BankAccount();
+        account.Deposit(100m);
+        account.Withdraw(40m);
+        Assert.AreEqual(60m, account.Balance);
+    }
+}`,
+        productionCode: `// BankAccount.cs - Refactored with validation
+public class BankAccount
+{
+    public decimal Balance { get; private set; }
+
+    public void Deposit(decimal amount)
+    {
+        if (amount <= 0)
+            throw new ArgumentException("Deposit must be positive");
+        Balance += amount;
+    }
+
+    public void Withdraw(decimal amount)
+    {
+        if (amount <= 0)
+            throw new ArgumentException("Withdraw must be positive");
+        Balance -= amount;
+    }
+}`,
+        testResults: [
+          { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" },
+          { name: "Withdraw_ShouldDecreaseBalance", status: "pass", message: "✓ Test passed" }
+        ],
+        testStats: { total: 2, passed: 2, failed: 0 }
+      },
+      {
+        title: "Step 9: Think - Prevent Overdraw 🧠",
+        description: "",
+        phase: "think",
+        testScenarios: [
+          {
+            id: "overdraw",
+            description: "Withdraw more than balance → throw exception",
+            examples: "Balance = 50, Withdraw(100) → Exception",
+            isCompleted: false
+          }
+        ],
+        productionGoals: [
+          "A real bank doesn't allow overdrawing",
+          "If client tries to withdraw more than the balance, an exception should be thrown"
+        ],
+        allTestsCode: `// Adding overdraw protection:
+// - Check if withdraw amount exceeds balance
+// - Throw exception if insufficient funds`,
+        productionCode: `// BankAccount.cs - Current implementation
+public class BankAccount
+{
+    public decimal Balance { get; private set; }
+
+    public void Deposit(decimal amount)
+    {
+        if (amount <= 0)
+            throw new ArgumentException("Deposit must be positive");
+        Balance += amount;
+    }
+
+    public void Withdraw(decimal amount)
+    {
+        if (amount <= 0)
+            throw new ArgumentException("Withdraw must be positive");
+        Balance -= amount;
+        // Need to add overdraw protection
+    }
+}`,
+        testResults: [
+          { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" },
+          { name: "Withdraw_ShouldDecreaseBalance", status: "pass", message: "✓ Test passed" }
+        ],
+        testStats: { total: 2, passed: 2, failed: 0 }
+      },
+      {
+        title: "Step 10: Red - Test for overdraw protection 🔴",
+        description: "Add a test that expects an exception when withdrawing more than the balance. This test will fail because we don't have overdraw protection yet.",
+        phase: "red",
+        allTestsCode: `[TestClass]
+public class BankAccountTests
+{
+    [TestMethod]
+    public void Deposit_ShouldIncreaseBalance()
+    {
+        var account = new BankAccount();
+        account.Deposit(100m);
+        Assert.AreEqual(100m, account.Balance);
+    }
+
+    [TestMethod]
+    public void Withdraw_ShouldDecreaseBalance()
+    {
+        var account = new BankAccount();
+        account.Deposit(100m);
+        account.Withdraw(40m);
+        Assert.AreEqual(60m, account.Balance);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(InvalidOperationException))]
+    public void Withdraw_ShouldThrow_WhenInsufficientBalance()
+    {
+        var account = new BankAccount();
+        account.Deposit(50m);
+        account.Withdraw(100m);
+    }
+}`,
+        productionCode: `// BankAccount.cs - current implementation
+public class BankAccount
+{
+    public decimal Balance { get; private set; }
+
+    public void Deposit(decimal amount)
+    {
+        if (amount <= 0)
+            throw new ArgumentException("Deposit must be positive");
+        Balance += amount;
+    }
+
+    public void Withdraw(decimal amount)
+    {
+        if (amount <= 0)
+            throw new ArgumentException("Withdraw must be positive");
+        Balance -= amount;
+        // No overdraw check yet!
+    }
+}`,
+        testResults: [
+          { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" },
+          { name: "Withdraw_ShouldDecreaseBalance", status: "pass", message: "✓ Test passed" },
+          { name: "Withdraw_ShouldThrow_WhenInsufficientBalance", status: "fail", message: "Expected InvalidOperationException but no exception was thrown" }
+        ],
+        testStats: { total: 3, passed: 2, failed: 1 }
+      },
+      {
+        title: "Step 11: Green - Add overdraw protection 🟢",
+        description: "Add a balance check in the Withdraw method. Now all three tests pass.",
+        phase: "green",
+        allTestsCode: `[TestClass]
+public class BankAccountTests
+{
+    [TestMethod]
+    public void Deposit_ShouldIncreaseBalance()
+    {
+        var account = new BankAccount();
+        account.Deposit(100m);
+        Assert.AreEqual(100m, account.Balance);
+    }
+
+    [TestMethod]
+    public void Withdraw_ShouldDecreaseBalance()
+    {
+        var account = new BankAccount();
+        account.Deposit(100m);
+        account.Withdraw(40m);
+        Assert.AreEqual(60m, account.Balance);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(InvalidOperationException))]
+    public void Withdraw_ShouldThrow_WhenInsufficientBalance()
+    {
+        var account = new BankAccount();
+        account.Deposit(50m);
+        account.Withdraw(100m);
+    }
+}`,
+        productionCode: `// BankAccount.cs
+public class BankAccount
+{
+    public decimal Balance { get; private set; }
+
+    public void Deposit(decimal amount)
+    {
+        if (amount <= 0)
+            throw new ArgumentException("Deposit must be positive");
+        Balance += amount;
+    }
+
+    public void Withdraw(decimal amount)
+    {
+        if (amount <= 0)
+            throw new ArgumentException("Withdraw must be positive");
+        if (amount > Balance)
+            throw new InvalidOperationException("Insufficient funds");
+
+        Balance -= amount;
+    }
+}`,
+        testResults: [
+          { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" },
+          { name: "Withdraw_ShouldDecreaseBalance", status: "pass", message: "✓ Test passed" },
+          { name: "Withdraw_ShouldThrow_WhenInsufficientBalance", status: "pass", message: "✓ Test passed" }
+        ],
+        testStats: { total: 3, passed: 3, failed: 0 }
+      },
+      {
+        title: "Step 12: Refactor 🔵",
+        description: "Our validation logic is growing — time to extract helper methods.",
+        phase: "refactor",
+        allTestsCode: `[TestClass]
+public class BankAccountTests
+{
+    [TestMethod]
+    public void Deposit_ShouldIncreaseBalance()
+    {
+        var account = new BankAccount();
+        account.Deposit(100m);
+        Assert.AreEqual(100m, account.Balance);
+    }
+
+    [TestMethod]
+    public void Withdraw_ShouldDecreaseBalance()
+    {
+        var account = new BankAccount();
+        account.Deposit(100m);
+        account.Withdraw(40m);
+        Assert.AreEqual(60m, account.Balance);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(InvalidOperationException))]
+    public void Withdraw_ShouldThrow_WhenInsufficientBalance()
+    {
+        var account = new BankAccount();
+        account.Deposit(50m);
+        account.Withdraw(100m);
+    }
+}`,
+        productionCode: `// BankAccount.cs - Refactored with helper methods
+public class BankAccount
+{
+    public decimal Balance { get; private set; }
+
+    private void EnsurePositiveAmount(decimal amount)
+    {
+        if (amount <= 0)
+            throw new ArgumentException("Amount must be positive");
+    }
+
+    private void EnsureSufficientFunds(decimal amount)
+    {
+        if (amount > Balance)
+            throw new InvalidOperationException("Insufficient funds");
+    }
+
+    public void Deposit(decimal amount)
+    {
+        EnsurePositiveAmount(amount);
+        Balance += amount;
+    }
+
+    public void Withdraw(decimal amount)
+    {
+        EnsurePositiveAmount(amount);
+        EnsureSufficientFunds(amount);
+        Balance -= amount;
+    }
+}`,
+        testResults: [
+          { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" },
+          { name: "Withdraw_ShouldDecreaseBalance", status: "pass", message: "✓ Test passed" },
+          { name: "Withdraw_ShouldThrow_WhenInsufficientBalance", status: "pass", message: "✓ Test passed" }
+        ],
+        testStats: { total: 3, passed: 3, failed: 0 }
+      },
+      {
+        title: "Step 13: Think - Transfer with Fee 🧠",
+        description: "",
+        phase: "think",
+        testScenarios: [
+          {
+            id: "transfer",
+            description: "Transfer between accounts → deduct from source + fee, add to destination",
+            examples: "Deposit 100, then transfer 50 with 5 fee → Source: 45, Destination: 50",
+            isCompleted: false
+          }
+        ],
+        productionGoals: [
+          "Client now needs to transfer money between two accounts",
+          "Transfers include a transaction fee",
+          "Don't hardcode the fee logic — inject a fee calculator instead"
+        ],
+        allTestsCode: `// Adding transfer capability:
+// - Transfer between two accounts
+// - Apply transaction fee
+// - Use dependency injection for fee calculator`,
+        productionCode: `// BankAccount.cs - Current implementation
+public class BankAccount
+{
+    public decimal Balance { get; private set; }
+    // Need to add Transfer method with fee calculator
+}
+
+// IFeeCalculator.cs - Interface to inject
+public interface IFeeCalculator
+{
+    decimal CalculateFee(decimal amount);
+}`,
+        testResults: [
+          { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" },
+          { name: "Withdraw_ShouldDecreaseBalance", status: "pass", message: "✓ Test passed" },
+          { name: "Withdraw_ShouldThrow_WhenInsufficientBalance", status: "pass", message: "✓ Test passed" }
+        ],
+        testStats: { total: 3, passed: 3, failed: 0 }
+      },
+      {
+        title: "Step 14: Red - Test for transfer with fee 🔴",
+        description: "Write a test for transferring money between accounts with a fee. This test will fail because TransferService doesn't exist yet.",
+        phase: "red",
+        allTestsCode: `[TestClass]
+public class BankAccountTests
+{
+    [TestMethod]
+    public void Deposit_ShouldIncreaseBalance()
+    {
+        var account = new BankAccount();
+        account.Deposit(100m);
+        Assert.AreEqual(100m, account.Balance);
+    }
+
+    [TestMethod]
+    public void Withdraw_ShouldDecreaseBalance()
+    {
+        var account = new BankAccount();
+        account.Deposit(100m);
+        account.Withdraw(40m);
+        Assert.AreEqual(60m, account.Balance);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(InvalidOperationException))]
+    public void Withdraw_ShouldThrow_WhenInsufficientBalance()
+    {
+        var account = new BankAccount();
+        account.Deposit(50m);
+        account.Withdraw(100m);
+    }
+}
+
+[TestClass]
+public class TransferServiceTests
+{
+    [TestMethod]
+    public void Transfer_ShouldMoveMoneyWithFee()
+    {
+        var source = new BankAccount();
+        var target = new BankAccount();
+        var service = new TransferService(new FixedFeeCalculator(5m));
+
+        source.Deposit(100m);
+        service.Transfer(source, target, 50m);
+
+        Assert.AreEqual(45m, source.Balance); // 100 - 50 - 5 (fee)
+        Assert.AreEqual(50m, target.Balance);
+    }
+}`,
+        productionCode: `// BankAccount.cs - existing implementation
+public class BankAccount
+{
+    public decimal Balance { get; private set; }
+
+    private void EnsurePositiveAmount(decimal amount)
+    {
+        if (amount <= 0)
+            throw new ArgumentException("Amount must be positive");
+    }
+
+    private void EnsureSufficientFunds(decimal amount)
+    {
+        if (amount > Balance)
+            throw new InvalidOperationException("Insufficient funds");
+    }
+
+    public void Deposit(decimal amount)
+    {
+        EnsurePositiveAmount(amount);
+        Balance += amount;
+    }
+
+    public void Withdraw(decimal amount)
+    {
+        EnsurePositiveAmount(amount);
+        EnsureSufficientFunds(amount);
+        Balance -= amount;
+    }
+}
+
+// TransferService.cs - doesn't exist yet!
+// FixedFeeCalculator.cs - doesn't exist yet!`,
+        testResults: [
+          { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" },
+          { name: "Withdraw_ShouldDecreaseBalance", status: "pass", message: "✓ Test passed" },
+          { name: "Withdraw_ShouldThrow_WhenInsufficientBalance", status: "pass", message: "✓ Test passed" },
+          { name: "Transfer_ShouldMoveMoneyWithFee", status: "fail", message: "'TransferService' does not exist in the current context" }
+        ],
+        testStats: { total: 4, passed: 3, failed: 1 }
+      },
+      {
+        title: "Step 15: Green - Implement TransferService with dependency injection 🟢",
+        description: "Implement the TransferService using dependency injection for the fee calculator. All tests now pass.",
+        phase: "green",
+        allTestsCode: `[TestClass]
+public class BankAccountTests
+{
+    [TestMethod]
+    public void Deposit_ShouldIncreaseBalance()
+    {
+        var account = new BankAccount();
+        account.Deposit(100m);
+        Assert.AreEqual(100m, account.Balance);
+    }
+
+    [TestMethod]
+    public void Withdraw_ShouldDecreaseBalance()
+    {
+        var account = new BankAccount();
+        account.Deposit(100m);
+        account.Withdraw(40m);
+        Assert.AreEqual(60m, account.Balance);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(InvalidOperationException))]
+    public void Withdraw_ShouldThrow_WhenInsufficientBalance()
+    {
+        var account = new BankAccount();
+        account.Deposit(50m);
+        account.Withdraw(100m);
+    }
+}
+
+[TestClass]
+public class TransferServiceTests
+{
+    [TestMethod]
+    public void Transfer_ShouldMoveMoneyWithFee()
+    {
+        var source = new BankAccount();
+        var target = new BankAccount();
+        var service = new TransferService(new FixedFeeCalculator(5m));
+
+        source.Deposit(100m);
+        service.Transfer(source, target, 50m);
+
+        Assert.AreEqual(45m, source.Balance);
+        Assert.AreEqual(50m, target.Balance);
+    }
+}`,
+        productionCode: `// BankAccount.cs
+public class BankAccount
+{
+    public decimal Balance { get; private set; }
+
+    private void EnsurePositiveAmount(decimal amount)
+    {
+        if (amount <= 0)
+            throw new ArgumentException("Amount must be positive");
+    }
+
+    private void EnsureSufficientFunds(decimal amount)
+    {
+        if (amount > Balance)
+            throw new InvalidOperationException("Insufficient funds");
+    }
+
+    public void Deposit(decimal amount)
+    {
+        EnsurePositiveAmount(amount);
+        Balance += amount;
+    }
+
+    public void Withdraw(decimal amount)
+    {
+        EnsurePositiveAmount(amount);
+        EnsureSufficientFunds(amount);
+        Balance -= amount;
+    }
+}
+
+// IFeeCalculator.cs
+public interface IFeeCalculator
+{
+    decimal Calculate(decimal amount);
+}
+
+// FixedFeeCalculator.cs
+public class FixedFeeCalculator : IFeeCalculator
+{
+    private readonly decimal _fee;
+    public FixedFeeCalculator(decimal fee) => _fee = fee;
+    public decimal Calculate(decimal amount) => _fee;
+}
+
+// TransferService.cs
+public class TransferService
+{
+    private readonly IFeeCalculator _feeCalculator;
+
+    public TransferService(IFeeCalculator feeCalculator)
+    {
+        _feeCalculator = feeCalculator;
+    }
+
+    public void Transfer(BankAccount from, BankAccount to, decimal amount)
+    {
+        var fee = _feeCalculator.Calculate(amount);
+        from.Withdraw(amount + fee);
+        to.Deposit(amount);
+    }
+}`,
+        testResults: [
+          { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" },
+          { name: "Withdraw_ShouldDecreaseBalance", status: "pass", message: "✓ Test passed" },
+          { name: "Withdraw_ShouldThrow_WhenInsufficientBalance", status: "pass", message: "✓ Test passed" },
+          { name: "Transfer_ShouldMoveMoneyWithFee", status: "pass", message: "✓ Test passed" }
+        ],
+        testStats: { total: 4, passed: 4, failed: 0 }
+      },
+      {
+        title: "Step 16: Refactor - Add null checks and improve clarity 🔵",
+        description: "Let's improve clarity and guard against invalid dependencies.",
+        phase: "refactor",
+        allTestsCode: `[TestClass]
+public class BankAccountTests
+{
+    [TestMethod]
+    public void Deposit_ShouldIncreaseBalance()
+    {
+        var account = new BankAccount();
+        account.Deposit(100m);
+        Assert.AreEqual(100m, account.Balance);
+    }
+
+    [TestMethod]
+    public void Withdraw_ShouldDecreaseBalance()
+    {
+        var account = new BankAccount();
+        account.Deposit(100m);
+        account.Withdraw(40m);
+        Assert.AreEqual(60m, account.Balance);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(InvalidOperationException))]
+    public void Withdraw_ShouldThrow_WhenInsufficientBalance()
+    {
+        var account = new BankAccount();
+        account.Deposit(50m);
+        account.Withdraw(100m);
+    }
+}
+
+[TestClass]
+public class TransferServiceTests
+{
+    [TestMethod]
+    public void Transfer_ShouldMoveMoneyWithFee()
+    {
+        var source = new BankAccount();
+        var target = new BankAccount();
+        var service = new TransferService(new FixedFeeCalculator(5m));
+
+        source.Deposit(100m);
+        service.Transfer(source, target, 50m);
+
+        Assert.AreEqual(45m, source.Balance);
+        Assert.AreEqual(50m, target.Balance);
+    }
+}`,
+        productionCode: `// BankAccount.cs
+public class BankAccount
+{
+    public decimal Balance { get; private set; }
+
+    private void EnsurePositiveAmount(decimal amount)
+    {
+        if (amount <= 0)
+            throw new ArgumentException("Amount must be positive");
+    }
+
+    private void EnsureSufficientFunds(decimal amount)
+    {
+        if (amount > Balance)
+            throw new InvalidOperationException("Insufficient funds");
+    }
+
+    public void Deposit(decimal amount)
+    {
+        EnsurePositiveAmount(amount);
+        Balance += amount;
+    }
+
+    public void Withdraw(decimal amount)
+    {
+        EnsurePositiveAmount(amount);
+        EnsureSufficientFunds(amount);
+        Balance -= amount;
+    }
+}
+
+// IFeeCalculator.cs
+public interface IFeeCalculator
+{
+    decimal Calculate(decimal amount);
+}
+
+// FixedFeeCalculator.cs
+public class FixedFeeCalculator : IFeeCalculator
+{
+    private readonly decimal _fee;
+    public FixedFeeCalculator(decimal fee) => _fee = fee;
+    public decimal Calculate(decimal amount) => _fee;
+}
+
+// TransferService.cs - Refactored with null checks
+public class TransferService
+{
+    private readonly IFeeCalculator _feeCalculator;
+
+    public TransferService(IFeeCalculator feeCalculator)
+        => _feeCalculator = feeCalculator ?? throw new ArgumentNullException(nameof(feeCalculator));
+
+    public void Transfer(BankAccount source, BankAccount target, decimal amount)
+    {
+        if (source == null || target == null)
+            throw new ArgumentNullException("Accounts cannot be null");
+
+        var fee = _feeCalculator.Calculate(amount);
+        source.Withdraw(amount + fee);
+        target.Deposit(amount);
+    }
+}`,
+        testResults: [
+          { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" },
+          { name: "Withdraw_ShouldDecreaseBalance", status: "pass", message: "✓ Test passed" },
+          { name: "Withdraw_ShouldThrow_WhenInsufficientBalance", status: "pass", message: "✓ Test passed" },
+          { name: "Transfer_ShouldMoveMoneyWithFee", status: "pass", message: "✓ Test passed" }
+        ],
+        testStats: { total: 4, passed: 4, failed: 0 }
+      }
+    ];
+
     const nextStep = () => {
       setCurrentStep((prev) => Math.min(prev + 1, demoSteps.length - 1));
     };
@@ -1457,7 +2331,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
 
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-5xl font-bold mb-4 leading-tight bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">Building FizzBuzz with TDD</h1>
+          <h1 className="text-4xl font-bold mb-4 leading-tight bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">Building a Bank Account System with TDD</h1>
 
           {/* Quick Jump Buttons */}
           <div className="flex justify-center space-x-2 mb-4">
@@ -1521,10 +2395,25 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
           {/* Test Scenarios and Production Goals - Only for Think phase */}
           {current.phase === 'think' && (current.testScenarios || current.productionGoals) && (
             <div className="grid md:grid-cols-2 gap-4">
+              {/* Production Goals */}
+              {current.productionGoals && (
+                <div className="bg-slate-800 border border-purple-400/30 p-4 rounded-xl">
+                  <h3 className="text-lg font-bold text-purple-400 mb-3">🧠 Think</h3>
+                  <div className="space-y-3">
+                    {current.productionGoals.map((goal, index) => (
+                      <div key={index} className="flex items-start space-x-3 p-3 bg-gray-700 rounded-lg border border-gray-600">
+                        <div className="text-purple-400 text-xl flex-shrink-0">•</div>
+                        <div className="text-white">{goal}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {/* Test Scenarios Checklist */}
               {current.testScenarios && (
-                <div className="bg-slate-800 border border-purple-400/30 p-4 rounded-xl">
-                  <h3 className="text-lg font-bold text-purple-400 mb-3">🎯 Test Scenarios to Implement</h3>
+                <div className="bg-slate-800 border border-blue-400/30 p-4 rounded-xl">
+                  <h3 className="text-lg font-bold text-blue-400 mb-3">🎯 Test Scenarios to Implement</h3>
                   <div className="space-y-3">
                     {current.testScenarios.map((scenario) => (
                       <div key={scenario.id} className="flex items-start space-x-3 p-3 bg-gray-700 rounded-lg border border-gray-600">
@@ -1539,21 +2428,6 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
                             Examples: {scenario.examples}
                           </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Production Goals */}
-              {current.productionGoals && (
-                <div className="bg-slate-800 border border-blue-400/30 p-4 rounded-xl">
-                  <h3 className="text-lg font-bold text-blue-400 mb-3">📦 What We'll Build</h3>
-                  <div className="space-y-3">
-                    {current.productionGoals.map((goal, index) => (
-                      <div key={index} className="flex items-start space-x-3 p-3 bg-gray-700 rounded-lg border border-gray-600">
-                        <div className="text-blue-400 text-xl flex-shrink-0">•</div>
-                        <div className="text-white">{goal}</div>
                       </div>
                     ))}
                   </div>
