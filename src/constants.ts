@@ -228,6 +228,8 @@ export const CONTENT = {
     THINK: 'Think'
   },
   PING_PONG: {
+    THINK_LEAD: 'Leads discussion – proposes next behavior',
+    THINK_CHALLENGE: 'Challenges or refines the scenario',
     WRITE_FAILING_TEST: 'Writes a failing test',
     MAKE_TEST_PASS: 'Writes minimal production code to pass test',
     REFACTOR_CODE: 'Cleans up code (rename, extract, simplify)',

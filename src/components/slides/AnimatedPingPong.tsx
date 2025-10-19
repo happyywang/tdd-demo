@@ -10,6 +10,20 @@ const AnimatedPingPong = memo(() => {
   const phases: PingPongPhase[] = useMemo(() => [
     // Cycle 1: Developer A writes test, Developer B implements
     {
+      name: 'Think',
+      color: 'purple',
+      result: '💬',
+      playerA: {
+        role: 'collaborating',
+        text: CONTENT.PING_PONG.THINK_LEAD
+      },
+      playerB: {
+        role: 'collaborating',
+        text: CONTENT.PING_PONG.THINK_CHALLENGE
+      },
+      notes: 'Both agree on one clear example'
+    },
+    {
       name: 'Red (Test)',
       color: 'red',
       result: '❌',
@@ -66,6 +80,20 @@ const AnimatedPingPong = memo(() => {
       notes: CONTENT.PING_PONG.SWITCH_ROLES
     },
     // Cycle 2: Developer B writes test, Developer A implements
+    {
+      name: 'Think',
+      color: 'purple',
+      result: '💬',
+      playerA: {
+        role: 'collaborating',
+        text: CONTENT.PING_PONG.THINK_CHALLENGE
+      },
+      playerB: {
+        role: 'collaborating',
+        text: CONTENT.PING_PONG.THINK_LEAD
+      },
+      notes: 'Both agree on one clear example'
+    },
     {
       name: 'Red (Test)',
       color: 'red',
@@ -135,7 +163,7 @@ const AnimatedPingPong = memo(() => {
       const nextPhase = (currentPhase + 1) % phases.length;
       setCurrentPhase(nextPhase);
 
-      // Check if we completed a full cycle (8 phases = 2 complete ping-pong cycles)
+      // Check if we completed a full cycle (10 phases = 2 complete ping-pong cycles)
       if (nextPhase === 0) {
         setCycleCount(prev => prev + 1);
         if (cycleCount >= 1) { // Show 2 complete cycles
