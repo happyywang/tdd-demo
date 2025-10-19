@@ -40,11 +40,17 @@ export interface TestScenario {
 
 export interface PingPongPhase {
   name: string;
-  player: 'A' | 'B';
   color: string;
-  position: { x: number; y: number };
   result: string;
-  text: string;
+  playerA: {
+    role: 'active' | 'observing' | 'collaborating';
+    text: string;
+  };
+  playerB: {
+    role: 'active' | 'observing' | 'collaborating';
+    text: string;
+  };
+  notes: string;
 }
 
 // Component Props Types

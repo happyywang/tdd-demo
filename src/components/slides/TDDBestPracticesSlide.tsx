@@ -44,7 +44,7 @@ const TDDBestPracticesSlide = () => {
     },
     {
       title: "Ping Pong Programming",
-      description: "Interactive visual demonstration of ping pong TDD process with pair programming.",
+      description: "A pair programming style where two developers alternate between writing tests and writing production code, like a ping-pong match.",
       icon: "🏓",
       isAnimation: true
     }

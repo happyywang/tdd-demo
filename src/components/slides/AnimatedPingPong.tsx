@@ -1,26 +1,127 @@
 import { useState, useEffect, memo, useMemo } from 'react';
 import { PingPongPhase } from '../../types';
-import { ANIMATIONS, CONTENT, DEMO_CONFIG, COLORS, TYPOGRAPHY, SPACING } from '../../constants';
+import { ANIMATIONS, CONTENT } from '../../constants';
 
 const AnimatedPingPong = memo(() => {
   const [currentPhase, setCurrentPhase] = useState(0);
-  const [ballPosition, setBallPosition] = useState({ x: 20, y: 50 });
-  const [ballColor, setBallColor] = useState('red');
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [showResult, setShowResult] = useState('❌');
-  const [animationCycle, setAnimationCycle] = useState(0);
   const [showAnimation, setShowAnimation] = useState(false);
+  const [cycleCount, setCycleCount] = useState(0);
 
   const phases: PingPongPhase[] = useMemo(() => [
-    { name: 'Red', player: 'A', color: 'red', position: { x: 20, y: 50 }, result: '❌', text: CONTENT.PING_PONG.WRITE_FAILING_TEST },
-    { name: 'Green', player: 'B', color: 'green', position: { x: 80, y: 50 }, result: '✅', text: CONTENT.PING_PONG.MAKE_TEST_PASS },
-    { name: 'Refactor', player: 'A', color: 'blue', position: { x: 20, y: 50 }, result: '🔧', text: CONTENT.PING_PONG.REFACTOR_CODE },
-    { name: 'Red', player: 'B', color: 'red', position: { x: 80, y: 50 }, result: '❌', text: CONTENT.PING_PONG.WRITE_FAILING_TEST },
-    { name: 'Green', player: 'A', color: 'green', position: { x: 20, y: 50 }, result: '✅', text: CONTENT.PING_PONG.MAKE_TEST_PASS },
-    { name: 'Refactor', player: 'B', color: 'blue', position: { x: 80, y: 50 }, result: '🔧', text: CONTENT.PING_PONG.REFACTOR_CODE },
-    { name: 'Red', player: 'A', color: 'red', position: { x: 20, y: 50 }, result: '❌', text: CONTENT.PING_PONG.WRITE_FAILING_TEST },
-    { name: 'Green', player: 'B', color: 'green', position: { x: 80, y: 50 }, result: '✅', text: CONTENT.PING_PONG.MAKE_TEST_PASS },
-    { name: 'Refactor', player: 'A', color: 'blue', position: { x: 20, y: 50 }, result: '🔧', text: CONTENT.PING_PONG.REFACTOR_CODE },
+    // Cycle 1: Developer A writes test, Developer B implements
+    {
+      name: 'Red (Test)',
+      color: 'red',
+      result: '❌',
+      playerA: {
+        role: 'active',
+        text: CONTENT.PING_PONG.WRITE_FAILING_TEST
+      },
+      playerB: {
+        role: 'observing',
+        text: CONTENT.PING_PONG.OBSERVES
+      },
+      notes: 'Defines desired behavior (spec)'
+    },
+    {
+      name: 'Green (Code)',
+      color: 'green',
+      result: '✅',
+      playerA: {
+        role: 'observing',
+        text: CONTENT.PING_PONG.WATCHES
+      },
+      playerB: {
+        role: 'active',
+        text: CONTENT.PING_PONG.MAKE_TEST_PASS
+      },
+      notes: 'Ensures test passes quickly'
+    },
+    {
+      name: 'Refactor',
+      color: 'blue',
+      result: '🔧',
+      playerA: {
+        role: 'collaborating',
+        text: CONTENT.PING_PONG.GIVES_FEEDBACK
+      },
+      playerB: {
+        role: 'collaborating',
+        text: CONTENT.PING_PONG.REFACTOR_CODE
+      },
+      notes: CONTENT.PING_PONG.DISCUSS
+    },
+    {
+      name: 'Switch Roles',
+      color: 'purple',
+      result: '🔄',
+      playerA: {
+        role: 'collaborating',
+        text: 'Next implementer'
+      },
+      playerB: {
+        role: 'collaborating',
+        text: 'Next test writer'
+      },
+      notes: CONTENT.PING_PONG.SWITCH_ROLES
+    },
+    // Cycle 2: Developer B writes test, Developer A implements
+    {
+      name: 'Red (Test)',
+      color: 'red',
+      result: '❌',
+      playerA: {
+        role: 'observing',
+        text: CONTENT.PING_PONG.OBSERVES
+      },
+      playerB: {
+        role: 'active',
+        text: CONTENT.PING_PONG.WRITE_FAILING_TEST
+      },
+      notes: 'Defines desired behavior (spec)'
+    },
+    {
+      name: 'Green (Code)',
+      color: 'green',
+      result: '✅',
+      playerA: {
+        role: 'active',
+        text: CONTENT.PING_PONG.MAKE_TEST_PASS
+      },
+      playerB: {
+        role: 'observing',
+        text: CONTENT.PING_PONG.WATCHES
+      },
+      notes: 'Ensures test passes quickly'
+    },
+    {
+      name: 'Refactor',
+      color: 'blue',
+      result: '🔧',
+      playerA: {
+        role: 'collaborating',
+        text: CONTENT.PING_PONG.REFACTOR_CODE
+      },
+      playerB: {
+        role: 'collaborating',
+        text: CONTENT.PING_PONG.GIVES_FEEDBACK
+      },
+      notes: CONTENT.PING_PONG.DISCUSS
+    },
+    {
+      name: 'Switch Roles',
+      color: 'purple',
+      result: '🔄',
+      playerA: {
+        role: 'collaborating',
+        text: 'Next test writer'
+      },
+      playerB: {
+        role: 'collaborating',
+        text: 'Next implementer'
+      },
+      notes: CONTENT.PING_PONG.SWITCH_ROLES
+    },
   ], []);
 
   const revealAnimation = () => {
@@ -31,140 +132,118 @@ const AnimatedPingPong = memo(() => {
     if (!showAnimation) return;
 
     const interval = setInterval(() => {
-      setIsAnimating(true);
       const nextPhase = (currentPhase + 1) % phases.length;
-      const phase = phases[nextPhase];
-      
-      // Update phase data immediately when animation starts
       setCurrentPhase(nextPhase);
-      setBallColor(phase.color);
-      setShowResult(phase.result);
-      
-      // Animate ball to new position
-      setBallPosition(phase.position);
-      
-      setTimeout(() => {
-        setIsAnimating(false);
-        
-        // Check if we completed a full cycle (every 3 phases = 1 complete cycle)
-        if (nextPhase % 3 === 0 && nextPhase > 0) {
-          setAnimationCycle(prev => prev + 1);
-          if (animationCycle >= 2) { // 3 cycles total (0, 1, 2)
-            clearInterval(interval);
-            setTimeout(() => {
-              setAnimationCycle(0);
-              setCurrentPhase(0);
-              setBallPosition(phases[0].position);
-              setBallColor(phases[0].color);
-              setShowResult(phases[0].result);
-            }, ANIMATIONS.BALL_TRANSITION_DURATION);
-          }
+
+      // Check if we completed a full cycle (8 phases = 2 complete ping-pong cycles)
+      if (nextPhase === 0) {
+        setCycleCount(prev => prev + 1);
+        if (cycleCount >= 1) { // Show 2 complete cycles
+          clearInterval(interval);
         }
-      }, ANIMATIONS.BALL_TRANSITION_DURATION);
+      }
     }, ANIMATIONS.PING_PONG_INTERVAL);
 
     return () => clearInterval(interval);
-  }, [currentPhase, animationCycle, showAnimation]);
+  }, [currentPhase, cycleCount, showAnimation, phases.length]);
 
   const currentPhaseData = useMemo(() => phases[currentPhase], [phases, currentPhase]);
 
-  return (
-    <div className={`relative w-full h-48 ${COLORS.BACKGROUNDS.SECONDARY} rounded-2xl overflow-hidden`}>
+  const getPhaseColor = (color: string) => {
+    switch (color) {
+      case 'red':
+        return { bg: 'bg-red-500', border: 'border-red-400', text: 'text-red-400', glow: 'shadow-red-500/50' };
+      case 'green':
+        return { bg: 'bg-green-500', border: 'border-green-400', text: 'text-green-400', glow: 'shadow-green-500/50' };
+      case 'blue':
+        return { bg: 'bg-blue-500', border: 'border-blue-400', text: 'text-blue-400', glow: 'shadow-blue-500/50' };
+      case 'purple':
+        return { bg: 'bg-purple-500', border: 'border-purple-400', text: 'text-purple-400', glow: 'shadow-purple-500/50' };
+      default:
+        return { bg: 'bg-gray-500', border: 'border-gray-400', text: 'text-gray-400', glow: 'shadow-gray-500/50' };
+    }
+  };
 
+  const phaseColors = getPhaseColor(currentPhaseData.color);
+
+  return (
+    <div className="relative w-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-lg overflow-hidden border border-gray-700">
       {/* Click overlay when animation is hidden */}
       {!showAnimation && (
         <div
-          className="absolute inset-0 flex items-center justify-center z-30 cursor-pointer bg-gray-900/60 backdrop-blur-sm"
+          className="absolute inset-0 flex items-center justify-center z-30 cursor-pointer bg-gray-900/70 backdrop-blur-sm"
           onClick={revealAnimation}
         >
-          <div className="text-center px-6 py-4 bg-black/80 rounded-lg border border-[#50DCE1]/50">
-            <div className="text-2xl mb-2 animate-pulse">👆</div>
-            <div className="text-sm text-[#50DCE1] font-semibold">Click to show ping-pong demo</div>
+          <div className="text-center px-5 py-3 bg-black/80 rounded-lg border border-[#50DCE1]/50 hover:border-[#50DCE1] transition-all">
+            <div className="text-2xl mb-1 animate-bounce">👆</div>
+            <div className="text-sm text-[#50DCE1] font-semibold">Click to start demo</div>
           </div>
         </div>
       )}
-      {/* TDD Phase Indicator at top */}
-      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20">
-        <div className={`${SPACING.PADDING_X.LG} ${SPACING.PADDING_Y.SM} rounded-full ${COLORS.TEXT.PRIMARY} ${TYPOGRAPHY.WEIGHTS.BOLD} ${TYPOGRAPHY.SIZES.LG} ${
-          currentPhaseData.color === 'red' ? COLORS.PHASES.RED :
-          currentPhaseData.color === 'green' ? COLORS.PHASES.GREEN : COLORS.PHASES.REFACTOR
-        }`}>
-          {currentPhaseData.name} Phase
-        </div>
-      </div>
 
-      {/* Player A */}
-      <div className="absolute left-8 top-1/2 transform -translate-y-1/2 text-center">
-        <div className={`w-20 h-20 rounded-full flex items-center justify-center ${TYPOGRAPHY.SIZES['4XL']} ${SPACING.MARGIN_B.SM} ${
-          currentPhaseData.player === 'A' ? `${COLORS.PRIMARY[500]} animate-pulse` : COLORS.BACKGROUNDS.SECONDARY
-        }`}>
-          👨‍💻
-        </div>
-        <p className={`${COLORS.TEXT.PRIMARY} ${TYPOGRAPHY.SIZES.SM}`}>Player A</p>
-      </div>
-
-      {/* Player B */}
-      <div className="absolute right-8 top-1/2 transform -translate-y-1/2 text-center">
-        <div className={`w-20 h-20 rounded-full flex items-center justify-center ${TYPOGRAPHY.SIZES['4XL']} ${SPACING.MARGIN_B.SM} ${
-          currentPhaseData.player === 'B' ? `${COLORS.ERROR[500]} animate-pulse` : COLORS.BACKGROUNDS.SECONDARY
-        }`}>
-          👩‍💻
-        </div>
-        <p className={`${COLORS.TEXT.PRIMARY} ${TYPOGRAPHY.SIZES.SM}`}>Player B</p>
-      </div>
-
-      {/* Ping Pong Ball with text and trail effect */}
-      <div 
-        className="absolute ease-in-out"
-        style={{ 
-          transition: `all ${ANIMATIONS.BALL_TRANSITION_DURATION}ms`,
-          left: `${ballPosition.x}%`,
-          top: `${ballPosition.y}%`,
-          transform: 'translate(-50%, -50%)'
-        }}
-      >
-        {/* Ball */}
-        <div className={`w-8 h-8 rounded-full ${
-          ballColor === 'red' ? 'bg-red-400' :
-          ballColor === 'green' ? 'bg-green-400' : 'bg-blue-400'
-        } ${isAnimating ? 'animate-bounce' : ''}`}
-        style={{
-          boxShadow: `0 0 20px ${ballColor === 'red' ? '#ef4444' : ballColor === 'green' ? '#22c55e' : '#3b82f6'}`
-        }}>
-          {/* Ball trail effect */}
-          <div className={`absolute inset-0 rounded-full animate-ping ${
-            ballColor === 'red' ? 'bg-red-400' :
-            ballColor === 'green' ? 'bg-green-400' : 'bg-blue-400'
-          }`} />
-          
-          {/* Result icon on ball */}
-          <div className="absolute inset-0 flex items-center justify-center text-white text-lg font-bold">
-            {showResult}
+      <div className="p-6">
+        {/* Main Stage - Developers Fixed Position */}
+        <div className="relative h-64 mb-4">
+          {/* Phase Title - Moves to active developer */}
+          <div className={`absolute top-0 transition-all duration-[2500ms] ease-in-out ${
+            currentPhaseData.playerA.role === 'active'
+              ? 'left-[25%] -translate-x-1/2'
+              : currentPhaseData.playerB.role === 'active'
+              ? 'left-[75%] -translate-x-1/2'
+              : 'left-1/2 -translate-x-1/2'
+          }`}>
+            <div className={`inline-block px-6 py-2 rounded-full ${phaseColors.bg} text-white font-bold text-lg shadow-lg ${phaseColors.glow}`}>
+              {currentPhaseData.result} {currentPhaseData.name}
+            </div>
           </div>
-        </div>
-        
-        {/* Action text below ball */}
-        <div className="absolute top-10 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
-          <div className={`${COLORS.BACKGROUNDS.OVERLAY} ${SPACING.PADDING_X.SM} ${SPACING.PADDING_Y.SM} rounded ${COLORS.TEXT.PRIMARY} ${TYPOGRAPHY.SIZES.SM} ${TYPOGRAPHY.WEIGHTS.SEMIBOLD}`}>
-            {currentPhaseData.text}
+
+          {/* Developer A - Fixed at 25% */}
+          <div className="absolute left-[25%] -translate-x-1/2 top-24 flex flex-col items-center">
+            <div className={`w-20 h-20 rounded-full flex items-center justify-center text-4xl mb-6 transition-all duration-500 ${
+              currentPhaseData.playerA.role === 'active'
+                ? 'bg-cyan-500 ring-4 ring-cyan-300 scale-125 animate-pulse'
+                : currentPhaseData.playerA.role === 'observing'
+                ? 'bg-gray-700 opacity-40 scale-90'
+                : 'bg-cyan-500 ring-2 ring-cyan-300 scale-105'
+            }`}>
+              👨‍💻
+            </div>
+            <div className="text-white font-semibold text-sm mb-3">Developer A</div>
+            <div className={`text-center text-xs px-2 py-1 rounded whitespace-nowrap ${
+              currentPhaseData.playerA.role === 'active'
+                ? 'bg-cyan-900/70 text-cyan-200 font-bold'
+                : currentPhaseData.playerA.role === 'observing'
+                ? 'bg-gray-800/50 text-gray-400'
+                : 'bg-cyan-900/50 text-cyan-200'
+            }`}>
+              {currentPhaseData.playerA.text}
+            </div>
+          </div>
+
+          {/* Developer B - Fixed at 75% */}
+          <div className="absolute left-[75%] -translate-x-1/2 top-24 flex flex-col items-center">
+            <div className={`w-20 h-20 rounded-full flex items-center justify-center text-4xl mb-6 transition-all duration-500 ${
+              currentPhaseData.playerB.role === 'active'
+                ? 'bg-cyan-500 ring-4 ring-cyan-300 scale-125 animate-pulse'
+                : currentPhaseData.playerB.role === 'observing'
+                ? 'bg-gray-700 opacity-40 scale-90'
+                : 'bg-cyan-500 ring-2 ring-cyan-300 scale-105'
+            }`}>
+              👩‍💻
+            </div>
+            <div className="text-white font-semibold text-sm mb-3">Developer B</div>
+            <div className={`text-center text-xs px-2 py-1 rounded whitespace-nowrap ${
+              currentPhaseData.playerB.role === 'active'
+                ? 'bg-cyan-900/70 text-cyan-200 font-bold'
+                : currentPhaseData.playerB.role === 'observing'
+                ? 'bg-gray-800/50 text-gray-400'
+                : 'bg-cyan-900/50 text-cyan-200'
+            }`}>
+              {currentPhaseData.playerB.text}
+            </div>
           </div>
         </div>
       </div>
-
-      {/* Final Summary */}
-      {animationCycle >= 2 && showAnimation && (
-        <div className={`absolute inset-0 ${COLORS.BACKGROUNDS.OVERLAY} flex items-center justify-center`}>
-          <div className={`text-center ${COLORS.TEXT.PRIMARY}`}>
-            <h3 className={`${TYPOGRAPHY.SIZES['3XL']} ${TYPOGRAPHY.WEIGHTS.BOLD} ${SPACING.MARGIN_B.MD}`}>
-              🏓 Ping-pong Programming
-            </h3>
-            <p className={`${TYPOGRAPHY.SIZES.XL} ${SPACING.MARGIN_B.SM}`}>
-              {CONTENT.PING_PONG.FINAL_MESSAGE}
-            </p>
-            <p className={TYPOGRAPHY.SIZES.LG}>You code, I code, Repeat!</p>
-          </div>
-        </div>
-      )}
     </div>
   );
 });

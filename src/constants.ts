@@ -19,7 +19,7 @@ export const TDD_STATS = {
 
 // Animation Timings
 export const ANIMATIONS = {
-  PING_PONG_INTERVAL: 3000,
+  PING_PONG_INTERVAL: 7000,
   BALL_TRANSITION_DURATION: 2000,
   SLIDE_TRANSITION: '300ms',
   BOUNCE_DURATION: '2s'
@@ -228,9 +228,14 @@ export const CONTENT = {
     THINK: 'Think'
   },
   PING_PONG: {
-    WRITE_FAILING_TEST: 'Write failing test',
-    MAKE_TEST_PASS: 'Make the test pass',
-    REFACTOR_CODE: 'Refactor code',
+    WRITE_FAILING_TEST: 'Writes a failing test',
+    MAKE_TEST_PASS: 'Writes minimal production code to pass test',
+    REFACTOR_CODE: 'Cleans up code (rename, extract, simplify)',
+    OBSERVES: 'Observes, gives input',
+    WATCHES: 'Watches',
+    GIVES_FEEDBACK: 'Gives feedback',
+    DISCUSS: 'Both discuss design improvements',
+    SWITCH_ROLES: 'The "ping-pong" switch happens after refactor',
     FINAL_MESSAGE: 'Ping-pong Programming = Pair Programming + TDD'
   }
 } as const;

@@ -175,7 +175,7 @@ public void ProcessOrder_MultipleItems_CalculatesTotalWithTax()
         {
           title: "Ping Pong Programming Animation",
           icon: "🏓",
-          description: "Interactive visual demonstration of ping pong TDD process",
+          description: "A pair programming style where two developers alternate between writing tests and writing production code, like a ping-pong match.",
           isAnimation: true,
           example: `Ping-pong Programming = Pair Programming + TDD
 You code, I code, Repeat!
