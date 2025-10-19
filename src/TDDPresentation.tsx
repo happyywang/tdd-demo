@@ -1330,7 +1330,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
     const demoSteps: DemoStep[] = [
       {
         title: "Step 1: Think - Deposit (The simplest possible behavior) 🧠",
-        description: "",
+        description: "Before writing any test code, think about what to build. Start with the simplest possible behavior.",
         phase: "think",
         testScenarios: [
           {
@@ -1355,7 +1355,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
       },
       {
         title: "Step 2: Red - Write the failing test 🔴",
-        description: "Write a test for deposit functionality. This test will fail because the BankAccount class and Deposit method don't exist yet.",
+        description: "Write a test for deposit functionality. Add minimal production code to compile, then watch the test fail.",
         phase: "red",
         allTestsCode: `[TestClass]
 public class BankAccountTests
@@ -1368,19 +1368,24 @@ public class BankAccountTests
         Assert.AreEqual(100m, account.Balance);
     }
 }`,
-        productionCode: `// BankAccount.cs
+        productionCode: `// BankAccount.cs - Just enough to compile
 public class BankAccount
 {
-    // No method yet!
+    public decimal Balance { get; private set; }
+
+    public void Deposit(decimal amount)
+    {
+        // Empty - does nothing yet!
+    }
 }`,
         testResults: [
-          { name: "Deposit_ShouldIncreaseBalance", status: "fail", message: "'BankAccount' does not contain a definition for 'Deposit'" }
+          { name: "Deposit_ShouldIncreaseBalance", status: "fail", message: "Expected: 100, Actual: 0" }
         ],
         testStats: { total: 1, passed: 0, failed: 1 }
       },
       {
         title: "Step 3: Green - Implement just enough to pass 🟢",
-        description: "Write the minimum code to make the test pass. Add the Deposit method and Balance property.",
+        description: "Write the minimum code to make the test pass.",
         phase: "green",
         allTestsCode: `[TestClass]
 public class BankAccountTests
@@ -1440,7 +1445,7 @@ public class BankAccount
       },
       {
         title: "Step 5: Think - Withdraw (The next simplest possible behavior) 🧠",
-        description: "",
+        description: "Deposit works. Now think about the next behavior: withdrawing money.",
         phase: "think",
         testScenarios: [
           {
@@ -1477,7 +1482,7 @@ public class BankAccount
       },
       {
         title: "Step 6: Red - Writing another failing test 🔴",
-        description: "Add a test for withdraw functionality. This test will fail because the Withdraw method doesn't exist yet.",
+        description: "Write a test for withdraw functionality. Add minimal production code to compile, then watch the test fail.",
         phase: "red",
         allTestsCode: `[TestClass]
 public class BankAccountTests
@@ -1499,7 +1504,7 @@ public class BankAccountTests
         Assert.AreEqual(60m, account.Balance);
     }
 }`,
-        productionCode: `// BankAccount.cs - current implementation
+        productionCode: `// BankAccount.cs - Just enough to compile
 public class BankAccount
 {
     public decimal Balance { get; private set; }
@@ -1509,17 +1514,20 @@ public class BankAccount
         Balance += amount;
     }
 
-    // No Withdraw method yet!
+    public void Withdraw(decimal amount)
+    {
+        // Empty - does nothing yet!
+    }
 }`,
         testResults: [
           { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" },
-          { name: "Withdraw_ShouldDecreaseBalance", status: "fail", message: "'BankAccount' does not contain a definition for 'Withdraw'" }
+          { name: "Withdraw_ShouldDecreaseBalance", status: "fail", message: "Expected: 60, Actual: 100" }
         ],
         testStats: { total: 2, passed: 1, failed: 1 }
       },
       {
         title: "Step 7: Green - Implement Withdraw 🟢",
-        description: "Add the Withdraw method to make both tests pass. Keep it simple.",
+        description: "Write the minimum code to make the test pass.",
         phase: "green",
         allTestsCode: `[TestClass]
 public class BankAccountTests
@@ -1613,7 +1621,7 @@ public class BankAccount
       },
       {
         title: "Step 9: Think - Prevent Overdraw 🧠",
-        description: "",
+        description: "Basic operations work. Now think about business rules: what should happen if someone tries to withdraw more than they have?",
         phase: "think",
         testScenarios: [
           {
@@ -1850,7 +1858,7 @@ public class BankAccount
       },
       {
         title: "Step 13: Think - Transfer with Fee 🧠",
-        description: "",
+        description: "Single account operations work. Now think about a more complex feature: transferring money between accounts with fees.",
         phase: "think",
         testScenarios: [
           {
@@ -1890,7 +1898,7 @@ public interface IFeeCalculator
       },
       {
         title: "Step 14: Red - Test for transfer with fee 🔴",
-        description: "Write a test for transferring money between accounts with a fee. This test will fail because TransferService doesn't exist yet.",
+        description: "Write a test for transfer with fee. Add minimal production code to compile, then watch the test fail.",
         phase: "red",
         allTestsCode: `[TestClass]
 public class BankAccountTests
@@ -1970,19 +1978,39 @@ public class BankAccount
     }
 }
 
-// TransferService.cs - doesn't exist yet!
-// FixedFeeCalculator.cs - doesn't exist yet!`,
+// IFeeCalculator.cs - Just enough to compile
+public interface IFeeCalculator
+{
+    decimal Calculate(decimal amount);
+}
+
+// FixedFeeCalculator.cs - Just enough to compile
+public class FixedFeeCalculator : IFeeCalculator
+{
+    public FixedFeeCalculator(decimal fee) { }
+    public decimal Calculate(decimal amount) => 0; // Wrong implementation!
+}
+
+// TransferService.cs - Just enough to compile
+public class TransferService
+{
+    public TransferService(IFeeCalculator feeCalculator) { }
+    public void Transfer(BankAccount from, BankAccount to, decimal amount)
+    {
+        // Empty - does nothing yet!
+    }
+}`,
         testResults: [
           { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" },
           { name: "Withdraw_ShouldDecreaseBalance", status: "pass", message: "✓ Test passed" },
           { name: "Withdraw_ShouldThrow_WhenInsufficientBalance", status: "pass", message: "✓ Test passed" },
-          { name: "Transfer_ShouldMoveMoneyWithFee", status: "fail", message: "'TransferService' does not exist in the current context" }
+          { name: "Transfer_ShouldMoveMoneyWithFee", status: "fail", message: "Expected source.Balance: 45, Actual: 100" }
         ],
         testStats: { total: 4, passed: 3, failed: 1 }
       },
       {
         title: "Step 15: Green - Implement TransferService with dependency injection 🟢",
-        description: "Implement the TransferService using dependency injection for the fee calculator. All tests now pass.",
+        description: "Write the minimum code to make the test pass.",
         phase: "green",
         allTestsCode: `[TestClass]
 public class BankAccountTests
