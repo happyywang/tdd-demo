@@ -13,7 +13,8 @@ This presentation provides a comprehensive introduction to TDD, including:
 - **Honest Discussion** - Challenges and disadvantages
 - **TDD vs BDD** - Comparison of methodologies
 - **Best Practices** - Practical guidance for .NET development
-- **Live Coding Demo** - Step-by-step FizzBuzz implementation using TDD
+- **Live Coding Demo** - Step-by-step Bank Account System implementation using TDD
+- **Ping-Pong Programming Animation** - Visual demonstration of pair programming with TDD
 
 ## 🚀 Features
 
