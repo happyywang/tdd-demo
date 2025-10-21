@@ -273,24 +273,43 @@ const TDDCycleSlide = () => {
                 </div>
 
                 {/* Flowing Arrow to Next Step */}
-                {isActive && showAnimation && (
-                  <div
-                    className="absolute animate-bounce"
-                    style={{
-                      left: `${(step.position.x + currentSteps[(index + 1) % currentSteps.length].position.x) / 2}%`,
-                      top: `${(step.position.y + currentSteps[(index + 1) % currentSteps.length].position.y) / 2}%`,
-                      transform: 'translate(-50%, -50%)'
-                    }}
-                  >
-                    {/* Different arrow directions based on step transition and mode */}
-                    <div className="text-2xl font-bold text-black bg-[#50DCE1] rounded w-10 h-10 flex items-center justify-center drop-shadow-lg">
-                      {showExtended
-                        ? (index === 0 ? '↘' : index === 1 ? '↙' : index === 2 ? '↖' : '↗')
-                        : (index === 0 ? '↘' : index === 1 ? '←' : '↗')
-                      }
+                {isActive && showAnimation && (() => {
+                  const nextStep = currentSteps[(index + 1) % currentSteps.length];
+                  let arrowLeft = (step.position.x + nextStep.position.x) / 2;
+                  let arrowTop = (step.position.y + nextStep.position.y) / 2;
+
+                  // Manual adjustment for problematic arrows in 4-step mode
+                  if (showExtended) {
+                    if (index === 1) {
+                      // Red(86,50) → Green(50,88): move away from circles
+                      arrowLeft = 62;  // Move more left away from Red
+                      arrowTop = 65;   // Move more up away from Green
+                    } else if (index === 2) {
+                      // Green(50,88) → Refactor(14,50): move away from Green
+                      arrowLeft = 28;  // Move left away from center
+                      arrowTop = 65;   // Move up away from Green
+                    }
+                  }
+
+                  return (
+                    <div
+                      className="absolute animate-bounce"
+                      style={{
+                        left: `${arrowLeft}%`,
+                        top: `${arrowTop}%`,
+                        transform: 'translate(-50%, -50%)'
+                      }}
+                    >
+                      {/* Different arrow directions based on step transition and mode */}
+                      <div className="text-2xl font-bold text-black bg-[#50DCE1] rounded w-10 h-10 flex items-center justify-center drop-shadow-lg">
+                        {showExtended
+                          ? (index === 0 ? '↘' : index === 1 ? '↙' : index === 2 ? '↖' : '↗')
+                          : (index === 0 ? '↘' : index === 1 ? '←' : '↗')
+                        }
+                      </div>
                     </div>
-                  </div>
-                )}
+                  );
+                })()}
 
                 {/* Ripple Effect for Active Step */}
                 {isActive && showAnimation && (

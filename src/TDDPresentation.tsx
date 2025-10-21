@@ -1089,8 +1089,8 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
     };
 
     const renderResearchView = () => (
-      <div className="h-full flex flex-col justify-center">
-        <div className="text-center mb-8">
+      <div className="h-full flex flex-col">
+        <div className="text-center mb-6">
           <h2 className="text-4xl font-bold mb-4 leading-tight text-[#50DCE1]">Research Evidence</h2>
           <p className="text-lg text-gray-300">What the studies tell us</p>
         </div>
