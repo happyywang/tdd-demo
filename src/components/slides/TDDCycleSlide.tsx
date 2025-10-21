@@ -190,13 +190,6 @@ const TDDCycleSlide = () => {
         <div className="flex justify-center">
           <div className={`relative w-[500px] h-[500px] mb-8 transition-opacity duration-500 ${!showAnimation ? 'opacity-30' : 'opacity-100'}`}>
 
-          {/* Floating Bubble Tip for Think step */}
-          {showExtended && showAnimation && (
-            <div className="absolute top-4 right-4 bg-[#50DCE1] text-black px-3 py-2 rounded-full text-sm font-bold shadow-lg animate-bounce z-10">
-              💡 Every cycle starts with Think!
-              <div className="absolute -bottom-2 left-8 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-[#50DCE1]"></div>
-            </div>
-          )}
 
           {/* Central Hub */}
           <div className="absolute inset-16 bg-gray-800 rounded-full border-4 border-gray-600 flex items-center justify-center shadow-2xl">
@@ -239,10 +232,10 @@ const TDDCycleSlide = () => {
                     </div>
                   </div>
 
-                  {/* Special indicator for Think step */}
-                  {isThinkStep && (
-                    <div className="absolute -top-2 -right-2 bg-gradient-to-r from-[#50DCE1] to-cyan-400 text-black text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shadow-lg">
-                      💭
+                  {/* START badge for Think step */}
+                  {isThinkStep && showAnimation && (
+                    <div className="absolute -top-3 -right-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-black text-[10px] font-black rounded-md px-2 py-1 shadow-lg border-2 border-white">
+                      START
                     </div>
                   )}
                 </div>
@@ -280,7 +273,11 @@ const TDDCycleSlide = () => {
 
                   // Manual adjustment for problematic arrows in 4-step mode
                   if (showExtended) {
-                    if (index === 1) {
+                    if (index === 0) {
+                      // Think(50,15) → Red(86,50): move away from Red
+                      arrowLeft = 65;  // Move left away from Red
+                      arrowTop = 30;   // Move up away from Red
+                    } else if (index === 1) {
                       // Red(86,50) → Green(50,88): move away from circles
                       arrowLeft = 62;  // Move more left away from Red
                       arrowTop = 65;   // Move more up away from Green
@@ -288,6 +285,10 @@ const TDDCycleSlide = () => {
                       // Green(50,88) → Refactor(14,50): move away from Green
                       arrowLeft = 28;  // Move left away from center
                       arrowTop = 65;   // Move up away from Green
+                    } else if (index === 3) {
+                      // Refactor(14,50) → Think(50,15): move toward outer ring
+                      arrowLeft = 28;  // Move left (toward outer ring)
+                      arrowTop = 28;   // Move up (toward outer ring)
                     }
                   }
 
