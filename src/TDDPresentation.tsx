@@ -2915,14 +2915,6 @@ Speed Optimization Techniques:
               Kent Beck
             </h2>
             <p className="text-base text-gray-300">Creator of Test-Driven Development</p>
-            <div className="flex justify-center space-x-2 mt-2">
-              <span className="px-2 py-1 bg-[#50DCE1] bg-opacity-20 text-[#50DCE1] rounded-full text-xs border border-[#50DCE1] border-opacity-30">
-                Software Pioneer
-              </span>
-              <span className="px-2 py-1 bg-[#50DCE1] bg-opacity-20 text-[#50DCE1] rounded-full text-xs border border-[#50DCE1] border-opacity-30">
-                Agile Methodologist
-              </span>
-            </div>
           </div>
         </div>
 
