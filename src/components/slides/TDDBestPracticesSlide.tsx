@@ -9,7 +9,7 @@ interface BestPractice {
 }
 
 const TDDBestPracticesSlide = () => {
-  const [currentPractice, setCurrentPractice] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
 
   const bestPractices: BestPractice[] = [
     {
@@ -50,15 +50,20 @@ const TDDBestPracticesSlide = () => {
     }
   ];
 
-  const nextPractice = () => {
-    setCurrentPractice((prev) => (prev + 1) % bestPractices.length);
+  const practicesPerPage = 2;
+  const totalPages = Math.ceil(bestPractices.length / practicesPerPage);
+
+  const nextPage = () => {
+    setCurrentPage((prev) => (prev + 1) % totalPages);
   };
 
-  const prevPractice = () => {
-    setCurrentPractice((prev) => (prev - 1 + bestPractices.length) % bestPractices.length);
+  const prevPage = () => {
+    setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
   };
 
-  const currentPracticeData = bestPractices[currentPractice];
+  const startIndex = currentPage * practicesPerPage;
+  const endIndex = Math.min(startIndex + practicesPerPage, bestPractices.length);
+  const currentPractices = bestPractices.slice(startIndex, endIndex);
 
   return (
     <div className="h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
@@ -70,69 +75,72 @@ const TDDBestPracticesSlide = () => {
         <p className="text-xl text-[#50DCE1]">Essential practices for successful TDD adoption</p>
       </div>
 
-      {/* Practice Counter */}
+      {/* Page Counter */}
       <div className="text-center mb-6">
         <span className="bg-gray-800 px-4 py-2 rounded-lg text-gray-300 border border-gray-600">
-          {currentPractice + 1} / {bestPractices.length}
+          Page {currentPage + 1} / {totalPages}
         </span>
       </div>
 
-      {/* Current Practice */}
-      <div className={`${currentPracticeData.isAnimation ? 'flex-1' : 'flex-1 flex items-center justify-center'}`}>
-        <div className={`${currentPracticeData.isAnimation ? 'max-w-6xl' : 'max-w-4xl'} mx-auto w-full`}>
-          <div className={`bg-gray-800 ${currentPracticeData.isAnimation ? 'p-6' : 'p-8'} rounded-xl border border-gray-700 hover:border-[#50DCE1] transition-all`}>
+      {/* Current Practices - Show 2 per page vertically */}
+      <div className="flex-1 flex flex-col justify-center space-y-6 max-w-6xl mx-auto w-full">
+        {currentPractices.map((practice, idx) => (
+          <div
+            key={startIndex + idx}
+            className="bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-[#50DCE1] transition-all shadow-lg"
+          >
             <div className="flex items-start space-x-6">
-              <div className="text-6xl flex-shrink-0">{currentPracticeData.icon}</div>
+              <div className="text-6xl flex-shrink-0">{practice.icon}</div>
               <div className="flex-1">
                 {/* Practice Title */}
                 <h3 className="text-3xl font-bold text-[#50DCE1] mb-4">
-                  {currentPracticeData.title}
+                  {practice.title}
                 </h3>
 
                 {/* Practice Description */}
-                <p className={`text-lg text-gray-300 leading-relaxed ${currentPracticeData.isAnimation ? 'mb-3' : 'mb-6'}`}>
-                  {currentPracticeData.description}
+                <p className="text-lg text-gray-300 leading-relaxed">
+                  {practice.description}
                 </p>
 
                 {/* Special handling for ping pong animation */}
-                {currentPracticeData.isAnimation && (
-                  <div className="mt-2">
+                {practice.isAnimation && (
+                  <div className="mt-4">
                     <AnimatedPingPong />
                   </div>
                 )}
               </div>
             </div>
           </div>
+        ))}
+      </div>
 
-          {/* Navigation Buttons */}
-          <div className="flex justify-between items-center mt-8">
-            <button
-              onClick={prevPractice}
-              className="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg text-lg font-bold transition-colors flex items-center space-x-2 group"
-            >
-              <span className="group-hover:-translate-x-1 transition-transform">←</span>
-              <span>Previous</span>
-            </button>
+      {/* Navigation Buttons */}
+      <div className="flex justify-between items-center mt-6">
+        <button
+          onClick={prevPage}
+          className="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg text-lg font-bold transition-colors flex items-center space-x-2 group"
+        >
+          <span className="group-hover:-translate-x-1 transition-transform">←</span>
+          <span>Previous</span>
+        </button>
 
-            <button
-              onClick={nextPractice}
-              className="bg-[#50DCE1] hover:bg-cyan-400 text-black px-6 py-3 rounded-lg text-lg font-bold transition-colors flex items-center space-x-2 group"
-            >
-              <span>Next</span>
-              <span className="group-hover:translate-x-1 transition-transform">→</span>
-            </button>
-          </div>
-        </div>
+        <button
+          onClick={nextPage}
+          className="bg-[#50DCE1] hover:bg-cyan-400 text-black px-6 py-3 rounded-lg text-lg font-bold transition-colors flex items-center space-x-2 group"
+        >
+          <span>Next</span>
+          <span className="group-hover:translate-x-1 transition-transform">→</span>
+        </button>
       </div>
 
       {/* Navigation Dots */}
-      <div className={`flex justify-center space-x-3 ${currentPracticeData.isAnimation ? 'mt-3' : 'mt-6'}`}>
-        {bestPractices.map((_, index) => (
+      <div className="flex justify-center space-x-3 mt-4">
+        {Array.from({ length: totalPages }).map((_, index) => (
           <button
             key={index}
-            onClick={() => setCurrentPractice(index)}
+            onClick={() => setCurrentPage(index)}
             className={`w-4 h-4 rounded-full transition-all ${
-              index === currentPractice
+              index === currentPage
                 ? 'bg-[#50DCE1] transform scale-125'
                 : 'bg-gray-600 hover:bg-gray-500'
             }`}

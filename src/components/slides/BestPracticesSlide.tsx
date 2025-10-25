@@ -5,7 +5,7 @@ import AnimatedPingPong from './AnimatedPingPong';
 
 const BestPracticesSlide = () => {
   const [currentCategory, setCurrentCategory] = useState(0);
-  const [selectedPractice, setSelectedPractice] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0); // Changed from selectedPractice to currentPage
 
   const practiceCategories: PracticeCategory[] = [
     {
@@ -294,16 +294,21 @@ public void ProcessOrder_ValidOrder_OrderIsPersisted()
 
   const nextCategory = () => {
     setCurrentCategory((prev) => (prev + 1) % practiceCategories.length);
-    setSelectedPractice(0);
+    setCurrentPage(0);
   };
 
-  const nextPractice = () => {
+  const nextPage = () => {
     const currentCat = practiceCategories[currentCategory];
-    setSelectedPractice((prev) => (prev + 1) % currentCat.practices.length);
+    const totalPages = Math.ceil(currentCat.practices.length / 2);
+    setCurrentPage((prev) => (prev + 1) % totalPages);
   };
 
   const currentCat = practiceCategories[currentCategory];
-  const currentPractice = currentCat.practices[selectedPractice];
+  const practicesPerPage = 2;
+  const startIndex = currentPage * practicesPerPage;
+  const endIndex = Math.min(startIndex + practicesPerPage, currentCat.practices.length);
+  const currentPractices = currentCat.practices.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(currentCat.practices.length / practicesPerPage);
 
   return (
     <div className="h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
@@ -319,7 +324,7 @@ public void ProcessOrder_ValidOrder_OrderIsPersisted()
             key={index}
             onClick={() => {
               setCurrentCategory(index);
-              setSelectedPractice(0);
+              setCurrentPage(0);
             }}
             className={`px-4 py-2 rounded-full text-sm font-bold transition-all transform hover:scale-105 ${
               index === currentCategory
@@ -339,75 +344,81 @@ public void ProcessOrder_ValidOrder_OrderIsPersisted()
         <p className="opacity-90 text-black font-semibold">{currentCat.description}</p>
       </div>
 
-      {/* Practice Content */}
-      <div className="flex-1 bg-slate-800 border border-[#50DCE1]/30 rounded-xl p-6">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-2xl font-bold text-[#50DCE1] flex items-center">
-            <span className="text-3xl mr-3">{currentPractice.icon}</span>
-            {currentPractice.title}
-          </h3>
-          <div className="flex space-x-2">
-            {currentCat.practices.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setSelectedPractice(index)}
-                className={`w-3 h-3 rounded-full transition-all ${
-                  index === selectedPractice
-                    ? 'bg-[#50DCE1] transform scale-125'
-                    : 'bg-slate-600 hover:bg-slate-500'
-                }`}
-              />
-            ))}
-          </div>
-        </div>
-
-        <p className="text-lg text-gray-300 mb-6">{currentPractice.description}</p>
-
-        {/* Special handling for animation practice */}
-        {currentPractice.isAnimation ? (
-          <div className="space-y-6">
-            <AnimatedPingPong />
-            <div className="bg-gray-900 p-4 rounded-lg">
-              <pre className="text-gray-300 text-sm whitespace-pre-wrap">
-                <code>{currentPractice.example}</code>
-              </pre>
-            </div>
-          </div>
-        ) : (
-          <div className="space-y-6">
-            {/* Code Example */}
-            <div className="bg-black p-4 rounded-lg">
-              <pre className="text-green-300 text-sm whitespace-pre-wrap overflow-x-auto">
-                <code>{currentPractice.example}</code>
-              </pre>
+      {/* Practice Content - Show 2 practices per page */}
+      <div className="flex-1 flex flex-col space-y-4">
+        {currentPractices.map((practice, idx) => (
+          <div key={startIndex + idx} className="flex-1 bg-slate-800 border border-[#50DCE1]/30 rounded-xl p-4">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-xl font-bold text-[#50DCE1] flex items-center">
+                <span className="text-2xl mr-2">{practice.icon}</span>
+                {practice.title}
+              </h3>
             </div>
 
-            {/* Tip */}
-            <div className="bg-yellow-900 bg-opacity-50 p-4 rounded-lg">
-              <div className="flex items-start">
-                <span className="text-2xl mr-3">💡</span>
-                <div>
-                  <h4 className="font-bold text-yellow-200 mb-1">Pro Tip:</h4>
-                  <p className="text-yellow-100 text-sm">{currentPractice.tip}</p>
+            <p className="text-base text-gray-300 mb-3">{practice.description}</p>
+
+            {/* Special handling for animation practice */}
+            {practice.isAnimation ? (
+              <div className="space-y-3">
+                <AnimatedPingPong />
+                <div className="bg-gray-900 p-3 rounded-lg">
+                  <pre className="text-gray-300 text-xs whitespace-pre-wrap">
+                    <code>{practice.example}</code>
+                  </pre>
                 </div>
               </div>
-            </div>
+            ) : (
+              <div className="space-y-3">
+                {/* Code Example */}
+                <div className="bg-black p-3 rounded-lg">
+                  <pre className="text-green-300 text-xs whitespace-pre-wrap overflow-x-auto">
+                    <code>{practice.example}</code>
+                  </pre>
+                </div>
+
+                {/* Tip */}
+                <div className="bg-yellow-900 bg-opacity-50 p-3 rounded-lg">
+                  <div className="flex items-start">
+                    <span className="text-xl mr-2">💡</span>
+                    <div>
+                      <h4 className="font-bold text-yellow-200 mb-1 text-sm">Pro Tip:</h4>
+                      <p className="text-yellow-100 text-xs">{practice.tip}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
-        )}
+        ))}
+      </div>
+
+      {/* Page Indicators */}
+      <div className="flex justify-center space-x-2 mt-4">
+        {Array.from({ length: totalPages }).map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentPage(index)}
+            className={`w-3 h-3 rounded-full transition-all ${
+              index === currentPage
+                ? 'bg-[#50DCE1] transform scale-125'
+                : 'bg-slate-600 hover:bg-slate-500'
+            }`}
+          />
+        ))}
       </div>
 
       {/* Navigation Buttons */}
-      <div className="flex justify-between items-center mt-6">
+      <div className="flex justify-between items-center mt-4">
         <button
-          onClick={nextPractice}
-          className="bg-[#50DCE1] hover:bg-cyan-400 text-black px-6 py-3 rounded-full font-bold transition-colors"
+          onClick={nextPage}
+          className="bg-[#50DCE1] hover:bg-cyan-400 text-black px-6 py-2 rounded-full font-bold transition-colors"
         >
-          Next Practice →
+          Next Page →
         </button>
 
         <button
           onClick={nextCategory}
-          className="bg-slate-700 hover:bg-slate-600 hover:border-[#50DCE1] border border-transparent text-white px-6 py-3 rounded-full font-bold transition-colors"
+          className="bg-slate-700 hover:bg-slate-600 hover:border-[#50DCE1] border border-transparent text-white px-6 py-2 rounded-full font-bold transition-colors"
         >
           Next Category: {practiceCategories[(currentCategory + 1) % practiceCategories.length].title} →
         </button>
