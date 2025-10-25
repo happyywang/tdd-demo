@@ -678,7 +678,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
       },
       {
         year: "1999",
-        description: "Kent Beck formalizes TDD in \"Extreme Programming Explained,\" making \"test before code\" a clear methodology.",
+        description: "Kent Beck formalizes TDD in \"Extreme Programming Explained: Embrace Change,\" making \"test before code\" a clear methodology.",
         icon: "📘",
         color: "orange",
         avatar: "/kent-beck.webp"
@@ -1029,13 +1029,15 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
         defectReduction: "40-91%",
         timeIncrease: "15-35%",
         teams: "Four professional teams",
-        credibility: "High - published research from major tech companies"
+        credibility: "High - published research from major tech companies",
+        sourceLink: "https://www.microsoft.com/en-us/research/wp-content/uploads/2009/10/Realizing-Quality-Improvement-Through-Test-Driven-Development-Results-and-Experiences-of-Four-Industrial-Teams-nagappan_tdd.pdf"
       },
       metaAnalysis: {
         title: "Systematic Review (2016)",
         qualityImprovement: "76% of studies showed significant internal quality increase",
         externalQuality: "88% showed significant external quality increase",
-        source: "ScienceDirect systematic review"
+        source: "ScienceDirect systematic review",
+        sourceLink: "https://www.sciencedirect.com/science/article/abs/pii/S0950584916300222"
       }
     };
 
@@ -1110,7 +1112,16 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
                 <p className="text-xs text-gray-200 mt-1">Short-term investment for long-term gain</p>
               </div>
             </div>
-            <p className="text-xs text-gray-200 mt-2 italic">{researchData.nagappan2008.credibility}</p>
+            <div className="mt-2 text-center">
+              <a
+                href={researchData.nagappan2008.sourceLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-[#50DCE1] hover:text-cyan-400 underline transition-colors font-bold"
+              >
+                📄 View Paper
+              </a>
+            </div>
           </div>
 
           <div className="bg-gradient-to-r from-[#50DCE1] to-cyan-500 p-4 rounded-xl">
@@ -1122,6 +1133,16 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
               <div className="bg-black bg-opacity-30 p-4 rounded-lg text-center">
                 <p className="text-xl font-bold text-black">{researchData.metaAnalysis.externalQuality}</p>
               </div>
+            </div>
+            <div className="mt-2 text-center">
+              <a
+                href={researchData.metaAnalysis.sourceLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-black hover:text-gray-800 underline transition-colors font-bold"
+              >
+                📄 View Study
+              </a>
             </div>
           </div>
         </div>
