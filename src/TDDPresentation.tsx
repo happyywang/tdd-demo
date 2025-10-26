@@ -469,11 +469,21 @@ const TDDPresentation = () => {
 
   // Title Slide Component
   const TitleSlide = () => (
-    <div className="flex flex-col items-center justify-center text-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" style={{minHeight: LAYOUT.SLIDE_MIN_HEIGHT}}>
+    <div className="relative flex flex-col items-center justify-center text-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" style={{minHeight: LAYOUT.SLIDE_MIN_HEIGHT}}>
+      {/* Company Logo - Top Left */}
+      <div className="absolute top-8 left-8">
+        <img
+          src="https://contenthub.rosen-nxt.com/api/public/content/2e51318a231c4dfdaf772eb018039c48?v=bd2b3919"
+          alt="inqu company logo"
+          className="h-16 w-auto"
+        />
+      </div>
+
       <h1 className="text-8xl font-bold mb-8 leading-tight bg-gradient-to-r from-white via-[#50DCE1] to-white bg-clip-text text-transparent">
         User Group TDD
       </h1>
-      <p className="text-4xl text-[#50DCE1] font-semibold">Test-Driven Development</p>
+      <p className="text-4xl text-[#50DCE1] font-semibold mb-6">Test-Driven Development</p>
+      <p className="text-2xl text-gray-300 mt-4">Yan Wang</p>
     </div>
   );
 
