@@ -532,31 +532,20 @@ public class DiscountCalculatorTests
 public class DiscountCalculatorTests
 {
     [TestMethod]
-    public void Calculate_ReturnsCorrectValues_ForVariousInputs()
+    public void Calculate_ReturnsExpectedResults()
     {
         // Arrange
         var calculator = new DiscountCalculator();
 
         // Act
-        var result1 = calculator.Calculate(120);
-        var result2 = calculator.Calculate(80);
+        var result1 = calculator.Calculate(80);
+        var result2 = calculator.Calculate(120);
+        var result3 = calculator.Calculate(200);
 
         // Assert
-        Assert.AreEqual(108m, result1);
-        Assert.AreEqual(80m, result2);
-    }
-
-    [TestMethod]
-    public void Calculate_UsesTenPercentDiscountFormula()
-    {
-        // Arrange
-        var calculator = new DiscountCalculator();
-
-        // Act
-        var result = calculator.Calculate(200);
-
-        // Assert
-        Assert.AreEqual(180m, result);
+        Assert.AreEqual(80m, result1);
+        Assert.AreEqual(108m, result2);
+        Assert.AreEqual(180m, result3);
     }
 }`} /></code>
             </pre>

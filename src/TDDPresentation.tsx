@@ -1139,10 +1139,10 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
             <h3 className="text-lg font-bold mb-2 text-black">{researchData.metaAnalysis.title}</h3>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="bg-black bg-opacity-30 p-4 rounded-lg text-center">
-                <p className="text-xl font-bold text-black">{researchData.metaAnalysis.qualityImprovement}</p>
+                <p className="text-xl font-bold text-white">{researchData.metaAnalysis.qualityImprovement}</p>
               </div>
               <div className="bg-black bg-opacity-30 p-4 rounded-lg text-center">
-                <p className="text-xl font-bold text-black">{researchData.metaAnalysis.externalQuality}</p>
+                <p className="text-xl font-bold text-white">{researchData.metaAnalysis.externalQuality}</p>
               </div>
             </div>
             <div className="mt-2 text-center">
