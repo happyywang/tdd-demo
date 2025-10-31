@@ -832,7 +832,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
         impact: "Developers feel slower and uncomfortable initially",
         detail: "Years of 'write code then test' habits are hard to break. Feels unnatural and counterintuitive at first.",
         mitigation: "Gradual adoption, promote a test-first culture through pair programming.",
-        practicalTip: "Begin each feature by writing one small failing test before implementing any code."
+        practicalTip: "Start small — apply TDD only to one simple function per feature. Gradually build the \"write one failing test first\" habit before full adoption."
       },
       {
         title: "Writing High-Quality, Behavior-Focused Tests",
@@ -913,7 +913,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
 
     const renderMitigationView = () => {
       return (
-        <div className="h-full flex flex-col justify-start pt-4">
+        <div className="h-full flex flex-col justify-start pt-2">
           <div className="max-w-7xl mx-auto w-full">
 
             <div className="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden">
@@ -934,16 +934,16 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
                 <tbody>
                   {challenges.map((challenge, index) => (
                     <tr key={index} className={`border-b border-gray-700 hover:bg-gray-750 ${index === challenges.length - 1 ? 'border-b-0' : ''}`}>
-                      <td className="px-4 py-3">
+                      <td className="px-4 py-2.5">
                         <div className="flex items-center space-x-2">
                           <span className="text-lg">{challenge.icon}</span>
-                          <span className="font-semibold text-white text-sm">{challenge.title}</span>
+                          <span className="font-semibold text-white text-base">{challenge.title}</span>
                         </div>
                       </td>
-                      <td className="px-4 py-3 text-gray-300 text-base">
+                      <td className="px-4 py-2.5 text-gray-300 text-base leading-normal">
                         {challenge.mitigation}
                       </td>
-                      <td className="px-4 py-3 text-gray-300 text-base">
+                      <td className="px-4 py-2.5 text-gray-300 text-base leading-normal">
                         {challenge.practicalTip}
                       </td>
                     </tr>

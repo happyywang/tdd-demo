@@ -13,34 +13,34 @@ const TDDBestPracticesSlide = () => {
 
   const bestPractices: BestPractice[] = [
     {
-      title: "Follow TDD Cycle Strictly",
-      description: "Red → Green → Refactor, always in order. Never skip a step. Each phase has a different mindset and purpose.",
-      icon: "🔄"
+      title: "Start with Business Value, Not Code Structure",
+      description: "Don't start by testing classes or methods — start from the most valuable user behavior. Let the tests express the system's intent, not internal logic.",
+      icon: "💼"
     },
     {
-      title: "Only Write Production Code to Satisfy a Failing Test",
-      description: "Let the tests drive the code, not the other way around. This ensures every line of code has a purpose and is tested.",
+      title: "Write the Simplest Failing Test That Proves Progress",
+      description: "Each test should push the design one clear step forward — Simplicity keeps feedback fast and cognitive load low.",
       icon: "🎯"
     },
     {
-      title: "Refactor Only When Tests Are Green",
-      description: "Green tests give you a safety net for improving code quality. Red tests mean STOP - fix the issue before continuing.",
+      title: "Refactor Relentlessly — But Only on Green",
+      description: "The real power of TDD is not tests — it's safe, continuous refactoring. Keep design clean and flexible after every green cycle.",
       icon: "🟢"
     },
     {
-      title: "Focus on Behavior, Not Implementation",
-      description: "Tests should verify what the code does, not how it does it. Avoid tightly coupling tests to internal implementation, or refactoring becomes difficult.",
-      icon: "🎭"
+      title: "Refactor Both Production and Test Code",
+      description: "Improve both your code under test and the test code itself after each cycle, ensuring clarity, reuse, and elimination of duplication.",
+      icon: "♻️"
     },
     {
-      title: "Keep Tests Small and Focused",
-      description: "Each test should verify a single behavior or functionality. Avoid tests that cover too much logic at once, as failures become harder to diagnose.",
-      icon: "🔍"
-    },
-    {
-      title: "Keep Tests Fast",
-      description: "Slow tests kill the TDD feedback loop. Unit tests should run in under 100ms each. If tests take more than 10 seconds total, developers will skip them.",
+      title: "Keep Tests Fast and Independent",
+      description: "Slow tests kill the TDD feedback loop. Mock I/O, isolate dependencies, and ensure tests run in seconds.",
       icon: "⚡"
+    },
+    {
+      title: "End Your Day with a Failing Test",
+      description: "A great productivity trick — you'll know exactly where to start the next morning, and it keeps you in the TDD rhythm.",
+      icon: "🌙"
     },
     {
       title: "Ping Pong Programming",
