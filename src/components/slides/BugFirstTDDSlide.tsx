@@ -7,7 +7,7 @@ const BugFirstTDDSlide = () => {
     {
       icon: '🪲',
       title: 'Bug',
-      subtitle: 'Don\'t rush to fix - understand the bug first, then write a test.',
+      subtitle: 'Don\'t rush to fix - fully understand the bug first.',
       bgColor: 'from-slate-900 via-slate-700 to-slate-900',
       accentColor: 'text-[#50DCE1]',
       borderColor: 'border-[#50DCE1]/30'
@@ -125,7 +125,7 @@ const BugFirstTDDSlide = () => {
                   <>
                     <div className="w-12 h-0.5 bg-gray-600 mx-2"></div>
                     <div className="text-gray-400 text-sm whitespace-nowrap">
-                      Loop back to Bug<br/>or New Feature
+                      Loop back to the next Bug
                     </div>
                   </>
                 )}
