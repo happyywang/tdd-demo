@@ -1820,7 +1820,7 @@ public class BankAccount
       },
       {
         title: "Step 12: Refactor 🔵",
-        description: "Our validation logic is growing — time to extract helper methods.",
+        description: "We spot duplication: both deposit and withdraw should forbid negative or zero amounts. We refactor with input validation",
         phase: "refactor",
         allTestsCode: `[TestClass]
 public class BankAccountTests
