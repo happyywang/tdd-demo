@@ -851,8 +851,8 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
         problem: "15-35% longer development time initially (research confirmed)",
         impact: "Pressure from management and tight deadlines create resistance",
         detail: "Writing tests first feels like doing extra work. Team velocity appears to drop in early sprints.",
-        mitigation: "Set realistic expectations: TDD feels slower initially but accelerates long-term quality and refactoring.",
-        practicalTip: "Compare defect rates, debugging hours, and maintenance costs."
+        mitigation: "Be clear from the beginning: TDD may feel slow at the start, but it gets much faster and better for quality later.",
+        practicalTip: "Show clear numbers: defect rates, debugging hours, and maintenance costs"
       }
     ];
 
