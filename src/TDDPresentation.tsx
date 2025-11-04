@@ -840,8 +840,8 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
         color: "bg-gradient-to-br from-slate-800 to-slate-700",
         problem: "TDD requires more than just having tests — it demands tests that express business intent, boundaries, and expected behavior.",
         impact: "Poorly written tests fail to guide design and reduce TDD's real value.",
-        detail: "Many existing tests verify internal logic or code paths rather than user-facing outcomes.",
-        mitigation: "Focus tests on observable business outcomes rather than internal logic.",
+        detail: "Many tests were still written in a unit test style to verify the internal logic or code paths rather than user-facing outcomes.",
+        mitigation: "Fully understand the difference between TDD style test and unit test style",
         practicalTip: "Use expressive test names and scenarios to describe business intent, not technical details."
       },
       {
