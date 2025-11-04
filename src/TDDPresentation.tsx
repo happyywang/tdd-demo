@@ -835,7 +835,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
         practicalTip: "Start small — apply TDD only to one simple function per feature. Gradually build the \"write one failing test first\" habit before full adoption."
       },
       {
-        title: "Writing High-Quality, Behavior-Focused Tests",
+        title: "Writing Behavior-Focused Tests",
         icon: "🎯",
         color: "bg-gradient-to-br from-slate-800 to-slate-700",
         problem: "TDD requires more than just having tests — it demands tests that express business intent, boundaries, and expected behavior.",
