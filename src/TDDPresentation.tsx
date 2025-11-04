@@ -850,7 +850,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
         color: "bg-gradient-to-br from-slate-600 to-slate-700",
         problem: "15-35% longer development time initially (research confirmed)",
         impact: "Pressure from management and tight deadlines create resistance",
-        detail: "Writing tests first feels like doing double work. Team velocity appears to drop in early sprints.",
+        detail: "Writing tests first feels like doing extra work. Team velocity appears to drop in early sprints.",
         mitigation: "Set realistic expectations: TDD feels slower initially but accelerates long-term quality and refactoring.",
         practicalTip: "Compare defect rates, debugging hours, and maintenance costs."
       }
