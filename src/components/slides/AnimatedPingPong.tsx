@@ -6,6 +6,7 @@ const AnimatedPingPong = memo(() => {
   const [currentPhase, setCurrentPhase] = useState(0);
   const [showAnimation, setShowAnimation] = useState(false);
   const [cycleCount, setCycleCount] = useState(0);
+  const [isAutoPlay, setIsAutoPlay] = useState(false);
 
   const phases: PingPongPhase[] = useMemo(() => [
     // Cycle 1: Developer A writes test, Developer B implements
@@ -156,24 +157,44 @@ const AnimatedPingPong = memo(() => {
     setShowAnimation(true);
   };
 
+  const nextPhase = () => {
+    const next = (currentPhase + 1) % phases.length;
+    setCurrentPhase(next);
+
+    // Check if we completed a full cycle (10 phases = 2 complete ping-pong cycles)
+    if (next === 0) {
+      setCycleCount(prev => prev + 1);
+    }
+  };
+
+  const prevPhase = () => {
+    const prev = (currentPhase - 1 + phases.length) % phases.length;
+    setCurrentPhase(prev);
+  };
+
+  const toggleAutoPlay = () => {
+    setIsAutoPlay(prev => !prev);
+  };
+
   useEffect(() => {
-    if (!showAnimation) return;
+    if (!showAnimation || !isAutoPlay) return;
 
     const interval = setInterval(() => {
-      const nextPhase = (currentPhase + 1) % phases.length;
-      setCurrentPhase(nextPhase);
+      const next = (currentPhase + 1) % phases.length;
+      setCurrentPhase(next);
 
       // Check if we completed a full cycle (10 phases = 2 complete ping-pong cycles)
-      if (nextPhase === 0) {
+      if (next === 0) {
         setCycleCount(prev => prev + 1);
         if (cycleCount >= 1) { // Show 2 complete cycles
           clearInterval(interval);
+          setIsAutoPlay(false);
         }
       }
     }, ANIMATIONS.PING_PONG_INTERVAL);
 
     return () => clearInterval(interval);
-  }, [currentPhase, cycleCount, showAnimation, phases.length]);
+  }, [currentPhase, cycleCount, showAnimation, isAutoPlay, phases.length]);
 
   const currentPhaseData = useMemo(() => phases[currentPhase], [phases, currentPhase]);
 
@@ -271,6 +292,49 @@ const AnimatedPingPong = memo(() => {
             </div>
           </div>
         </div>
+
+        {/* Manual Controls */}
+        {showAnimation && (
+          <div className="flex items-center justify-center gap-4 mt-6">
+            <button
+              onClick={prevPhase}
+              className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-semibold transition-colors flex items-center gap-2"
+              title="Previous phase"
+            >
+              <span>←</span>
+              <span>Previous</span>
+            </button>
+
+            <button
+              onClick={toggleAutoPlay}
+              className={`${
+                isAutoPlay
+                  ? 'bg-yellow-600 hover:bg-yellow-500'
+                  : 'bg-[#50DCE1] hover:bg-cyan-400'
+              } text-black px-6 py-2 rounded-lg font-semibold transition-colors flex items-center gap-2`}
+              title={isAutoPlay ? 'Pause auto-play' : 'Start auto-play'}
+            >
+              <span className="text-xl">{isAutoPlay ? '⏸' : '▶'}</span>
+              <span>{isAutoPlay ? 'Pause' : 'Auto Play'}</span>
+            </button>
+
+            <button
+              onClick={nextPhase}
+              className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-semibold transition-colors flex items-center gap-2"
+              title="Next phase"
+            >
+              <span>Next</span>
+              <span>→</span>
+            </button>
+          </div>
+        )}
+
+        {/* Phase Info */}
+        {showAnimation && (
+          <div className="text-center mt-4 text-gray-400 text-sm">
+            Phase {currentPhase + 1} of {phases.length} | Cycle {cycleCount + 1}
+          </div>
+        )}
       </div>
     </div>
   );
