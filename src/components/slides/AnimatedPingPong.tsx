@@ -328,13 +328,6 @@ const AnimatedPingPong = memo(() => {
             </button>
           </div>
         )}
-
-        {/* Phase Info */}
-        {showAnimation && (
-          <div className="text-center mt-4 text-gray-400 text-sm">
-            Phase {currentPhase + 1} of {phases.length} | Cycle {cycleCount + 1}
-          </div>
-        )}
       </div>
     </div>
   );
