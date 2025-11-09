@@ -1393,7 +1393,7 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
 public class BankAccountTests
 {
     [TestMethod]
-    public void Deposit_ShouldIncreaseBalance()
+    public void Should_IncreaseBalance_When_Deposit()
     {
         var account = new BankAccount();
         account.Deposit(100m);
@@ -1411,7 +1411,7 @@ public class BankAccount
     }
 }`,
         testResults: [
-          { name: "Deposit_ShouldIncreaseBalance", status: "fail", message: "Expected: 100, Actual: 0" }
+          { name: "Should_IncreaseBalance_When_Deposit", status: "fail", message: "Expected: 100, Actual: 0" }
         ],
         testStats: { total: 1, passed: 0, failed: 1 }
       },
@@ -1423,7 +1423,7 @@ public class BankAccount
 public class BankAccountTests
 {
     [TestMethod]
-    public void Deposit_ShouldIncreaseBalance()
+    public void Should_IncreaseBalance_When_Deposit()
     {
         var account = new BankAccount();
         account.Deposit(100m);
@@ -1441,7 +1441,7 @@ public class BankAccount
     }
 }`,
         testResults: [
-          { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" }
+          { name: "Should_IncreaseBalance_When_Deposit", status: "pass", message: "✓ Test passed" }
         ],
         testStats: { total: 1, passed: 1, failed: 0 }
       },
@@ -1453,7 +1453,7 @@ public class BankAccount
 public class BankAccountTests
 {
     [TestMethod]
-    public void Deposit_ShouldIncreaseBalance()
+    public void Should_IncreaseBalance_When_Deposit()
     {
         var account = new BankAccount();
         account.Deposit(100m);
@@ -1471,7 +1471,7 @@ public class BankAccount
     }
 }`,
         testResults: [
-          { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" }
+          { name: "Should_IncreaseBalance_When_Deposit", status: "pass", message: "✓ Test passed" }
         ],
         testStats: { total: 1, passed: 1, failed: 0 }
       },
@@ -1508,7 +1508,7 @@ public class BankAccount
     // Need to add Withdraw method
 }`,
         testResults: [
-          { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" }
+          { name: "Should_IncreaseBalance_When_Deposit", status: "pass", message: "✓ Test passed" }
         ],
         testStats: { total: 1, passed: 1, failed: 0 }
       },
@@ -1520,7 +1520,7 @@ public class BankAccount
 public class BankAccountTests
 {
     [TestMethod]
-    public void Deposit_ShouldIncreaseBalance()
+    public void Should_IncreaseBalance_When_Deposit()
     {
         var account = new BankAccount();
         account.Deposit(100m);
@@ -1528,7 +1528,7 @@ public class BankAccountTests
     }
 
     [TestMethod]
-    public void Withdraw_ShouldDecreaseBalance()
+    public void Should_DecreaseBalance_When_Withdraw()
     {
         var account = new BankAccount();
         account.Deposit(100m);
@@ -1552,8 +1552,8 @@ public class BankAccount
     }
 }`,
         testResults: [
-          { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" },
-          { name: "Withdraw_ShouldDecreaseBalance", status: "fail", message: "Expected: 60, Actual: 100" }
+          { name: "Should_IncreaseBalance_When_Deposit", status: "pass", message: "✓ Test passed" },
+          { name: "Should_DecreaseBalance_When_Withdraw", status: "fail", message: "Expected: 60, Actual: 100" }
         ],
         testStats: { total: 2, passed: 1, failed: 1 }
       },
@@ -1565,7 +1565,7 @@ public class BankAccount
 public class BankAccountTests
 {
     [TestMethod]
-    public void Deposit_ShouldIncreaseBalance()
+    public void Should_IncreaseBalance_When_Deposit()
     {
         var account = new BankAccount();
         account.Deposit(100m);
@@ -1573,7 +1573,7 @@ public class BankAccountTests
     }
 
     [TestMethod]
-    public void Withdraw_ShouldDecreaseBalance()
+    public void Should_DecreaseBalance_When_Withdraw()
     {
         var account = new BankAccount();
         account.Deposit(100m);
@@ -1597,8 +1597,8 @@ public class BankAccount
     }
 }`,
         testResults: [
-          { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" },
-          { name: "Withdraw_ShouldDecreaseBalance", status: "pass", message: "✓ Test passed" }
+          { name: "Should_IncreaseBalance_When_Deposit", status: "pass", message: "✓ Test passed" },
+          { name: "Should_DecreaseBalance_When_Withdraw", status: "pass", message: "✓ Test passed" }
         ],
         testStats: { total: 2, passed: 2, failed: 0 }
       },
@@ -1610,7 +1610,7 @@ public class BankAccount
 public class BankAccountTests
 {
     [TestMethod]
-    public void Deposit_ShouldIncreaseBalance()
+    public void Should_IncreaseBalance_When_Deposit()
     {
         var account = new BankAccount();
         account.Deposit(100m);
@@ -1618,7 +1618,7 @@ public class BankAccountTests
     }
 
     [TestMethod]
-    public void Withdraw_ShouldDecreaseBalance()
+    public void Should_DecreaseBalance_When_Withdraw()
     {
         var account = new BankAccount();
         account.Deposit(100m);
@@ -1646,8 +1646,8 @@ public class BankAccount
     }
 }`,
         testResults: [
-          { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" },
-          { name: "Withdraw_ShouldDecreaseBalance", status: "pass", message: "✓ Test passed" }
+          { name: "Should_IncreaseBalance_When_Deposit", status: "pass", message: "✓ Test passed" },
+          { name: "Should_DecreaseBalance_When_Withdraw", status: "pass", message: "✓ Test passed" }
         ],
         testStats: { total: 2, passed: 2, failed: 0 }
       },
@@ -1691,8 +1691,8 @@ public class BankAccount
     }
 }`,
         testResults: [
-          { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" },
-          { name: "Withdraw_ShouldDecreaseBalance", status: "pass", message: "✓ Test passed" }
+          { name: "Should_IncreaseBalance_When_Deposit", status: "pass", message: "✓ Test passed" },
+          { name: "Should_DecreaseBalance_When_Withdraw", status: "pass", message: "✓ Test passed" }
         ],
         testStats: { total: 2, passed: 2, failed: 0 }
       },
@@ -1704,7 +1704,7 @@ public class BankAccount
 public class BankAccountTests
 {
     [TestMethod]
-    public void Deposit_ShouldIncreaseBalance()
+    public void Should_IncreaseBalance_When_Deposit()
     {
         var account = new BankAccount();
         account.Deposit(100m);
@@ -1712,7 +1712,7 @@ public class BankAccountTests
     }
 
     [TestMethod]
-    public void Withdraw_ShouldDecreaseBalance()
+    public void Should_DecreaseBalance_When_Withdraw()
     {
         var account = new BankAccount();
         account.Deposit(100m);
@@ -1722,7 +1722,7 @@ public class BankAccountTests
 
     [TestMethod]
     [ExpectedException(typeof(InvalidOperationException))]
-    public void Withdraw_ShouldThrow_WhenInsufficientBalance()
+    public void Should_ThrowException_When_WithdrawExceedsBalance()
     {
         var account = new BankAccount();
         account.Deposit(50m);
@@ -1750,9 +1750,9 @@ public class BankAccount
     }
 }`,
         testResults: [
-          { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" },
-          { name: "Withdraw_ShouldDecreaseBalance", status: "pass", message: "✓ Test passed" },
-          { name: "Withdraw_ShouldThrow_WhenInsufficientBalance", status: "fail", message: "Expected InvalidOperationException but no exception was thrown" }
+          { name: "Should_IncreaseBalance_When_Deposit", status: "pass", message: "✓ Test passed" },
+          { name: "Should_DecreaseBalance_When_Withdraw", status: "pass", message: "✓ Test passed" },
+          { name: "Should_ThrowException_When_WithdrawExceedsBalance", status: "fail", message: "Expected InvalidOperationException but no exception was thrown" }
         ],
         testStats: { total: 3, passed: 2, failed: 1 }
       },
@@ -1764,7 +1764,7 @@ public class BankAccount
 public class BankAccountTests
 {
     [TestMethod]
-    public void Deposit_ShouldIncreaseBalance()
+    public void Should_IncreaseBalance_When_Deposit()
     {
         var account = new BankAccount();
         account.Deposit(100m);
@@ -1772,7 +1772,7 @@ public class BankAccountTests
     }
 
     [TestMethod]
-    public void Withdraw_ShouldDecreaseBalance()
+    public void Should_DecreaseBalance_When_Withdraw()
     {
         var account = new BankAccount();
         account.Deposit(100m);
@@ -1782,7 +1782,7 @@ public class BankAccountTests
 
     [TestMethod]
     [ExpectedException(typeof(InvalidOperationException))]
-    public void Withdraw_ShouldThrow_WhenInsufficientBalance()
+    public void Should_ThrowException_When_WithdrawExceedsBalance()
     {
         var account = new BankAccount();
         account.Deposit(50m);
@@ -1812,9 +1812,9 @@ public class BankAccount
     }
 }`,
         testResults: [
-          { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" },
-          { name: "Withdraw_ShouldDecreaseBalance", status: "pass", message: "✓ Test passed" },
-          { name: "Withdraw_ShouldThrow_WhenInsufficientBalance", status: "pass", message: "✓ Test passed" }
+          { name: "Should_IncreaseBalance_When_Deposit", status: "pass", message: "✓ Test passed" },
+          { name: "Should_DecreaseBalance_When_Withdraw", status: "pass", message: "✓ Test passed" },
+          { name: "Should_ThrowException_When_WithdrawExceedsBalance", status: "pass", message: "✓ Test passed" }
         ],
         testStats: { total: 3, passed: 3, failed: 0 }
       },
@@ -1826,7 +1826,7 @@ public class BankAccount
 public class BankAccountTests
 {
     [TestMethod]
-    public void Deposit_ShouldIncreaseBalance()
+    public void Should_IncreaseBalance_When_Deposit()
     {
         var account = new BankAccount();
         account.Deposit(100m);
@@ -1834,7 +1834,7 @@ public class BankAccountTests
     }
 
     [TestMethod]
-    public void Withdraw_ShouldDecreaseBalance()
+    public void Should_DecreaseBalance_When_Withdraw()
     {
         var account = new BankAccount();
         account.Deposit(100m);
@@ -1844,7 +1844,7 @@ public class BankAccountTests
 
     [TestMethod]
     [ExpectedException(typeof(InvalidOperationException))]
-    public void Withdraw_ShouldThrow_WhenInsufficientBalance()
+    public void Should_ThrowException_When_WithdrawExceedsBalance()
     {
         var account = new BankAccount();
         account.Deposit(50m);
@@ -1882,9 +1882,9 @@ public class BankAccount
     }
 }`,
         testResults: [
-          { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" },
-          { name: "Withdraw_ShouldDecreaseBalance", status: "pass", message: "✓ Test passed" },
-          { name: "Withdraw_ShouldThrow_WhenInsufficientBalance", status: "pass", message: "✓ Test passed" }
+          { name: "Should_IncreaseBalance_When_Deposit", status: "pass", message: "✓ Test passed" },
+          { name: "Should_DecreaseBalance_When_Withdraw", status: "pass", message: "✓ Test passed" },
+          { name: "Should_ThrowException_When_WithdrawExceedsBalance", status: "pass", message: "✓ Test passed" }
         ],
         testStats: { total: 3, passed: 3, failed: 0 }
       },
@@ -1922,9 +1922,9 @@ public interface IFeeCalculator
     decimal CalculateFee(decimal amount);
 }`,
         testResults: [
-          { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" },
-          { name: "Withdraw_ShouldDecreaseBalance", status: "pass", message: "✓ Test passed" },
-          { name: "Withdraw_ShouldThrow_WhenInsufficientBalance", status: "pass", message: "✓ Test passed" }
+          { name: "Should_IncreaseBalance_When_Deposit", status: "pass", message: "✓ Test passed" },
+          { name: "Should_DecreaseBalance_When_Withdraw", status: "pass", message: "✓ Test passed" },
+          { name: "Should_ThrowException_When_WithdrawExceedsBalance", status: "pass", message: "✓ Test passed" }
         ],
         testStats: { total: 3, passed: 3, failed: 0 }
       },
@@ -1936,7 +1936,7 @@ public interface IFeeCalculator
 public class BankAccountTests
 {
     [TestMethod]
-    public void Deposit_ShouldIncreaseBalance()
+    public void Should_IncreaseBalance_When_Deposit()
     {
         var account = new BankAccount();
         account.Deposit(100m);
@@ -1944,7 +1944,7 @@ public class BankAccountTests
     }
 
     [TestMethod]
-    public void Withdraw_ShouldDecreaseBalance()
+    public void Should_DecreaseBalance_When_Withdraw()
     {
         var account = new BankAccount();
         account.Deposit(100m);
@@ -1954,7 +1954,7 @@ public class BankAccountTests
 
     [TestMethod]
     [ExpectedException(typeof(InvalidOperationException))]
-    public void Withdraw_ShouldThrow_WhenInsufficientBalance()
+    public void Should_ThrowException_When_WithdrawExceedsBalance()
     {
         var account = new BankAccount();
         account.Deposit(50m);
@@ -1966,7 +1966,7 @@ public class BankAccountTests
 public class TransferServiceTests
 {
     [TestMethod]
-    public void Transfer_ShouldMoveMoneyWithFee()
+    public void Should_MoveMoneyWithFee_When_Transfer()
     {
         var source = new BankAccount();
         var target = new BankAccount();
@@ -2033,10 +2033,10 @@ public class TransferService
     }
 }`,
         testResults: [
-          { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" },
-          { name: "Withdraw_ShouldDecreaseBalance", status: "pass", message: "✓ Test passed" },
-          { name: "Withdraw_ShouldThrow_WhenInsufficientBalance", status: "pass", message: "✓ Test passed" },
-          { name: "Transfer_ShouldMoveMoneyWithFee", status: "fail", message: "Expected source.Balance: 45, Actual: 100" }
+          { name: "Should_IncreaseBalance_When_Deposit", status: "pass", message: "✓ Test passed" },
+          { name: "Should_DecreaseBalance_When_Withdraw", status: "pass", message: "✓ Test passed" },
+          { name: "Should_ThrowException_When_WithdrawExceedsBalance", status: "pass", message: "✓ Test passed" },
+          { name: "Should_MoveMoneyWithFee_When_Transfer", status: "fail", message: "Expected source.Balance: 45, Actual: 100" }
         ],
         testStats: { total: 4, passed: 3, failed: 1 }
       },
@@ -2048,7 +2048,7 @@ public class TransferService
 public class BankAccountTests
 {
     [TestMethod]
-    public void Deposit_ShouldIncreaseBalance()
+    public void Should_IncreaseBalance_When_Deposit()
     {
         var account = new BankAccount();
         account.Deposit(100m);
@@ -2056,7 +2056,7 @@ public class BankAccountTests
     }
 
     [TestMethod]
-    public void Withdraw_ShouldDecreaseBalance()
+    public void Should_DecreaseBalance_When_Withdraw()
     {
         var account = new BankAccount();
         account.Deposit(100m);
@@ -2066,7 +2066,7 @@ public class BankAccountTests
 
     [TestMethod]
     [ExpectedException(typeof(InvalidOperationException))]
-    public void Withdraw_ShouldThrow_WhenInsufficientBalance()
+    public void Should_ThrowException_When_WithdrawExceedsBalance()
     {
         var account = new BankAccount();
         account.Deposit(50m);
@@ -2078,7 +2078,7 @@ public class BankAccountTests
 public class TransferServiceTests
 {
     [TestMethod]
-    public void Transfer_ShouldMoveMoneyWithFee()
+    public void Should_MoveMoneyWithFee_When_Transfer()
     {
         var source = new BankAccount();
         var target = new BankAccount();
@@ -2154,10 +2154,10 @@ public class TransferService
     }
 }`,
         testResults: [
-          { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" },
-          { name: "Withdraw_ShouldDecreaseBalance", status: "pass", message: "✓ Test passed" },
-          { name: "Withdraw_ShouldThrow_WhenInsufficientBalance", status: "pass", message: "✓ Test passed" },
-          { name: "Transfer_ShouldMoveMoneyWithFee", status: "pass", message: "✓ Test passed" }
+          { name: "Should_IncreaseBalance_When_Deposit", status: "pass", message: "✓ Test passed" },
+          { name: "Should_DecreaseBalance_When_Withdraw", status: "pass", message: "✓ Test passed" },
+          { name: "Should_ThrowException_When_WithdrawExceedsBalance", status: "pass", message: "✓ Test passed" },
+          { name: "Should_MoveMoneyWithFee_When_Transfer", status: "pass", message: "✓ Test passed" }
         ],
         testStats: { total: 4, passed: 4, failed: 0 }
       },
@@ -2169,7 +2169,7 @@ public class TransferService
 public class BankAccountTests
 {
     [TestMethod]
-    public void Deposit_ShouldIncreaseBalance()
+    public void Should_IncreaseBalance_When_Deposit()
     {
         var account = new BankAccount();
         account.Deposit(100m);
@@ -2177,7 +2177,7 @@ public class BankAccountTests
     }
 
     [TestMethod]
-    public void Withdraw_ShouldDecreaseBalance()
+    public void Should_DecreaseBalance_When_Withdraw()
     {
         var account = new BankAccount();
         account.Deposit(100m);
@@ -2187,7 +2187,7 @@ public class BankAccountTests
 
     [TestMethod]
     [ExpectedException(typeof(InvalidOperationException))]
-    public void Withdraw_ShouldThrow_WhenInsufficientBalance()
+    public void Should_ThrowException_When_WithdrawExceedsBalance()
     {
         var account = new BankAccount();
         account.Deposit(50m);
@@ -2199,7 +2199,7 @@ public class BankAccountTests
 public class TransferServiceTests
 {
     [TestMethod]
-    public void Transfer_ShouldMoveMoneyWithFee()
+    public void Should_MoveMoneyWithFee_When_Transfer()
     {
         var source = new BankAccount();
         var target = new BankAccount();
@@ -2276,10 +2276,10 @@ public class TransferService
     }
 }`,
         testResults: [
-          { name: "Deposit_ShouldIncreaseBalance", status: "pass", message: "✓ Test passed" },
-          { name: "Withdraw_ShouldDecreaseBalance", status: "pass", message: "✓ Test passed" },
-          { name: "Withdraw_ShouldThrow_WhenInsufficientBalance", status: "pass", message: "✓ Test passed" },
-          { name: "Transfer_ShouldMoveMoneyWithFee", status: "pass", message: "✓ Test passed" }
+          { name: "Should_IncreaseBalance_When_Deposit", status: "pass", message: "✓ Test passed" },
+          { name: "Should_DecreaseBalance_When_Withdraw", status: "pass", message: "✓ Test passed" },
+          { name: "Should_ThrowException_When_WithdrawExceedsBalance", status: "pass", message: "✓ Test passed" },
+          { name: "Should_MoveMoneyWithFee_When_Transfer", status: "pass", message: "✓ Test passed" }
         ],
         testStats: { total: 4, passed: 4, failed: 0 }
       }

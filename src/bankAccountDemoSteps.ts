@@ -34,7 +34,7 @@ export const bankAccountDemoSteps: DemoStep[] = [
 public class BankAccountTests
 {
     [TestMethod]
-    public void Deposit_ShouldIncreaseBalance()
+    public void Should_IncreaseBalance_When_Deposit()
     {
         var account = new BankAccount();
         account.Deposit(100m);
@@ -48,7 +48,7 @@ public class BankAccount
 }`,
     testResults: [
       {
-        name: "Deposit_ShouldIncreaseBalance",
+        name: "Should_IncreaseBalance_When_Deposit",
         status: "fail",
         message: "'BankAccount' does not contain a definition for 'Deposit'"
       }
