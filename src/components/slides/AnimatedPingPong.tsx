@@ -12,8 +12,8 @@ const AnimatedPingPong = memo(() => {
     // Cycle 1: Developer A writes test, Developer B implements
     {
       name: 'Think',
-      color: 'purple',
-      result: '💬',
+      color: 'cyan',
+      result: '🧠',
       playerA: {
         role: 'collaborating',
         text: CONTENT.PING_PONG.THINK_LEAD
@@ -83,8 +83,8 @@ const AnimatedPingPong = memo(() => {
     // Cycle 2: Developer B writes test, Developer A implements
     {
       name: 'Think',
-      color: 'purple',
-      result: '💬',
+      color: 'cyan',
+      result: '🧠',
       playerA: {
         role: 'collaborating',
         text: CONTENT.PING_PONG.THINK_CHALLENGE
@@ -206,6 +206,8 @@ const AnimatedPingPong = memo(() => {
         return { bg: 'bg-green-500', border: 'border-green-400', text: 'text-green-400', glow: 'shadow-green-500/50' };
       case 'blue':
         return { bg: 'bg-blue-500', border: 'border-blue-400', text: 'text-blue-400', glow: 'shadow-blue-500/50' };
+      case 'cyan':
+        return { bg: 'bg-[#50DCE1]', border: 'border-cyan-400', text: 'text-black', glow: 'shadow-cyan-500/50' };
       case 'purple':
         return { bg: 'bg-purple-500', border: 'border-purple-400', text: 'text-purple-400', glow: 'shadow-purple-500/50' };
       default:
@@ -241,7 +243,7 @@ const AnimatedPingPong = memo(() => {
               ? 'left-[75%] -translate-x-1/2'
               : 'left-1/2 -translate-x-1/2'
           }`}>
-            <div className={`inline-block px-6 py-2 rounded-full ${phaseColors.bg} text-white font-bold text-lg shadow-lg ${phaseColors.glow}`}>
+            <div className={`inline-block px-6 py-2 rounded-full ${phaseColors.bg} ${phaseColors.text} font-bold text-lg shadow-lg ${phaseColors.glow}`}>
               {currentPhaseData.result} {currentPhaseData.name}
             </div>
           </div>
