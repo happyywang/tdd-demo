@@ -30,7 +30,7 @@ const TDDCycleSlide = () => {
       bgColor: 'bg-red-600',
       icon: '🔴',
       position: { x: 50, y: 15 }, // Top - 12 o'clock
-      labelPosition: { x: 25, y: 2 } // Left and up
+      labelPosition: { x: 18, y: 10 } // Left and down adjusted
     },
     {
       id: 'green',
@@ -64,7 +64,7 @@ const TDDCycleSlide = () => {
       bgColor: 'bg-[#50DCE1]',
       icon: '🧠',
       position: { x: 50, y: 15 }, // Top - 12 o'clock
-      labelPosition: { x: 50, y: 2 },
+      labelPosition: { x: 5, y: 10 },
       isSpecial: true
     },
     {
@@ -85,7 +85,7 @@ const TDDCycleSlide = () => {
       bgColor: 'bg-emerald-600',
       icon: '🟢',
       position: { x: 50, y: 88 }, // Bottom - moved further down
-      labelPosition: { x: 25, y: 95 }
+      labelPosition: { x: 30, y: 92 }
     },
     {
       id: 'refactor',
@@ -131,6 +131,28 @@ const TDDCycleSlide = () => {
     setIsAnimating(false);
   };
 
+  const nextStep = () => {
+    const next = (currentStep + 1) % currentSteps.length;
+    setCurrentStep(next);
+
+    // Track cycle count when completing full cycle
+    const lastStepIndex = currentSteps.length - 1;
+    if (currentStep === lastStepIndex) {
+      setCycleCount(count => count + 1);
+    }
+    prevStepRef.current = next;
+  };
+
+  const prevStep = () => {
+    const prev = (currentStep - 1 + currentSteps.length) % currentSteps.length;
+    setCurrentStep(prev);
+    prevStepRef.current = prev;
+  };
+
+  const toggleAutoPlay = () => {
+    setIsAnimating(prev => !prev);
+  };
+
   const toggleExtended = () => {
     setShowExtended(!showExtended);
     setCurrentStep(0);
@@ -140,7 +162,7 @@ const TDDCycleSlide = () => {
 
   const revealAnimation = () => {
     setShowAnimation(true);
-    setIsAnimating(true);
+    setIsAnimating(false);
     setCurrentStep(0);
     setCycleCount(0);
     prevStepRef.current = 0;
@@ -155,7 +177,7 @@ const TDDCycleSlide = () => {
       </div>
 
       <div className="flex-1 flex flex-col items-center justify-center">
-        <div className="max-w-4xl mx-auto relative mt-4">
+        <div className="max-w-4xl mx-auto relative -mt-12">
 
         {/* Click overlay when animation is hidden */}
         {!showAnimation && (
@@ -174,7 +196,7 @@ const TDDCycleSlide = () => {
         <div
           className="absolute -right-48"
           style={{
-            top: '2%',
+            top: '14%',
             transform: 'translate(-50%, -100%)'
           }}
         >
@@ -231,13 +253,6 @@ const TDDCycleSlide = () => {
                       {step.shortName}
                     </div>
                   </div>
-
-                  {/* START badge for Think step */}
-                  {isThinkStep && showAnimation && (
-                    <div className="absolute -top-3 -right-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-black text-[10px] font-black rounded-md px-2 py-1 shadow-lg border-2 border-white">
-                      START
-                    </div>
-                  )}
                 </div>
 
                 {/* Outer Position Step Label */}
@@ -329,6 +344,42 @@ const TDDCycleSlide = () => {
 
         </div>
         </div>
+
+        {/* Manual Controls */}
+        {showAnimation && (
+          <div className="flex items-center justify-center gap-4 -mt-6 -ml-8 relative z-30">
+            <button
+              onClick={prevStep}
+              className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-semibold transition-colors flex items-center gap-2"
+              title="Previous step"
+            >
+              <span>←</span>
+              <span>Previous</span>
+            </button>
+
+            <button
+              onClick={toggleAutoPlay}
+              className={`${
+                isAnimating
+                  ? 'bg-yellow-600 hover:bg-yellow-500'
+                  : 'bg-[#50DCE1] hover:bg-cyan-400'
+              } text-black px-6 py-2 rounded-lg font-semibold transition-colors flex items-center gap-2`}
+              title={isAnimating ? 'Pause auto-play' : 'Start auto-play'}
+            >
+              <span className="text-xl">{isAnimating ? '⏸' : '▶'}</span>
+              <span>{isAnimating ? 'Pause' : 'Auto Play'}</span>
+            </button>
+
+            <button
+              onClick={nextStep}
+              className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-semibold transition-colors flex items-center gap-2"
+              title="Next step"
+            >
+              <span>Next</span>
+              <span>→</span>
+            </button>
+          </div>
+        )}
 
         </div>
       </div>
