@@ -201,17 +201,17 @@ const AnimatedPingPong = memo(() => {
   const getPhaseColor = (color: string) => {
     switch (color) {
       case 'red':
-        return { bg: 'bg-red-500', border: 'border-red-400', text: 'text-red-400', glow: 'shadow-red-500/50' };
+        return { bg: 'bg-red-500', border: 'border-red-400', text: 'text-white', glow: 'shadow-red-500/50' };
       case 'green':
-        return { bg: 'bg-green-500', border: 'border-green-400', text: 'text-green-400', glow: 'shadow-green-500/50' };
+        return { bg: 'bg-green-500', border: 'border-green-400', text: 'text-white', glow: 'shadow-green-500/50' };
       case 'blue':
-        return { bg: 'bg-blue-500', border: 'border-blue-400', text: 'text-blue-400', glow: 'shadow-blue-500/50' };
+        return { bg: 'bg-blue-500', border: 'border-blue-400', text: 'text-white', glow: 'shadow-blue-500/50' };
       case 'cyan':
         return { bg: 'bg-[#50DCE1]', border: 'border-cyan-400', text: 'text-black', glow: 'shadow-cyan-500/50' };
       case 'purple':
-        return { bg: 'bg-purple-500', border: 'border-purple-400', text: 'text-purple-400', glow: 'shadow-purple-500/50' };
+        return { bg: 'bg-purple-500', border: 'border-purple-400', text: 'text-white', glow: 'shadow-purple-500/50' };
       default:
-        return { bg: 'bg-gray-500', border: 'border-gray-400', text: 'text-gray-400', glow: 'shadow-gray-500/50' };
+        return { bg: 'bg-gray-500', border: 'border-gray-400', text: 'text-white', glow: 'shadow-gray-500/50' };
     }
   };
 
