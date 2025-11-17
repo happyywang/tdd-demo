@@ -1029,8 +1029,8 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
         title: "Living Documentation",
         icon: "📚",
         color: "bg-gradient-to-br from-[#50DCE1] to-slate-500",
-        description: "Tests show exactly what the system should behave",
-        detail: "Tests evolve with the product and always stay current as features change"
+        description: "Tests show exactly how the system should behave",
+        detail: "Tests evolve with the product and always stay up to date as features change"
       }
     ];
 
@@ -1273,8 +1273,25 @@ public void IsEven_GivenOddNumber_ReturnsFalse()
           const beforeComment = remaining.substring(0, commentIndex);
           const comment = remaining.substring(commentIndex);
 
-          // Process before comment
-          addToken(beforeComment);
+          // Process keywords before comment
+          const parts = beforeComment.split(/(\[TestMethod\]|"[^"]*"|\b(?:public|class|void|static|string|int|Assert\.AreEqual|return|FizzBuzz|Convert)\b)/);
+
+          parts.forEach((part, partIndex) => {
+            if (part === '[TestMethod]') {
+              addToken(part, 'text-purple-400');
+            } else if (part.match(/^"[^"]*"$/)) {
+              addToken(part, 'text-yellow-300');
+            } else if (part.match(/^(public|class|void|static|string|int)$/)) {
+              addToken(part, 'text-blue-400');
+            } else if (part.match(/^(Assert\.AreEqual|return)$/)) {
+              addToken(part, 'text-green-400');
+            } else if (part.match(/^(FizzBuzz|Convert)$/)) {
+              addToken(part, 'text-cyan-400');
+            } else {
+              addToken(part);
+            }
+          });
+
           addToken(comment, 'text-gray-500');
         } else {
           // Process keywords, strings, etc.
