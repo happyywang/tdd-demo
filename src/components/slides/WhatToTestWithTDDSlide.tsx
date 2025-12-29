@@ -433,7 +433,7 @@ const ComparisonSection = () => (
     </div>
 
     {/* Code Comparison Section */}
-    <div className="max-w-4xl mx-auto w-full">
+    <div className="max-w-7xl mx-auto w-full">
       <h3 className="text-2xl font-bold text-[#50DCE1] mb-6 text-center flex items-center justify-center gap-3">
         <span className="bg-blue-600 text-white px-2 py-1 rounded text-lg font-bold">VS</span>
         Code Example: Discount Calculator
