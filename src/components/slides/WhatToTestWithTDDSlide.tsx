@@ -281,7 +281,7 @@ const TestingPyramidSection = () => (
 );
 
 const GranularitySection = () => (
-  <div className="max-w-5xl mx-auto">
+  <div className="max-w-4xl mx-auto">
     <div className="space-y-4">
       <PrincipleCard
         title="Single Behavior per Test"
@@ -364,7 +364,7 @@ const QuestionCard = ({
 
 const ComparisonSection = () => (
   <div className="w-full flex flex-col justify-center space-y-8">
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-4xl mx-auto">
 
       <div className="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden">
       <table className="w-full">
@@ -433,7 +433,7 @@ const ComparisonSection = () => (
     </div>
 
     {/* Code Comparison Section */}
-    <div className="max-w-7xl mx-auto w-full">
+    <div className="max-w-4xl mx-auto w-full">
       <h3 className="text-2xl font-bold text-[#50DCE1] mb-6 text-center flex items-center justify-center gap-3">
         <span className="bg-blue-600 text-white px-2 py-1 rounded text-lg font-bold">VS</span>
         Code Example: Discount Calculator
