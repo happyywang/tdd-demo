@@ -282,53 +282,35 @@ const TestingPyramidSection = () => (
 
 const GranularitySection = () => (
   <div className="max-w-5xl mx-auto">
-    <div className="grid md:grid-cols-2 gap-8 items-center">
-      <div>
-        <div className="space-y-6">
-          <PrincipleCard
-            title="Test Behavior, not Implementation"
-            description="Focus on what the code should do, not how it does it"
-            icon="🎯"
-          />
-          <PrincipleCard
-            title="Focus on interfaces, not internal steps"
-            description="Test the public API and contracts, not private methods"
-            icon="🔌"
-          />
-          <PrincipleCard
-            title="Tests don't break when 'how' changes"
-            description="Refactoring should not require test changes"
-            icon="🔄"
-          />
-          <PrincipleCard
-            title="Tests help team understand code intent"
-            description="Tests serve as living documentation"
-            icon="📚"
-          />
-        </div>
-      </div>
-
-      <div className="bg-gray-800 p-6 rounded-xl border border-gray-700">
-        <div className="text-center mb-4">
-          <span className="text-3xl">💡</span>
-          <h4 className="text-xl font-bold text-[#50DCE1] mt-2">Think of it as:</h4>
-        </div>
-        <div className="bg-gray-900 p-4 rounded-lg border-l-4 border-[#50DCE1]">
-          <p className="text-lg text-gray-300 leading-relaxed">
-            Testing a restaurant's service (order → meal delivered) rather than testing each individual cooking step in the kitchen.
-          </p>
-        </div>
-      </div>
+    <div className="space-y-4">
+      <PrincipleCard
+        title="Single Behavior per Test"
+        description="Each test should focus on one clear, observable business behavior so that failures are easy to locate and debug"
+        icon="🎯"
+        color="text-blue-400"
+      />
+      <PrincipleCard
+        title="Fast Feedback Loop"
+        description="Tests should run fast enough that you can run the whole suite frequently during Red–Green–Refactor cycle"
+        icon="⚡"
+        color="text-green-400"
+      />
+      <PrincipleCard
+        title="Stable Under Refactoring"
+        description="Small design changes should only affect a small number of tests; if every refactor breaks many tests, the test granularity is probably not quite right"
+        icon="🔄"
+        color="text-yellow-400"
+      />
     </div>
   </div>
 );
 
-const PrincipleCard = ({ title, description, icon }: { title: string; description: string; icon: string }) => (
-  <div className="flex items-start space-x-4 bg-gray-800 p-4 rounded-lg border border-gray-700 hover:border-[#50DCE1] transition-colors">
-    <div className="text-2xl flex-shrink-0">{icon}</div>
+const PrincipleCard = ({ title, description, icon, color }: { title: string; description: string; icon: string; color: string }) => (
+  <div className="flex items-start space-x-5 bg-gray-800 p-5 rounded-lg border border-gray-700 hover:border-[#50DCE1] transition-colors">
+    <div className="text-3xl flex-shrink-0">{icon}</div>
     <div>
-      <div className="font-semibold text-white text-lg">{title}</div>
-      <div className="text-gray-400 text-sm">{description}</div>
+      <div className={`font-semibold text-white text-xl mb-2 ${color}`}>{title}</div>
+      <div className="text-gray-400 text-base">{description}</div>
     </div>
   </div>
 );
@@ -345,23 +327,16 @@ const KeyQuestionsSection = () => (
 
       <QuestionCard
         question="Will this test survive refactoring?"
-        description="If you change the implementation tomorrow, should this test still pass?"
+        description="If you change the implementation tomorrow, will this test still pass?"
         icon="🔄"
         color="text-green-400"
       />
 
       <QuestionCard
-        question="Is this test too 'big'?"
-        description="Does it test too many things at once, making it hard to maintain?"
-        icon="📏"
+        question="Does having this test meaningfully reduce production risk?"
+        description="If the behavior the test protects breaks in production, how much will it cost?"
+        icon="⚠️"
         color="text-yellow-400"
-      />
-
-      <QuestionCard
-        question="Is this test too 'small'?"
-        description="Does it only verify internal implementation rather than meaningful behavior?"
-        icon="🔍"
-        color="text-red-400"
       />
     </div>
   </div>
@@ -378,11 +353,11 @@ const QuestionCard = ({
   icon: string;
   color: string;
 }) => (
-  <div className="flex items-start space-x-4 bg-gray-800 p-4 rounded-lg border border-gray-700 hover:border-[#50DCE1] transition-colors">
-    <div className="text-2xl flex-shrink-0">{icon}</div>
+  <div className="flex items-start space-x-5 bg-gray-800 p-5 rounded-lg border border-gray-700 hover:border-[#50DCE1] transition-colors">
+    <div className="text-3xl flex-shrink-0">{icon}</div>
     <div>
-      <div className={`font-semibold text-white text-lg ${color}`}>{question}</div>
-      <div className="text-gray-400 text-sm">{description}</div>
+      <div className={`font-semibold text-white text-xl mb-2 ${color}`}>{question}</div>
+      <div className="text-gray-400 text-base">{description}</div>
     </div>
   </div>
 );
